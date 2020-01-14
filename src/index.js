@@ -7,7 +7,7 @@ app.set('views','./views');
 app.use(express.static('public'));
 
 app.get('/', function(req, res){
-   res.send("Hello world!");
+   res.render("index");
 });
 
 app.get('/first_template', function(req, res){

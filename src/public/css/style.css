@@ -1,0 +1,47 @@
+body.index {
+  padding: 30px;
+}
+
+.navbar {
+  margin: -30px;
+}
+
+.navbar a {
+  color: white;
+}
+
+.navbar-toggler-icon{
+  color: black
+}
+
+.index h1{
+  text-align: center;
+  padding-top: 25px;
+}
+
+.index p{
+  padding-top: 15px;
+  text-align: justify;
+}
+
+.index-button-area {
+  padding: 50px;
+}
+
+.index-button {
+  margin-top: 5px;
+  width: 15%;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  background-color: #428bca;
+  color: white;
+  border-radius: 5px;
+  align: center;
+  margin: 5px auto;
+}
+
+.index-button:hover {
+  background-color: #428bFF;
+}
