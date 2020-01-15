@@ -1,4 +1,4 @@
-body.index {
+body {
   padding: 30px;
 }
 
@@ -14,7 +14,7 @@ body.index {
   color: black
 }
 
-.index h1{
+h1{
   text-align: center;
   padding-top: 25px;
 }
@@ -26,6 +26,7 @@ body.index {
 
 .index-button-area {
   padding: 50px;
+  text-align: center;
 }
 
 .index-button {
@@ -44,4 +45,13 @@ body.index {
 
 .index-button:hover {
   background-color: #428bFF;
+}
+
+input {
+  margin: 25px;
+  margin-top: 30px;
+}
+
+.login-div {
+  text-align: center;
 }

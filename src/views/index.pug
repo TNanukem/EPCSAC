@@ -9,12 +9,7 @@ html
 
    body.index
 
-      nav.navbar.navbar-light.bg-white
-        a.navbar-brand EPCSAC
-        button.navbar-toggler(type='button', data-toggle='collapse',
-          data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent',
-          aria-expanded='false', aria-label='Toggle navigation')
-            span.navbar-toggler-icon
+      include ./navbar.pug
 
       h1 Extensible Platform for Cloud Scheduling Algorithm Comparison (EPCSAC)
       p.
@@ -24,5 +19,6 @@ html
          and comparing your results.
 
       div.index-button-area
-        .button.login.index-button(type='button') Login
-        .button.signup.index-button(type='button') Sign up
+        a.btn.btn-default.index-button(href='login') Login
+        br
+        a.btn.btn-default.index-button(href='signup') Sign up

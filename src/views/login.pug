@@ -1,0 +1,22 @@
+doctype html
+html
+
+   head
+
+      title "Login into EPCSAC"
+      link(rel='stylesheet', href='/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/css/style.css')
+
+   body.login-page
+      include ./navbar.pug
+
+      h1 Login into EPCSAC
+
+      div.login-div
+        form.login-form(method= "POST"  )
+
+          input(type="text", value="Username")
+
+          input(type="text", value="Password")
+
+          input(type="submit", value="Login")
