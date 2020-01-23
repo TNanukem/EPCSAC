@@ -24,19 +24,15 @@ app.use(express.static('public'));
 
 app.get('/', function(req, res){
    res.render("index");
-   // pool.query(array, (err, res) => {
-      // console.log(err, res)
-      // pool.end()
-   // })
 });
 
 app.get('/login', function(req, res) {
   res.render("login")
 })
 
-app.post('/login', function(req, res){
-  console.log(req.body);
-  res.send("Logged");
+app.get('/config', function(req, res) {
+  res.render("experiment_config")
 })
+
 
 app.listen(3000);

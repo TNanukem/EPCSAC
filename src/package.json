@@ -9,12 +9,15 @@
   "author": "Tiago Toledo Jr",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^3.0.7",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "multer": "^1.4.2",
     "node-postgres": "^0.1.2",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "pg": "^7.17.1",
     "pug": "^2.0.4"
   }
