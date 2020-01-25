@@ -1,0 +1,48 @@
+body div{
+  float: left;
+  text-align: center;
+}
+
+body h1{
+  padding-bottom: 20px;
+}
+
+body p{
+  margin-bottom: -15px;
+  text-align: center !important;
+  font-size: 30px;
+}
+
+input[type="checkbox"] {
+  margin:15px;
+  padding:0px;
+}
+
+input[type="text"] {
+  text-align: center;
+}
+
+div.checkbox_div{
+  float:none !important;
+  text-align: center !important;
+  margin: 0px;
+  margin-bottom:-30px;
+  padding: 0px;
+}
+
+div.checkbox_div input{
+  float:none !important;
+  text-align: center !important;
+  margin-top: 24px;
+  padding: 0px;
+}
+
+.randomize{
+  font-size: 15px;
+}
+
+.center input{
+  text-align: center;
+  float:none !important;
+  margin-left: 90%;
+}

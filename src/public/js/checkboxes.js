@@ -7,9 +7,11 @@ function checkbox(id_check, id_div, id_text){
 
   if (checkbox.checked == true){
     text.style.display = "none";
+    text.style.float = "initial";
     div.style.display = "block"
   } else {
     text.style.display = "block";
+    div.style.float = "initial";
     div.style.display = "none"
   }
 }

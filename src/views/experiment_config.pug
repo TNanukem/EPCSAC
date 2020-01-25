@@ -2,72 +2,106 @@ doctype html
 html
 
    head
+      include ./meta_config.pug
 
       title "Experiment Configuration"
       script
         include ../public/js/checkboxes.js
       link(rel='stylesheet', href='/css/bootstrap.min.css')
       link(rel='stylesheet', href='/css/style.css')
+      link(rel='stylesheet', href='/css/config.css')
 
    body.index
 
       include ./navbar.pug
 
-      h1 Configure your experiment
+      div.container-fluid
+        h1 Configure your experiment
 
-      form(method="post")
-        // Host Number
+        div.row
+          form(method="post")
 
-        p Host Number
-        input#host_number_exact(type="text", name="host_exact", placeholder="Number of Hosts")
+            div.col-md-6(style="text-align:center")
+              // Host Number
 
-        div#host_random_div(style="display:none")
-          input#host_number_max(type="text", name="host_max", placeholder="Max Hosts")
-          input#host_number_min(type="text", name="host_min", placeholder="Min Hosts")
+              div.checkbox_div
+                p Host Number
+                span.randomize.
+                    Randomize Parameter
+                input#checkbox_host_number(type="checkbox", style="position:sticky", name="checkbox_host", onclick="checkbox('checkbox_host_number', 'host_random_div' ,'host_number_exact')")
 
-        input#checkbox_host_number(type="checkbox", name="checkbox_host", onclick="checkbox('checkbox_host_number', 'host_random_div' ,'host_number_exact')")
+              div.center
+                input#host_number_exact(type="text", name="host_exact", placeholder="Number of Hosts")
 
-        // Host Number of PEs
+              div#host_random_div(style="display:none")
+                input#host_number_max(type="text", name="host_max", placeholder="Max Hosts")
+                input#host_number_min(type="text", name="host_min", placeholder="Min Hosts")
 
-        p Host Number PEs
-        input#host_number_pes_exact(type="text", name="host_pes_exact", placeholder="Number of Hosts PEs")
+            div.col-md-6
+              // Host Number of PEs
 
-        div#host_pes_random_div(style="display:none")
-          input#host_number_pes_max(type="text", name="host_pes_max", placeholder="Max Hosts PEs")
-          input#host_number_pes_min(type="text", name="host_pes_min", placeholder="Min Hosts PEs")
+              div.checkbox_div
+                p Host Number PEs
+                span.randomize.
+                    Randomize Parameter
+                input#checkbox_host_number_pes(type="checkbox", name="checkbox_host_pes", onclick="checkbox('checkbox_host_number_pes', 'host_pes_random_div' ,'host_number_pes_exact')")
 
-        input#checkbox_host_number_pes(type="checkbox", name="checkbox_host_pes", onclick="checkbox('checkbox_host_number_pes', 'host_pes_random_div' ,'host_number_pes_exact')")
+              div.center
+                input#host_number_pes_exact(type="text", name="host_pes_exact", placeholder="Number of Hosts PEs")
 
-        // Hosts RAM
-        p Hosts RAM
-        input#host_ram_exact(type="text", name="host_ram_exact", placeholder="Hosts RAM")
+              div#host_pes_random_div(style="display:none")
+                input#host_number_pes_max(type="text", name="host_pes_max", placeholder="Max Hosts PEs")
+                input#host_number_pes_min(type="text", name="host_pes_min", placeholder="Min Hosts PEs")
 
-        div#host_ram(style="display:none")
-          input#host_ram_max(type="text", name="host_ram_max", placeholder="Max Hosts RAM")
-          input#host_ram_min(type="text", name="host_ram_min", placeholder="Min Hosts RAM")
 
-        input#checkbox_host_ram(type="checkbox", name="checkbox_host_ram", onclick="checkbox('checkbox_host_ram', 'host_ram' ,'host_ram_exact')")
 
-        // Hosts BW
+            div.col-md-6
+              // Hosts RAM
 
-        p Hosts BW
-        input#host_bw_exact(type="text", name="host_bw_exact", placeholder="Hosts BW")
+              div.checkbox_div
+                p Hosts RAM
+                span.randomize.
+                    Randomize Parameter
+                input#checkbox_host_ram(type="checkbox", name="checkbox_host_ram", onclick="checkbox('checkbox_host_ram', 'host_ram' ,'host_ram_exact')")
 
-        div#host_bw(style="display:none")
-          input#host_bw_max(type="text", name="host_bw_max", placeholder="Max Hosts BW")
-          input#host_bw_min(type="text", name="host_bw_min", placeholder="Min Hosts BW")
+              div.center
+                input#host_ram_exact(type="text", name="host_ram_exact", placeholder="Hosts RAM")
 
-        input#checkbox_host_bw(type="checkbox", name="checkbox_host_bw", onclick="checkbox('checkbox_host_bw', 'host_bw' ,'host_bw_exact')")
+              div#host_ram(style="display:none")
+                input#host_ram_max(type="text", name="host_ram_max", placeholder="Max Hosts RAM")
+                input#host_ram_min(type="text", name="host_ram_min", placeholder="Min Hosts RAM")
 
-        // Hosts HD
+            div.col-md-6
+              // Hosts BW
 
-        p Hosts HD
-        input#host_hd_exact(type="text",name="host_hd_exact" , placeholder="Hosts HD")
+              div.checkbox_div
+                p Hosts BW
+                span.randomize.
+                    Randomize Parameter
+                input#checkbox_host_bw(type="checkbox", name="checkbox_host_bw", onclick="checkbox('checkbox_host_bw', 'host_bw' ,'host_bw_exact')")
 
-        div#host_hd(style="display:none")
-          input#host_hd_max(type="text", name="host_hd_max", placeholder="Max Hosts HD")
-          input#host_hd_min(type="text", name="host_hd_min", placeholder="Min Hosts HD")
+              div.center
+                input#host_bw_exact(type="text", name="host_bw_exact", placeholder="Hosts BW")
 
-        input#checkbox_host_hd(type="checkbox", name="checkbox_host_hd", onclick="checkbox('checkbox_host_hd', 'host_hd' ,'host_hd_exact')")
+              div#host_bw(style="display:none")
+                input#host_bw_max(type="text", name="host_bw_max", placeholder="Max Hosts BW")
+                input#host_bw_min(type="text", name="host_bw_min", placeholder="Min Hosts BW")
 
-        input#submit_button(type="submit")
+            div.col-md-12(style="text-align:center;itens-align:center")
+              // Hosts HD
+
+              div.checkbox_div
+                p Hosts HD
+                span.randomize.
+                    Randomize Parameter
+                input#checkbox_host_hd(type="checkbox", name="checkbox_host_hd", onclick="checkbox('checkbox_host_hd', 'host_hd' ,'host_hd_exact')")
+
+              div.center(style="margin-left:25% !important")
+                input#host_hd_exact(type="text",name="host_hd_exact" , placeholder="Hosts HD")
+
+              div#host_hd(style="display:none")
+                input#host_hd_max(type="text", name="host_hd_max", placeholder="Max Hosts HD")
+                input#host_hd_min(type="text", name="host_hd_min", placeholder="Min Hosts HD")
+
+            div.col-md-12(style="text-align:center")
+              input#submit_button(type="submit")
