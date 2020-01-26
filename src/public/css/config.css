@@ -1,3 +1,7 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+
 body div{
   float: left;
   text-align: center;
@@ -28,6 +32,7 @@ div.checkbox_div{
   margin: 0px;
   margin-bottom:-30px;
   padding: 0px;
+  width: 100% !important;
 }
 
 div.checkbox_div input{
@@ -41,8 +46,57 @@ div.checkbox_div input{
   font-size: 15px;
 }
 
+
 .center input{
   text-align: center;
   float:none !important;
   margin-left: 90%;
+}
+
+.icons {
+  font-size: 18px;
+  padding-left: 8px;
+  vertical-align: middle;
+}
+
+.icon-button{
+  padding: 0px;
+  background-color: transparent;
+  border: none;
+}
+
+.icons .hide{
+  display: none;
+  background-color: #fefefe;
+  padding: 20px;
+  padding-top: 0px;
+  margin-top: 0px;
+  border: 1px solid #888;
+  width: 15%; /* Could be more or less, depending on screen size */
+  border-radius: 10px;
+  overflow: auto;
+  position: fixed;
+  z-index: 1;
+  vertical-align: middle;
+}
+
+.icons .hide p{
+  font-size: 11px;
+  vertical-align: middle;
+}
+
+.icons:hover .hide{
+  display:inline-block;
+}
+
+#next-button{
+  font-size: 30px;
+  margin-left: 200px;;
+  color: black;
+}
+
+#previous-button{
+  font-size: 30px;
+  margin-right: 200px;
+  color: black;
 }
