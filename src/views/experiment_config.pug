@@ -252,7 +252,7 @@ html
                   input#vm_hd_min(type="text", name="vm_hd_min", placeholder="Min VMs HD")
             //--------------------- CLOUDLET CONFIGURATION PAGE ----------------------
             div.pages
-              div.col-md-6(style="text-align:center")
+              div.col-md-6
                 // cloudlets Number
 
                 div.checkbox_div
@@ -298,7 +298,7 @@ html
                   input#cloudlet_number_pes_min(type="text", name="cloudlet_pes_min", placeholder="Min Tasks PEs")
 
 
-              div.col-md-12(style="text-align:center;itens-align:center")
+              div.col-md-6
                 // Cloudlets Length
 
                 div.checkbox_div
@@ -313,12 +313,50 @@ html
                       Randomize Parameter
                   input#checkbox_cloudlet_length(type="checkbox", name="checkbox_cloudlet_length", onclick="checkbox('checkbox_cloudlet_length', 'cloudlet_length' ,'cloudlet_length_exact')")
 
-                div.center(style="margin-left:25% !important")
+                div.center
                   input#cloudlet_length_exact(type="text",name="cloudlet_length_exact" , placeholder="Tasks Length")
 
                 div#cloudlet_length(style="display:none")
                   input#cloudlet_length_max(type="text", name="cloudlet_length_max", placeholder="Max Tasks Length")
                   input#cloudlet_length_min(type="text", name="cloudlet_length_min", placeholder="Min Tasks Length")
+
+              div.col-md-6
+                // Datacenters
+
+                div.checkbox_div
+                  p Datacenters
+                    button.icon-button
+                      span.far.fa-question-circle.icons
+                        div.hide
+                          p.
+                            This option defines the number of datacenters in the simulation.
+                  span.randomize.
+                      Randomize Parameter
+                  input#checkbox_datacenters(type="checkbox", name="checkbox_datacenters", onclick="checkbox('checkbox_datacenters', 'datacenters' ,'datacenters_exact')")
+
+                div.center
+                  input#datacenters_exact(type="text",name="datacenters_exact" , placeholder="Datacenters")
+
+                div#datacenters(style="display:none")
+                  input#datacenters_max(type="text", name="datacenters_max", placeholder="Max Datacenters")
+                  input#datacenters_min(type="text", name="datacenters_min", placeholder="Min Datacenters")
+
+
+              div.col-md-12(style="text-align:center;itens-align:center")
+                // Number of Iterations
+
+                div.checkbox_div
+                  p Iterations
+                    button.icon-button
+                      span.far.fa-question-circle.icons
+                        div.hide
+                          p.
+                            This option defines the number of iterations you
+                            want in your simulation. When using random values,
+                            this is useful to generate statistical relevance.
+                div.center(style="margin-left:25% !important")
+                  input#iterations_exact(type="text",name="iterations_exact" , placeholder="Iterations")
+
 
             div.col-md-12(style="text-align:center;")
               a.icon-button(onclick="plusPage(-1)", href="#")
