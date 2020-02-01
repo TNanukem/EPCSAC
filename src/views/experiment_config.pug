@@ -18,9 +18,10 @@ html
       include ./navbar.pug
 
       div.container-fluid
-        h1 Configure your experiment
 
         div.row
+          div.col-md-12
+            h1 Configure your experiment
           form(method="post")
             div.pages
               div.col-md-6(style="text-align:center")
@@ -365,4 +366,4 @@ html
                 span.fas.fa-arrow-circle-right#next-button
 
             div.col-md-12(style="text-align:center;")
-              input#submit_button(type="submit")
+              input.btn.btn-success#submit_button(type="submit", value="Simulate",  style="width: 15%")

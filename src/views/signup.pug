@@ -1,0 +1,45 @@
+doctype html
+html
+
+   head
+
+      title "Signup into EPCSAC"
+      link(rel='stylesheet', href='/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/css/style.css')
+      link(rel='stylesheet', href='/css/config.css')
+
+   body.signup-page
+      include ./navbar.pug
+
+      div.container-fluid
+
+        div.row
+          div.col-md-12
+            h1 Create your account
+          form(method="post")
+            div.col-md-6
+              p(style="font-size: 20px;") Username
+              input(type="text", placeholder="Username", name="username")
+
+            div.col-md-6
+              p(style="font-size: 20px;") E-mail
+              input(type="text", placeholder="Email", name="email")
+
+            div.col-md-6
+              p(style="font-size: 20px;") Password
+              input(type="password", placeholder="Password", name="password", style="text-align: center !important")
+
+            div.col-md-6
+              p(style="font-size: 20px;") Password Confirmation
+              input(type="password", placeholder="Password Confirmation", name="password_confirm", style="text-align: center !important")
+
+            div.col-md-6
+              p(style="font-size: 20px;") Name
+              input(type="text", placeholder="Name", name="name")
+
+            div.col-md-6
+              p(style="font-size: 20px;") Institution
+              input(type="text", placeholder="Institution", name="institution")
+
+            div.col-md-12
+              input.btn.btn-success(type="submit", value="Finish", style="width: 15%")

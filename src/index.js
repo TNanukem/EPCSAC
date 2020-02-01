@@ -26,12 +26,42 @@ app.get('/', function(req, res){
    res.render("index");
 });
 
+app.get('/signup', function(req, res){
+  res.render("signup")
+})
+
 app.get('/login', function(req, res) {
   res.render("login");
 })
 
 app.get('/config', function(req, res) {
   res.render("experiment_config");
+})
+
+app.post('/signup', function(req, res){
+
+    var name = req.body.name;
+    var username = req.body.username;
+    var password = req.body.password;
+    var password_confirm = req.body.password_confirm;
+    var email = req.body.email;
+    var institution = req.body.institution;
+
+    console.log('name:', name);
+    console.log('username:', username);
+    console.log('password:', password);
+    console.log('password_confirm:', password_confirm);
+    console.log('email:', email);
+    console.log('institution:', institution);
+
+    pool.query(
+      'INSERT INTO researchers (name, institution, email, username, password) VALUES ($1, $2, $3, $4, $5)', [name, institution, email, username, password], error => {
+      if (error) {
+        throw error
+      }
+      else {
+        console.log('The table researchers has been updated')
+      }})
 })
 
 app.post('/config', function(req, res){

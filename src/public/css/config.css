@@ -67,11 +67,12 @@ div.checkbox_div input{
 
 .icons .hide{
   display: none;
-  background-color: #fefefe;
+  background-color: #000000;
+  opacity: 50%;
   padding: 20px;
   padding-top: 0px;
   margin-top: 0px;
-  border: 1px solid #888;
+  border: 1px solid black;
   width: 15%; /* Could be more or less, depending on screen size */
   border-radius: 10px;
   overflow: auto;
@@ -83,6 +84,7 @@ div.checkbox_div input{
 .icons .hide p{
   font-size: 11px;
   vertical-align: middle;
+  color: white;
 }
 
 .icons:hover .hide{

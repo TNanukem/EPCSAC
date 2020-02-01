@@ -1,0 +1,8 @@
+div {
+  float: none !important;
+}
+
+input {
+  float: none !important;
+  text-align: center;
+}
