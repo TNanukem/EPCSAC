@@ -1,5 +1,6 @@
 var bcrypt = require('bcrypt');
 var jwt = require('jsonwebtoken');
+require('dotenv').config()
 
 const Helper = {
 

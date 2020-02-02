@@ -6,6 +6,7 @@ const cors = require('cors')
 
 var User = require('./helpers/user')
 var Experiment = require('./helpers/experiment');
+var Auth = require('./helpers/middleware');
 
 var upload = multer();
 var app = express();
@@ -41,7 +42,11 @@ app.get('/config', function(req, res) {
   res.render("experiment_config");
 })
 
-app.post('/signup', User.create)
+app.post('/signup', User.create);
+app.post('/login', User.login);
+app.get('/user_page', Auth.verifyToken, function(req, res){
+  res.render('user_page');
+});
 
 app.post('/config', Experiment.create)
 
