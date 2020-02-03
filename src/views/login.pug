@@ -15,8 +15,11 @@ html
       div.login-div
         form.login-form(method= "POST")
 
-          input(type="text", placeholder="Email", name="email")
+          input(type="email", placeholder="Email", name="email", maxLength="320" required)
 
-          input(type="password", placeholder="Password", name="password")
+          input(type="password", placeholder="Password", name="password", maxLength="100", required)
 
           input(type="submit", value="Login")
+
+          script
+            include ../public/js/validator.min.js
