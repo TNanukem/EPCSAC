@@ -8,6 +8,7 @@ html
       script
         include ../public/js/checkboxes.js
         include ../public/js/page_selection.js
+        include ../public/js/config_validator.js
       link(rel='stylesheet', href='/css/bootstrap.min.css')
       link(rel='stylesheet', href='/css/style.css')
       link(rel='stylesheet', href='/css/config.css')
@@ -37,10 +38,10 @@ html
                             the datacenter will have.
                   span.randomize.
                       Randomize Parameter
-                  input#checkbox_host_number(type="checkbox", style="position:sticky", name="checkbox_host", onclick="checkbox('checkbox_host_number', 'host_random_div' ,'host_number_exact')")
+                  input#checkbox_host_number(type="checkbox", style="position:sticky", name="checkbox_host", onclick="checkbox('checkbox_host_number', 'host_random_div' ,'host_number_exact'); validation('checkbox_host_number', 'host_number_exact', 'host_number_max', 'host_number_min')")
 
                 div.center
-                  input#host_number_exact(type="text", name="host_exact", placeholder="Number of Hosts")
+                  input#host_number_exact(type="text", name="host_exact", placeholder="Number of Hosts", required)
 
                 div#host_random_div(style="display:none")
                   input#host_number_max(type="text", name="host_max", placeholder="Max Hosts")
@@ -60,10 +61,10 @@ html
 
                   span.randomize.
                       Randomize Parameter
-                  input#checkbox_host_number_pes(type="checkbox", name="checkbox_host_pes", onclick="checkbox('checkbox_host_number_pes', 'host_pes_random_div' ,'host_number_pes_exact')")
+                  input#checkbox_host_number_pes(type="checkbox", name="checkbox_host_pes", onclick="checkbox('checkbox_host_number_pes', 'host_pes_random_div' ,'host_number_pes_exact'); validation('checkbox_host_number_pes', 'host_number_pes_exact', 'host_number_pes_max', 'host_number_pes_min')")
 
                 div.center
-                  input#host_number_pes_exact(type="text", name="host_pes_exact", placeholder="Number of Hosts PEs")
+                  input#host_number_pes_exact(type="text", name="host_pes_exact", placeholder="Number of Hosts PEs", required)
 
                 div#host_pes_random_div(style="display:none")
                   input#host_number_pes_max(type="text", name="host_pes_max", placeholder="Max Hosts PEs")
@@ -84,10 +85,10 @@ html
                             datacenter will have.
                   span.randomize.
                       Randomize Parameter
-                  input#checkbox_host_ram(type="checkbox", name="checkbox_host_ram", onclick="checkbox('checkbox_host_ram', 'host_ram' ,'host_ram_exact')")
+                  input#checkbox_host_ram(type="checkbox", name="checkbox_host_ram", onclick="checkbox('checkbox_host_ram', 'host_ram' ,'host_ram_exact'); validation('checkbox_host_ram', 'host_ram_exact', 'host_ram_max', 'host_ram_min')")
 
                 div.center
-                  input#host_ram_exact(type="text", name="host_ram_exact", placeholder="Hosts RAM")
+                  input#host_ram_exact(type="text", name="host_ram_exact", placeholder="Hosts RAM", required)
 
                 div#host_ram(style="display:none")
                   input#host_ram_max(type="text", name="host_ram_max", placeholder="Max Hosts RAM")
@@ -106,10 +107,10 @@ html
                             host in the datacenter is going to have.
                   span.randomize.
                       Randomize Parameter
-                  input#checkbox_host_bw(type="checkbox", name="checkbox_host_bw", onclick="checkbox('checkbox_host_bw', 'host_bw' ,'host_bw_exact')")
+                  input#checkbox_host_bw(type="checkbox", name="checkbox_host_bw", onclick="checkbox('checkbox_host_bw', 'host_bw' ,'host_bw_exact'); validation('checkbox_host_bw', 'host_bw_exact', 'host_bw_max', 'host_bw_min')")
 
                 div.center
-                  input#host_bw_exact(type="text", name="host_bw_exact", placeholder="Hosts BW")
+                  input#host_bw_exact(type="text", name="host_bw_exact", placeholder="Hosts BW", required)
 
                 div#host_bw(style="display:none")
                   input#host_bw_max(type="text", name="host_bw_max", placeholder="Max Hosts BW")
@@ -128,10 +129,10 @@ html
                             host in the datacenter is going to have.
                   span.randomize.
                       Randomize Parameter
-                  input#checkbox_host_hd(type="checkbox", name="checkbox_host_hd", onclick="checkbox('checkbox_host_hd', 'host_hd' ,'host_hd_exact')")
+                  input#checkbox_host_hd(type="checkbox", name="checkbox_host_hd", onclick="checkbox('checkbox_host_hd', 'host_hd' ,'host_hd_exact'); validation('checkbox_host_hd', 'host_hd_exact', 'host_hd_max', 'host_hd_min')")
 
                 div.center(style="margin-left:25% !important")
-                  input#host_hd_exact(type="text",name="host_hd_exact" , placeholder="Hosts HD")
+                  input#host_hd_exact(type="text",name="host_hd_exact" , placeholder="Hosts HD", required)
 
                 div#host_hd(style="display:none")
                   input#host_hd_max(type="text", name="host_hd_max", placeholder="Max Hosts HD")
@@ -152,10 +153,10 @@ html
                             the datacenter will have.
                   span.randomize.
                       Randomize Parameter
-                  input#checkbox_vm_number(type="checkbox", style="position:sticky", name="checkbox_vm", onclick="checkbox('checkbox_vm_number', 'vm_random_div' ,'vm_number_exact')")
+                  input#checkbox_vm_number(type="checkbox", style="position:sticky", name="checkbox_vm", onclick="checkbox('checkbox_vm_number', 'vm_random_div' ,'vm_number_exact'); validation('checkbox_vm_number', 'vm_number_exact', 'vm_number_max', 'vm_number_min')")
 
                 div.center
-                  input#vm_number_exact(type="text", name="vm_exact", placeholder="Number of VMs")
+                  input#vm_number_exact(type="text", name="vm_exact", placeholder="Number of VMs", required)
 
                 div#vm_random_div(style="display:none")
                   input#vm_number_max(type="text", name="vm_max", placeholder="Max VMs")
@@ -175,10 +176,10 @@ html
 
                   span.randomize.
                       Randomize Parameter
-                  input#checkbox_vm_number_pes(type="checkbox", name="checkbox_vm_pes", onclick="checkbox('checkbox_vm_number_pes', 'vm_pes_random_div' ,'vm_number_pes_exact')")
+                  input#checkbox_vm_number_pes(type="checkbox", name="checkbox_vm_pes", onclick="checkbox('checkbox_vm_number_pes', 'vm_pes_random_div' ,'vm_number_pes_exact'); validation('checkbox_vm_number_pes', 'vm_number_pes_exact', 'vm_number_pes_max', 'vm_number_pes_min')")
 
                 div.center
-                  input#vm_number_pes_exact(type="text", name="vm_pes_exact", placeholder="Number of VMs PEs")
+                  input#vm_number_pes_exact(type="text", name="vm_pes_exact", placeholder="Number of VMs PEs", required)
 
                 div#vm_pes_random_div(style="display:none")
                   input#vm_number_pes_max(type="text", name="vm_pes_max", placeholder="Max VMs PEs")
@@ -199,10 +200,10 @@ html
                             datacenter will have.
                   span.randomize.
                       Randomize Parameter
-                  input#checkbox_vm_ram(type="checkbox", name="checkbox_vm_ram", onclick="checkbox('checkbox_vm_ram', 'vm_ram' ,'vm_ram_exact')")
+                  input#checkbox_vm_ram(type="checkbox", name="checkbox_vm_ram", onclick="checkbox('checkbox_vm_ram', 'vm_ram' ,'vm_ram_exact'); validation('checkbox_vm_ram', 'vm_ram_exact', 'vm_ram_max', 'vm_ram_min')")
 
                 div.center
-                  input#vm_ram_exact(type="text", name="vm_ram_exact", placeholder="VMs RAM")
+                  input#vm_ram_exact(type="text", name="vm_ram_exact", placeholder="VMs RAM", required)
 
                 div#vm_ram(style="display:none")
                   input#vm_ram_max(type="text", name="vm_ram_max", placeholder="Max VMs RAM")
@@ -221,10 +222,10 @@ html
                             VM in the datacenter is going to have.
                   span.randomize.
                       Randomize Parameter
-                  input#checkbox_vm_bw(type="checkbox", name="checkbox_vm_bw", onclick="checkbox('checkbox_vm_bw', 'vm_bw' ,'vm_bw_exact')")
+                  input#checkbox_vm_bw(type="checkbox", name="checkbox_vm_bw", onclick="checkbox('checkbox_vm_bw', 'vm_bw' ,'vm_bw_exact'); validation('checkbox_vm_bw', 'vm_bw_exact', 'vm_bw_max', 'vm_bw_min')")
 
                 div.center
-                  input#vm_bw_exact(type="text", name="vm_bw_exact", placeholder="VMs BW")
+                  input#vm_bw_exact(type="text", name="vm_bw_exact", placeholder="VMs BW", required)
 
                 div#vm_bw(style="display:none")
                   input#vm_bw_max(type="text", name="vm_bw_max", placeholder="Max VMs BW")
@@ -243,10 +244,10 @@ html
                             vm in the datacenter is going to have.
                   span.randomize.
                       Randomize Parameter
-                  input#checkbox_vm_hd(type="checkbox", name="checkbox_vm_hd", onclick="checkbox('checkbox_vm_hd', 'vm_hd' ,'vm_hd_exact')")
+                  input#checkbox_vm_hd(type="checkbox", name="checkbox_vm_hd", onclick="checkbox('checkbox_vm_hd', 'vm_hd' ,'vm_hd_exact'); validation('checkbox_vm_hd', 'vm_hd_exact', 'vm_hd_max', 'vm_hd_min')")
 
                 div.center(style="margin-left:25% !important")
-                  input#vm_hd_exact(type="text",name="vm_hd_exact" , placeholder="VMs HD")
+                  input#vm_hd_exact(type="text",name="vm_hd_exact" , placeholder="VMs HD", required)
 
                 div#vm_hd(style="display:none")
                   input#vm_hd_max(type="text", name="vm_hd_max", placeholder="Max VMs HD")
@@ -266,10 +267,10 @@ html
                             the datacenter will have.
                   span.randomize.
                       Randomize Parameter
-                  input#checkbox_cloudlet_number(type="checkbox", style="position:sticky", name="checkbox_cloudlet", onclick="checkbox('checkbox_cloudlet_number', 'cloudlet_random_div' ,'cloudlet_number_exact')")
+                  input#checkbox_cloudlet_number(type="checkbox", style="position:sticky", name="checkbox_cloudlet", onclick="checkbox('checkbox_cloudlet_number', 'cloudlet_random_div' ,'cloudlet_number_exact'); validation('checkbox_cloudlet_number', 'cloudlet_number_exact', 'cloudlet_number_max', 'cloudlet_number_min')")
 
                 div.center
-                  input#cloudlet_number_exact(type="text", name="cloudlet_exact", placeholder="Number of Tasks")
+                  input#cloudlet_number_exact(type="text", name="cloudlet_exact", placeholder="Number of Tasks", required)
 
                 div#cloudlet_random_div(style="display:none")
                   input#cloudlet_number_max(type="text", name="cloudlet_max", placeholder="Max Tasks")
@@ -289,10 +290,10 @@ html
 
                   span.randomize.
                       Randomize Parameter
-                  input#checkbox_cloudlet_number_pes(type="checkbox", name="checkbox_cloudlet_pes", onclick="checkbox('checkbox_cloudlet_number_pes', 'cloudlet_pes_random_div' ,'cloudlet_number_pes_exact')")
+                  input#checkbox_cloudlet_number_pes(type="checkbox", name="checkbox_cloudlet_pes", onclick="checkbox('checkbox_cloudlet_number_pes', 'cloudlet_pes_random_div' ,'cloudlet_number_pes_exact'); validation('checkbox_cloudlet_number_pes', 'cloudlet_number_pes_exact', 'cloudlet_number_pes_max', 'cloudlet_number_pes_min')")
 
                 div.center
-                  input#cloudlet_number_pes_exact(type="text", name="cloudlet_pes_exact", placeholder="Number of Tasks PEs")
+                  input#cloudlet_number_pes_exact(type="text", name="cloudlet_pes_exact", placeholder="Number of Tasks PEs", required)
 
                 div#cloudlet_pes_random_div(style="display:none")
                   input#cloudlet_number_pes_max(type="text", name="cloudlet_pes_max", placeholder="Max Tasks PEs")
@@ -312,10 +313,10 @@ html
                             cloudlet in the datacenter is going to have.
                   span.randomize.
                       Randomize Parameter
-                  input#checkbox_cloudlet_length(type="checkbox", name="checkbox_cloudlet_length", onclick="checkbox('checkbox_cloudlet_length', 'cloudlet_length' ,'cloudlet_length_exact')")
+                  input#checkbox_cloudlet_length(type="checkbox", name="checkbox_cloudlet_length", onclick="checkbox('checkbox_cloudlet_length', 'cloudlet_length' ,'cloudlet_length_exact'); validation('checkbox_cloudlet_length', 'cloudlet_length_exact', 'cloudlet_length_max', 'cloudlet_length_min')")
 
                 div.center
-                  input#cloudlet_length_exact(type="text",name="cloudlet_length_exact" , placeholder="Tasks Length")
+                  input#cloudlet_length_exact(type="text",name="cloudlet_length_exact" , placeholder="Tasks Length", required)
 
                 div#cloudlet_length(style="display:none")
                   input#cloudlet_length_max(type="text", name="cloudlet_length_max", placeholder="Max Tasks Length")
@@ -333,10 +334,11 @@ html
                             This option defines the number of datacenters in the simulation.
                   span.randomize.
                       Randomize Parameter
-                  input#checkbox_datacenters(type="checkbox", name="checkbox_datacenters", onclick="checkbox('checkbox_datacenters', 'datacenters' ,'datacenters_exact')")
+                  input#checkbox_datacenters(type="checkbox", name="checkbox_datacenters",
+                    onclick="checkbox('checkbox_datacenters', 'datacenters' ,'datacenters_exact'); validation('checkbox_datacenters', 'datacenters_exact', 'datacenters_max', 'datacenters_min')")
 
                 div.center
-                  input#datacenters_exact(type="text",name="datacenters_exact" , placeholder="Datacenters")
+                  input#datacenters_exact(type="text",name="datacenters_exact" , placeholder="Datacenters", required)
 
                 div#datacenters(style="display:none")
                   input#datacenters_max(type="text", name="datacenters_max", placeholder="Max Datacenters")
@@ -356,7 +358,7 @@ html
                             want in your simulation. When using random values,
                             this is useful to generate statistical relevance.
                 div.center(style="margin-left:25% !important")
-                  input#iterations_exact(type="text",name="iterations_exact" , placeholder="Iterations")
+                  input#iterations_exact(type="text",name="iterations_exact" , placeholder="Iterations", required)
 
 
             div.col-md-12(style="text-align:center;")
