@@ -44,10 +44,14 @@ app.get('/config', function(req, res) {
 
 app.post('/signup', User.create);
 app.post('/login', User.login);
-app.get('/user_page', Auth.verifyToken, function(req, res){
-  res.render('user_page');
+app.get('/user_page', function(req, res){
+  res.render('user_page', {name:req.query.name});
 });
 
-app.post('/config', Experiment.create)
+app.post('/user_page', function(req, res){
+  res.redirect('../config');
+});
+
+app.post('/config', Experiment.create);
 
 app.listen(3000);

@@ -51,8 +51,8 @@ const User = {
         return res.status(400).send({ 'message': 'The credentials you provided is incorrect' });
       }
       const token = Helper.generateToken(rows[0].id);
-      
-      return res.render("user_page");
+
+      return res.redirect("user_page/?name="+rows[0].name);
     } catch (error) {
        return res.status(400).send(error);
     }

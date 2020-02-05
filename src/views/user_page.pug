@@ -1,2 +1,16 @@
-include ./navbar.pug
-h1 User page
+doctype html
+html
+
+  head
+    title Welcome #{name}
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/style.css')
+
+  body
+    include ./navbar.pug
+    div.container-fluid
+      div.row
+        div.col-md-12(style="text-align:center;")
+          h1 Welcome #{name}
+          form(method="post")
+            input.btn.btn-success(type="submit", value="Configure an experiment", style="width: 19%")
