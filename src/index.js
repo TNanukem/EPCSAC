@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var { pool } = require('./helpers/config')
+const session = require('express-session')
 const cors = require('cors')
 
 var User = require('./helpers/user')
@@ -13,6 +14,12 @@ var app = express();
 
 app.set('view engine', 'pug');
 app.set('views','./views');
+
+app.use(session({
+  secret: '343ji43j4n3jn4jk3n',
+  resave: true,
+  saveUninitialized: true
+}))
 
 // for parsing application/json
 app.use(bodyParser.json());

@@ -52,10 +52,15 @@ const User = {
       }
       const token = Helper.generateToken(rows[0].id);
 
-      return res.redirect("user_page/?name="+rows[0].name);
+      req.session.name = rows[0].name;
+      req.session.user_id = rows[0].id;
+      req.session.email = rows[0].email;
+
+      return res.redirect("user_page/?name="+req.session.name);
     } catch (error) {
        return res.status(400).send(error);
     }
+
   },
 }
 module.exports = User;

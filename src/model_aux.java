@@ -37,23 +37,23 @@ import java.util.Random;
 
 public class modelo {
     // Number of iterations
-    private static final int ITERATIONS = 1;
+    private static final int ITERATIONS = 2;
 
     // Exact Values
-    private static final int DATACENTER_EXACT = 1;
-    private static final int HOSTS_EXACT = 50;
-    private static final int HOSTS_PES_EXACT = 0;
-    private static final int HOSTS_RAM_EXACT = 0;
-    private static final int HOSTS_BW_EXACT = 50000;
-    private static final int HOSTS_HD_EXACT = 500000;
-    private static final int VMS_EXACT = 0;
-    private static final int VM_PES_EXACT = 0;
-    private static final int VM_RAM_EXACT = 4000;
-    private static final int VM_BW_EXACT = 20000;
-    private static final int VM_HD_EXACT = 150000;
-    private static final int CLOUDLETS_EXACT = 0;
-    private static final int CLOUDLETS_PES_EXACT = 0;
-    private static final int CLOUDLETS_LENGTH_EXACT = 0;
+    private static final int DATACENTER_EXACT = 5;
+    private static final int HOSTS_EXACT = 23;
+    private static final int HOSTS_PES_EXACT = 2;
+    private static final int HOSTS_RAM_EXACT = 3;
+    private static final int HOSTS_BW_EXACT = 4;
+    private static final int HOSTS_HD_EXACT = 6;
+    private static final int VMS_EXACT = 12;
+    private static final int VM_PES_EXACT = 4;
+    private static final int VM_RAM_EXACT = 43;
+    private static final int VM_BW_EXACT = 13;
+    private static final int VM_HD_EXACT = 21;
+    private static final int CLOUDLETS_EXACT = 5;
+    private static final int CLOUDLETS_PES_EXACT = 1;
+    private static final int CLOUDLETS_LENGTH_EXACT = 6;
 
     // Number of datacenters
     private static final int DATACENTER_MAX = 0;
@@ -66,14 +66,14 @@ public class modelo {
     private static final boolean HOSTS_FLAG = false;
 
     // Number of processing units inside each host
-    private static final int HOST_PES_MAX = 16;
-    private static final int HOST_PES_MIN = 8;
-    private static final boolean HOSTS_PES_FLAG = true;
+    private static final int HOST_PES_MAX = 0;
+    private static final int HOST_PES_MIN = 0;
+    private static final boolean HOSTS_PES_FLAG = false;
 
     // RAM of each Host
-    private static final int HOST_RAM_MAX = 16000;
-    private static final int HOST_RAM_MIN = 8000;
-    private static final boolean HOSTS_RAM_FLAG = true;
+    private static final int HOST_RAM_MAX = 0;
+    private static final int HOST_RAM_MIN = 0;
+    private static final boolean HOSTS_RAM_FLAG = false;
 
     // BW of each Host
     private static final int HOST_BW_MAX = 0;
@@ -86,14 +86,14 @@ public class modelo {
     private static final boolean HOSTS_HD_FLAG = false;
 
     // Number of VMs inside the datacenter
-    private static final int VMS_MAX = 100;
-    private static final int VMS_MIN = 80;
-    private static final boolean VMS_FLAG = true;
+    private static final int VMS_MAX = 0;
+    private static final int VMS_MIN = 0;
+    private static final boolean VMS_FLAG = false;
 
     // Number of processing units inside each VM
-    private static final int VM_PES_MAX = 4;
-    private static final int VM_PES_MIN = 2;
-    private static final boolean VMS_PES_FLAG = true;
+    private static final int VM_PES_MAX = 0;
+    private static final int VM_PES_MIN = 0;
+    private static final boolean VMS_PES_FLAG = false;
 
     // RAM of each VM
     private static final int VM_RAM_MAX = 0;
@@ -111,19 +111,19 @@ public class modelo {
     private static final boolean VMS_HD_FLAG = false;
 
     // Number of cloudlets (tasks)
-    private static final int CLOUDLETS_MAX = 50;
-    private static final int CLOUDLETS_MIN = 30;
-    private static final boolean CLOUDLETS_FLAG = true;
+    private static final int CLOUDLETS_MAX = 0;
+    private static final int CLOUDLETS_MIN = 0;
+    private static final boolean CLOUDLETS_FLAG = false;
 
     // Number of processing units necessary to run each cloudlet (task)
-    private static final int CLOUDLET_PES_MAX = 2;
-    private static final int CLOUDLET_PES_MIN = 1;
-    private static final boolean CLOUDLETS_PES_FLAG = true;
+    private static final int CLOUDLET_PES_MAX = 0;
+    private static final int CLOUDLET_PES_MIN = 0;
+    private static final boolean CLOUDLETS_PES_FLAG = false;
 
     // The lenght of each cloudlet (task)
-    private static final int CLOUDLET_LENGTH_MAX = 1000;
-    private static final int CLOUDLET_LENGTH_MIN = 500;
-    private static final boolean CLOUDLET_LENGTH_FLAG = true;
+    private static final int CLOUDLET_LENGTH_MAX = 0;
+    private static final int CLOUDLET_LENGTH_MIN = 0;
+    private static final boolean CLOUDLET_LENGTH_FLAG = false;
 
     private CloudSim simulation;
     private DatacenterBroker broker0;
@@ -142,7 +142,7 @@ public class modelo {
           Make sure to import org.cloudsimplus.util.Log;*/
         //Log.setLevel(ch.qos.logback.classic.Level.WARN);
 
-        for (int it = 0; it <= ITERATIONS; it++) {
+        for (int it = 1; it <= ITERATIONS; it++) {
         	simulation = new CloudSim();
             datacenter0 = createDatacenter();
 

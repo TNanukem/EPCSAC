@@ -20,11 +20,11 @@ const Experiment = {
       var host_flag = false;
     }
 
-    console.log("\nHOST number");
-    console.log("checkbox:",checkbox_host);
-    console.log("exact:",host_exact);
-    console.log("max:",host_max);
-    console.log("min:",host_min);
+    // console.log("\nHOST number");
+    // console.log("checkbox:",checkbox_host);
+    // console.log("exact:",host_exact);
+    // console.log("max:",host_max);
+    // console.log("min:",host_min);
 
     // HOST NUMBER OF PEs PARAMETERS
     var checkbox_host_pes = req.body.checkbox_host_pes;
@@ -43,11 +43,11 @@ const Experiment = {
       var host_pes_flag = false;
     }
 
-    console.log("\nHOST pes");
-    console.log("checkbox:",checkbox_host_pes);
-    console.log("exact:",host_pes_exact);
-    console.log("max:",host_pes_max);
-    console.log("min:",host_pes_min);
+    // console.log("\nHOST pes");
+    // console.log("checkbox:",checkbox_host_pes);
+    // console.log("exact:",host_pes_exact);
+    // console.log("max:",host_pes_max);
+    // console.log("min:",host_pes_min);
 
     // HOST RAM PARAMETERS
     var checkbox_host_ram = req.body.checkbox_host_ram;
@@ -66,11 +66,11 @@ const Experiment = {
       var host_ram_flag = false;
     }
 
-    console.log("\nHOST ram");
-    console.log("checkbox:",checkbox_host_ram);
-    console.log("exact:",host_ram_exact);
-    console.log("max:",host_ram_max);
-    console.log("min:",host_ram_min);
+    // console.log("\nHOST ram");
+    // console.log("checkbox:",checkbox_host_ram);
+    // console.log("exact:",host_ram_exact);
+    // console.log("max:",host_ram_max);
+    // console.log("min:",host_ram_min);
 
     // HOST BW PARAMETERS
     var checkbox_host_bw = req.body.checkbox_host_bw;
@@ -89,11 +89,11 @@ const Experiment = {
       var host_bw_flag = false;
     }
 
-    console.log("\nHOST bw");
-    console.log("checkbox:",checkbox_host_bw);
-    console.log("exact:",host_bw_exact);
-    console.log("max:",host_bw_max);
-    console.log("min:",host_bw_min);
+    // console.log("\nHOST bw");
+    // console.log("checkbox:",checkbox_host_bw);
+    // console.log("exact:",host_bw_exact);
+    // console.log("max:",host_bw_max);
+    // console.log("min:",host_bw_min);
 
     // HOST HD PARAMETERS
     var checkbox_host_hd = req.body.checkbox_host_hd;
@@ -112,11 +112,11 @@ const Experiment = {
       var host_hd_flag = false;
     }
 
-    console.log("\nHOST HD");
-    console.log("checkbox:",checkbox_host_hd);
-    console.log("exact:",host_hd_exact);
-    console.log("max:",host_hd_max);
-    console.log("min:",host_hd_min);
+    // console.log("\nHOST HD");
+    // console.log("checkbox:",checkbox_host_hd);
+    // console.log("exact:",host_hd_exact);
+    // console.log("max:",host_hd_max);
+    // console.log("min:",host_hd_min);
 
     // VM NUMBER PARAMETERS
     var checkbox_vm = req.body.checkbox_vm;
@@ -135,11 +135,11 @@ const Experiment = {
       var vm_flag = false;
     }
 
-    console.log("\nvm number");
-    console.log("checkbox:",checkbox_vm);
-    console.log("exact:",vm_exact);
-    console.log("max:",vm_max);
-    console.log("min:",vm_min);
+    // console.log("\nvm number");
+    // console.log("checkbox:",checkbox_vm);
+    // console.log("exact:",vm_exact);
+    // console.log("max:",vm_max);
+    // console.log("min:",vm_min);
 
     // VM NUMBER OF PEs PARAMETERS
     var checkbox_vm_pes = req.body.checkbox_vm_pes;
@@ -158,11 +158,11 @@ const Experiment = {
       var vm_pes_flag = false;
     }
 
-    console.log("\nvm pes");
-    console.log("checkbox:",checkbox_vm_pes);
-    console.log("exact:",vm_pes_exact);
-    console.log("max:",vm_pes_max);
-    console.log("min:",vm_pes_min);
+    // console.log("\nvm pes");
+    // console.log("checkbox:",checkbox_vm_pes);
+    // console.log("exact:",vm_pes_exact);
+    // console.log("max:",vm_pes_max);
+    // console.log("min:",vm_pes_min);
 
     // VM RAM PARAMETERS
     var checkbox_vm_ram = req.body.checkbox_vm_ram;
@@ -181,11 +181,11 @@ const Experiment = {
       var vm_ram_flag = false;
     }
 
-    console.log("\nvm ram");
-    console.log("checkbox:",checkbox_vm_ram);
-    console.log("exact:",vm_ram_exact);
-    console.log("max:",vm_ram_max);
-    console.log("min:",vm_ram_min);
+    // console.log("\nvm ram");
+    // console.log("checkbox:",checkbox_vm_ram);
+    // console.log("exact:",vm_ram_exact);
+    // console.log("max:",vm_ram_max);
+    // console.log("min:",vm_ram_min);
 
     // VM BW PARAMETERS
     var checkbox_vm_bw = req.body.checkbox_vm_bw;
@@ -204,11 +204,11 @@ const Experiment = {
       var vm_bw_flag = false;
     }
 
-    console.log("\nvm bw");
-    console.log("checkbox:",checkbox_vm_bw);
-    console.log("exact:",vm_bw_exact);
-    console.log("max:",vm_bw_max);
-    console.log("min:",vm_bw_min);
+    // console.log("\nvm bw");
+    // console.log("checkbox:",checkbox_vm_bw);
+    // console.log("exact:",vm_bw_exact);
+    // console.log("max:",vm_bw_max);
+    // console.log("min:",vm_bw_min);
 
     // vm HD PARAMETERS
     var checkbox_vm_hd = req.body.checkbox_vm_hd;
@@ -227,11 +227,11 @@ const Experiment = {
       var vm_hd_flag = false;
     }
 
-    console.log("\nvm HD");
-    console.log("checkbox:",checkbox_vm_hd);
-    console.log("exact:",vm_hd_exact);
-    console.log("max:",vm_hd_max);
-    console.log("min:",vm_hd_min);
+    // console.log("\nvm HD");
+    // console.log("checkbox:",checkbox_vm_hd);
+    // console.log("exact:",vm_hd_exact);
+    // console.log("max:",vm_hd_max);
+    // console.log("min:",vm_hd_min);
 
     // CLOUDLET NUMBER PARAMETERS
     var checkbox_cloudlet = req.body.checkbox_cloudlet;
@@ -250,11 +250,11 @@ const Experiment = {
       var cloudlet_flag = false;
     }
 
-    console.log("\ncloudlet number");
-    console.log("checkbox:",checkbox_cloudlet);
-    console.log("exact:",cloudlet_exact);
-    console.log("max:",cloudlet_max);
-    console.log("min:",cloudlet_min);
+    // console.log("\ncloudlet number");
+    // console.log("checkbox:",checkbox_cloudlet);
+    // console.log("exact:",cloudlet_exact);
+    // console.log("max:",cloudlet_max);
+    // console.log("min:",cloudlet_min);
 
     // CLOUDLET NUMBER OF PEs PARAMETERS
     var checkbox_cloudlet_pes = req.body.checkbox_cloudlet_pes;
@@ -272,12 +272,12 @@ const Experiment = {
       var cloudlet_pes_exact = req.body.cloudlet_pes_exact;
       var cloudlet_pes_flag = false;
     }
-
-    console.log("\ncloudlet pes");
-    console.log("checkbox:",checkbox_cloudlet_pes);
-    console.log("exact:",cloudlet_pes_exact);
-    console.log("max:",cloudlet_pes_max);
-    console.log("min:",cloudlet_pes_min);
+    //
+    // console.log("\ncloudlet pes");
+    // console.log("checkbox:",checkbox_cloudlet_pes);
+    // console.log("exact:",cloudlet_pes_exact);
+    // console.log("max:",cloudlet_pes_max);
+    // console.log("min:",cloudlet_pes_min);
 
     // CLOUDLET LENGTH PARAMETERS
     var checkbox_cloudlet_length = req.body.checkbox_cloudlet_length;
@@ -296,17 +296,17 @@ const Experiment = {
       var cloudlet_length_flag = false;
     }
 
-    console.log("\ncloudlet length");
-    console.log("checkbox:",checkbox_cloudlet_length);
-    console.log("exact:",cloudlet_length_exact);
-    console.log("max:",cloudlet_length_max);
-    console.log("min:",cloudlet_length_min);
+    // console.log("\ncloudlet length");
+    // console.log("checkbox:",checkbox_cloudlet_length);
+    // console.log("exact:",cloudlet_length_exact);
+    // console.log("max:",cloudlet_length_max);
+    // console.log("min:",cloudlet_length_min);
 
     var checkbox_iterations = req.body.checkbox_iterations;
     var iterations_exact = req.body.iterations_exact;
 
-    console.log("\nIterations");
-    console.log("exact:",iterations_exact);
+    // console.log("\nIterations");
+    // console.log("exact:",iterations_exact);
 
     var checkbox_datacenters = req.body.checkbox_datacenters;
 
@@ -324,11 +324,11 @@ const Experiment = {
       var datacenters_flag = false;
     }
 
-    console.log("\nDatacenters");
-    console.log("checkbox:",checkbox_datacenters);
-    console.log("exact:",datacenters_exact);
-    console.log("max:",datacenters_max);
-    console.log("min:",datacenters_min);
+    // console.log("\nDatacenters");
+    // console.log("checkbox:",checkbox_datacenters);
+    // console.log("exact:",datacenters_exact);
+    // console.log("max:",datacenters_max);
+    // console.log("min:",datacenters_min);
 
     var parametersList = [iterations_exact, datacenters_exact, host_exact, host_pes_exact, host_ram_exact, host_bw_exact, host_hd_exact, vm_exact, vm_pes_exact, vm_ram_exact, vm_bw_exact, vm_hd_exact, cloudlet_exact, cloudlet_pes_exact, cloudlet_length_exact, datacenters_max, datacenters_min, datacenters_flag, host_max, host_min, host_flag, host_pes_max, host_pes_min, host_pes_flag, host_ram_max, host_ram_min, host_ram_flag, host_bw_max, host_bw_min, host_bw_flag, host_hd_max, host_hd_min, host_hd_flag,vm_max, vm_min, vm_flag, vm_pes_max, vm_pes_min, vm_pes_flag, vm_ram_max, vm_ram_min, vm_ram_flag, vm_bw_max, vm_bw_min, vm_bw_flag, vm_hd_max, vm_hd_min, vm_hd_flag, cloudlet_max, cloudlet_min, cloudlet_flag, cloudlet_pes_max, cloudlet_pes_min, cloudlet_pes_flag, cloudlet_length_max, cloudlet_length_min,cloudlet_length_flag]
 
@@ -353,7 +353,7 @@ const Experiment = {
 
       const exec = require('child_process').exec;
       //var parametersList = "\"[5, 3, 'false', '251', '1', 'false', '2', '1', 'false', '2','1', 'false','2', '1', 'false', '2', '1', 'false', '2', '1', 'false', '2', '1','false', '2', '1', 'true','3300', '1', 'false', '2', '1', 'false', '2', '1','false', '2', '1', 'false', '2', '1700', 'false']\""
-      var yourscript = exec("./scripts/generate_simulation_file.sh " + "\"[" + auxList + "]\"",
+      var generate_simulation_file = exec("./scripts/generate_simulation_file.sh " + "\"[" + auxList + "]\"",
            (error, stdout, stderr) => {
                console.log(stdout);
                console.log(stderr);
@@ -361,6 +361,8 @@ const Experiment = {
                    console.log(`exec error: ${error}`);
                }
        });
+
+      res.redirect("user_page/?name="+req.session.name);
     },
 
   }
