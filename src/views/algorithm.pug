@@ -1,0 +1,23 @@
+doctype html
+html
+
+   head
+      include ./meta_config.pug
+
+      title "Algorithm upload"
+      link(rel='stylesheet', href='/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/css/style.css')
+
+   body.index
+
+      include ./navbar.pug
+
+      div.container-fluid
+
+        div.row
+          div.col-md-12
+            h1 Upload your algorithm
+
+            form#algorithm-uploader(enctype="multipart/form-data" action="algorithm_upload" method="post")
+              input(type="file" name="algorithmUploader")
+              input(type="submit" name="submit" id="btnSubmit" value="Upload")

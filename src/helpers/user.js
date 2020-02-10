@@ -23,8 +23,12 @@ const User = {
         'INSERT INTO researchers(email, password, institution, username, name) VALUES ($1, $2, $3, $4, $5) RETURNING *;',
         [req.body.email, hashPassword, req.body.institution, req.body.username, req.body.name])
 
-      console.log(rows);
-      const token = Helper.generateToken(rows[0].id)
+        req.session.id_user = rows[0].id;
+        req.session.name = rows[0].name;
+        req.session.authenticated = true;
+
+        res.redirect("user_page/?name="+req.session.name)
+
     } catch(error) {
       console.log(error);
     }
@@ -55,8 +59,15 @@ const User = {
       req.session.name = rows[0].name;
       req.session.user_id = rows[0].id;
       req.session.email = rows[0].email;
+      req.session.authenticated = true;
 
-      return res.redirect("user_page/?name="+req.session.name);
+      if(req.session.next_page == "user_page" || req.session.next_page == undefined){
+          return res.redirect("user_page/?name="+req.session.name);
+      }
+      else{
+        return res.redirect(req.session.next_page);
+      }
+
     } catch (error) {
        return res.status(400).send(error);
     }

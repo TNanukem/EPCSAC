@@ -21,6 +21,21 @@ app.use(session({
   saveUninitialized: true
 }))
 
+var Storage = multer.diskStorage({
+  destination: function(req, file, callback){
+    callback(null, "./Files")
+  },
+  filename: function(req, file, callback){
+    callback(null, file.originalname);
+  }
+});
+
+var uploadAlg = multer({
+
+    storage: Storage
+
+}).array("algorithmUploader", 1); //Field name and max count
+
 // for parsing application/json
 app.use(bodyParser.json());
 
@@ -29,7 +44,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //form-urlencoded
 
 // for parsing multipart/form-data
-app.use(upload.array());
+//app.use(upload.array());
 
 app.use(express.static('public'));
 
@@ -42,22 +57,70 @@ app.get('/signup', function(req, res){
 })
 
 app.get('/login', function(req, res) {
-  res.render("login");
+  if(req.session.authenticated == true){
+    res.redirect("user_page/?name="+req.session.name);
+  }
+  else {
+    res.render("login");
+  }
 })
 
 app.get('/config', function(req, res) {
-  res.render("experiment_config");
+  if(req.session.authenticated == true){
+    res.render("experiment_config");
+  }
+  else {
+    req.session.next_page = "config";
+    res.redirect("login");
+  }
+
 })
 
 app.post('/signup', User.create);
 app.post('/login', User.login);
 app.get('/user_page', function(req, res){
-  res.render('user_page', {name:req.query.name});
+  if(req.session.authenticated == true){
+    res.render('user_page', {name:req.query.name});
+  }
+  else {
+    req.session.next_page = "user_page";
+    res.redirect("login");
+  }
 });
 
 app.post('/user_page', function(req, res){
   res.redirect('../config');
 });
+
+app.post('/algorithm', function(req, res){
+  if(req.session.authenticated == true){
+    res.render('algorithm');
+  }
+  else {
+    req.session.next_page = "algorithm";
+    res.redirect("login");
+  }
+})
+
+app.post('/algorithm_upload',function(req, res){
+  uploadAlg(req, res, function(err) {
+    if(err) {
+      console.log(err);
+      return res.end('Something went wrong');
+    }
+    return res.end('File successfully uploaded')
+  });
+});
+
+app.post('/simulation', function(req, res){
+  if(req.session.authenticated == true){
+    res.render('simulation');
+  }
+  else {
+    req.session.next_page = "simulation";
+    res.redirect("login");
+  }
+})
 
 app.post('/config', Experiment.create);
 

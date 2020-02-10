@@ -14,3 +14,9 @@ html
           h1 Welcome #{name}
           form(method="post")
             input.btn.btn-success(type="submit", value="Configure an experiment", style="width: 19%")
+
+          form(method="post", action="/algorithm")
+            input.btn.btn-success(type="submit", value="Upload an algorithm", style="width: 19%")
+
+          form(method="post", action="/simulation")
+            input.btn.btn-success(type="submit", value="Make a simulation", style="width: 19%")
