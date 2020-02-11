@@ -40,20 +40,20 @@ public class modelo {
     private static final int ITERATIONS = 1;
 
     // Exact Values
-    private static final int DATACENTER_EXACT = 2;
-    private static final int HOSTS_EXACT = 2;
-    private static final int HOSTS_PES_EXACT = 2;
-    private static final int HOSTS_RAM_EXACT = 2;
-    private static final int HOSTS_BW_EXACT = 2;
-    private static final int HOSTS_HD_EXACT = 2;
-    private static final int VMS_EXACT = 2;
-    private static final int VM_PES_EXACT = 2;
-    private static final int VM_RAM_EXACT = 2;
-    private static final int VM_BW_EXACT = 2;
-    private static final int VM_HD_EXACT = 2;
-    private static final int CLOUDLETS_EXACT = 2;
-    private static final int CLOUDLETS_PES_EXACT = 2;
-    private static final int CLOUDLETS_LENGTH_EXACT = 2;
+    private static final int DATACENTER_EXACT = 1;
+    private static final int HOSTS_EXACT = 1;
+    private static final int HOSTS_PES_EXACT = 1;
+    private static final int HOSTS_RAM_EXACT = 1;
+    private static final int HOSTS_BW_EXACT = 1;
+    private static final int HOSTS_HD_EXACT = 1;
+    private static final int VMS_EXACT = 1;
+    private static final int VM_PES_EXACT = 1;
+    private static final int VM_RAM_EXACT = 1;
+    private static final int VM_BW_EXACT = 1;
+    private static final int VM_HD_EXACT = 1;
+    private static final int CLOUDLETS_EXACT = 1;
+    private static final int CLOUDLETS_PES_EXACT = 1;
+    private static final int CLOUDLETS_LENGTH_EXACT = 1;
 
     // Number of datacenters
     private static final int DATACENTER_MAX = 0;

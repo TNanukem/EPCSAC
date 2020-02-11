@@ -18,6 +18,12 @@ html
           div.col-md-12
             h1 Upload your algorithm
 
-            form#algorithm-uploader(enctype="multipart/form-data" action="algorithm_upload" method="post")
-              input(type="file" name="algorithmUploader")
+            form#algorithm-uploader(method="post" enctype="multipart/form-data")
+              p Algorithm Name
+              br
+              input#algorithm_name(type="text", name="algorithm_name", required)
+              p Version
+              br
+              input#algorithm_version(type="text", name="algorithm_version", required)
+              input(type="file" name="algorithmUploader", required)
               input(type="submit" name="submit" id="btnSubmit" value="Upload")
