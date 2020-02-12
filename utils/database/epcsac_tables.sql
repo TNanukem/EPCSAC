@@ -5,7 +5,8 @@ CREATE TABLE "researchers" (
   "username" varchar(100) UNIQUE NOT NULL,
   "password" varchar(1000) NOT NULL,
   "email" varchar(320) UNIQUE NOT NULL,
-  "verified" boolean NOT NULL DEFAULT false
+  "verified" boolean NOT NULL DEFAULT false,
+  "token" varchar(120) NOT NULL
 );
 
 CREATE TABLE "algorithms" (
@@ -15,7 +16,7 @@ CREATE TABLE "algorithms" (
   "published" boolean NOT NULL,
   "publication" varchar(300),
   "insert_date" timestamp NOT NULL,
-  "code" bit NOT NULL
+  "code" varchar(500) NOT NULL
 );
 
 CREATE TABLE "development" (

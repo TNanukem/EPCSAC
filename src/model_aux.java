@@ -37,23 +37,23 @@ import java.util.Random;
 
 public class modelo {
     // Number of iterations
-    private static final int ITERATIONS = 1;
+    private static final int ITERATIONS = 4;
 
     // Exact Values
-    private static final int DATACENTER_EXACT = 1;
-    private static final int HOSTS_EXACT = 1;
-    private static final int HOSTS_PES_EXACT = 1;
-    private static final int HOSTS_RAM_EXACT = 1;
-    private static final int HOSTS_BW_EXACT = 1;
-    private static final int HOSTS_HD_EXACT = 1;
-    private static final int VMS_EXACT = 1;
-    private static final int VM_PES_EXACT = 1;
-    private static final int VM_RAM_EXACT = 1;
-    private static final int VM_BW_EXACT = 1;
-    private static final int VM_HD_EXACT = 1;
-    private static final int CLOUDLETS_EXACT = 1;
-    private static final int CLOUDLETS_PES_EXACT = 1;
-    private static final int CLOUDLETS_LENGTH_EXACT = 1;
+    private static final int DATACENTER_EXACT = 4;
+    private static final int HOSTS_EXACT = 4;
+    private static final int HOSTS_PES_EXACT = 4;
+    private static final int HOSTS_RAM_EXACT = 4;
+    private static final int HOSTS_BW_EXACT = 4;
+    private static final int HOSTS_HD_EXACT = 4;
+    private static final int VMS_EXACT = 4;
+    private static final int VM_PES_EXACT = 4;
+    private static final int VM_RAM_EXACT = 4;
+    private static final int VM_BW_EXACT = 4;
+    private static final int VM_HD_EXACT = 4;
+    private static final int CLOUDLETS_EXACT = 4;
+    private static final int CLOUDLETS_PES_EXACT = 4;
+    private static final int CLOUDLETS_LENGTH_EXACT = 4;
 
     // Number of datacenters
     private static final int DATACENTER_MAX = 0;

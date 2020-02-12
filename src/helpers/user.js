@@ -1,8 +1,13 @@
+// This helper handles all the user related functions
+
 var Helper = require('./authentication_helper');
 var { pool } = require('./config');
+var nodemailer = require("nodemailer");
+require('dotenv').config()
 
 const User = {
 
+  // Creates a new user
   async create(req, res) {
     if (!req.body.email || !req.body.password) {
       return res.status(400).send({'message': 'Some values are missing'});
@@ -19,13 +24,43 @@ const User = {
     var institution = req.body.institution;
 
     try {
+
+      // Random token to verify e-mail
+      var token = Math.floor((Math.random() * 100) + 5405);
+
+      // Inserts the new user in the database and then redirects it to user page
       const { rows } = await pool.query(
-        'INSERT INTO researchers(email, password, institution, username, name) VALUES ($1, $2, $3, $4, $5) RETURNING *;',
-        [req.body.email, hashPassword, req.body.institution, req.body.username, req.body.name])
+        'INSERT INTO researchers(email, password, institution, username, name, token) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;',
+        [req.body.email, hashPassword, req.body.institution, req.body.username, req.body.name, token])
 
         req.session.id_user = rows[0].id;
         req.session.name = rows[0].name;
         req.session.authenticated = true;
+
+        // Sending the confirmation email
+        var smtpTransport = nodemailer.createTransport({
+          service: "Gmail",
+          auth: {
+            user: process.env.GMAIL_USER,
+            pass: process.env.GMAIL_PASSWORD
+          }
+        });
+
+        host = req.get('host');
+        link = "http://"+req.get('host')+"/verify?id="+token;
+
+        var mailOptions = {
+            to : req.body.email,
+            subject : "Please confirm your Email account",
+            html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"
+        }
+
+        smtpTransport.sendMail(mailOptions, function(error, response){
+          if(error){
+            console.log(error);
+          }else{
+            console.log("Message sent: " + response.message);
+          }});
 
         res.redirect("user_page/?name="+req.session.name)
 
@@ -35,6 +70,12 @@ const User = {
 
   },
 
+  // Verifies the email of the user
+  async verify(req, res){
+    host = req.get('host');
+  },
+
+  // Proccess the login request from some user
   async login(req, res) {
     if (!req.body.email || !req.body.password) {
       return res.status(400).send({'message': 'Some values are missing'});
@@ -47,14 +88,12 @@ const User = {
       const { rows } = await pool.query(
         'SELECT * FROM researchers WHERE email = $1', [req.body.email])
 
-      console.log(rows);
       if (!rows[0]) {
         return res.status(400).send({'message': 'The credentials you provided is incorrect'});
       }
       if(!Helper.comparePassword(rows[0].password, req.body.password)) {
         return res.status(400).send({ 'message': 'The credentials you provided is incorrect' });
       }
-      const token = Helper.generateToken(rows[0].id);
 
       req.session.name = rows[0].name;
       req.session.user_id = rows[0].id;

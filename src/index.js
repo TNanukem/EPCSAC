@@ -1,34 +1,40 @@
+// EPCSAC - Developed by Tiago Toledo Junior (github.com/TNanukem)
+
+// ------------------------- BASIC CONFIGURATION -------------------------------
+
+// Requirements Import
 var express = require('express');
 var bodyParser = require('body-parser');
 var { pool } = require('./helpers/config')
 const session = require('express-session')
 const cors = require('cors')
 var multer = require('multer');
-var upload = multer();
 
+// Helpers to be used in the project
 var User = require('./helpers/user')
 var Experiment = require('./helpers/experiment');
-var Auth = require('./helpers/middleware');
 var Algorithm = require('./helpers/algorithm');
 
 var app = express();
+var upload = multer();
 
 app.set('view engine', 'pug');
 app.set('views','./views');
-
-app.use(session({
-  secret: '343ji43j4n3jn4jk3n',
-  resave: true,
-  saveUninitialized: true
-}))
 
 // for parsing application/json
 app.use(bodyParser.json());
 
 // for parsing application/xwww-
 app.use(bodyParser.urlencoded({ extended: true }));
-//form-urlencoded
 
+// Session configuration
+app.use(session({
+  secret: '343ji43j4n3jn4jk3n',
+  resave: true,
+  saveUninitialized: true
+}))
+
+// Multer file upload configuration
 var Storage = multer.diskStorage({
   destination: function(req, file, callback){
     callback(null, './Files')
@@ -44,15 +50,24 @@ var upload = multer({
 
 
 app.use(express.static('public'));
+app.listen(3000);
 
+// -------------------------- END OF CONFIGURATION -----------------------------
+
+
+// ------------------------------ ROUTING -------------------------------------
 app.get('/', function(req, res){
    res.render("index");
 });
 
+// Signup page routing
 app.get('/signup', function(req, res){
-  res.render("signup")
+  res.render("signup");
 })
+app.post('/signup', User.create);
 
+
+// Login page routing
 app.get('/login', function(req, res) {
   if(req.session.authenticated == true){
     res.redirect("user_page/?name="+req.session.name);
@@ -61,7 +76,10 @@ app.get('/login', function(req, res) {
     res.render("login");
   }
 })
+app.post('/login', User.login);
 
+
+// Experiment configuration page routing
 app.get('/config', function(req, res) {
   if(req.session.authenticated == true){
     res.render("experiment_config");
@@ -72,9 +90,10 @@ app.get('/config', function(req, res) {
   }
 
 })
+app.post('/config', Experiment.create);
 
-app.post('/signup', User.create);
-app.post('/login', User.login);
+
+// User page routing
 app.get('/user_page', function(req, res){
   if(req.session.authenticated == true){
     res.render('user_page', {name:req.query.name});
@@ -89,6 +108,8 @@ app.post('/user_page', function(req, res){
   res.redirect('../config');
 });
 
+
+// Algorithm upload pages routing
 app.post('/algorithm_page', function(req, res){
   if(req.session.authenticated == true){
     res.render('algorithm');
@@ -98,16 +119,6 @@ app.post('/algorithm_page', function(req, res){
     res.redirect("login");
   }
 })
-
-// app.post('/algorithm_upload',function(req, res){
-//   uploadAlg(req, res, function(err) {
-//     if(err) {
-//       console.log(err);
-//       return res.end('Something went wrong');
-//     }
-//     return res.end('File successfully uploaded')
-//   });
-// });
 
 app.get('/algorithm', function(req, res){
   res.render('algorithm');
@@ -123,6 +134,8 @@ app.post('/algorithm', function(req, res){
   });
 });
 
+
+// Simulation page routing
 app.post('/simulation', function(req, res){
   if(req.session.authenticated == true){
     res.render('simulation');
@@ -132,7 +145,3 @@ app.post('/simulation', function(req, res){
     res.redirect("login");
   }
 })
-
-app.post('/config', Experiment.create);
-
-app.listen(3000);
