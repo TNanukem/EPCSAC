@@ -78,6 +78,12 @@ app.get('/login', function(req, res) {
 })
 app.post('/login', User.login);
 
+app.get('/verify', User.verify);
+
+app.get('/need_confirmation', function(req, res){
+  res.render('need_confirmation');
+})
+
 
 // Experiment configuration page routing
 app.get('/config', function(req, res) {

@@ -33,10 +33,6 @@ const User = {
         'INSERT INTO researchers(email, password, institution, username, name, token) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;',
         [req.body.email, hashPassword, req.body.institution, req.body.username, req.body.name, token])
 
-        req.session.id_user = rows[0].id;
-        req.session.name = rows[0].name;
-        req.session.authenticated = true;
-
         // Sending the confirmation email
         var smtpTransport = nodemailer.createTransport({
           service: "Gmail",
@@ -47,7 +43,7 @@ const User = {
         });
 
         host = req.get('host');
-        link = "http://"+req.get('host')+"/verify?id="+token;
+        link = "http://"+req.get('host')+"/verify?id="+token+"&email="+req.body.email;
 
         var mailOptions = {
             to : req.body.email,
@@ -62,7 +58,7 @@ const User = {
             console.log("Message sent: " + response.message);
           }});
 
-        res.redirect("user_page/?name="+req.session.name)
+        res.redirect("need_confirmation")
 
     } catch(error) {
       console.log(error);
@@ -72,7 +68,27 @@ const User = {
 
   // Verifies the email of the user
   async verify(req, res){
+
     host = req.get('host');
+
+    if((req.protocol+"://"+req.get('host'))==("http://"+host)){
+      console.log("Domain is matched. Information is from Authentic email");
+
+      try{
+        const {rows} = await pool.query('SELECT * FROM researchers WHERE email = $1', [req.query.email]);
+
+        if(rows[0]){
+          if(req.query.id == rows[0].token){
+            console.log('User verified');
+            await pool.query('UPDATE researchers SET verified = true WHERE email = $1', [req.query.email]);
+
+            res.redirect('login');
+          }
+        }
+      } catch(error){
+        console.log(error);
+      }
+    }
   },
 
   // Proccess the login request from some user
@@ -93,6 +109,11 @@ const User = {
       }
       if(!Helper.comparePassword(rows[0].password, req.body.password)) {
         return res.status(400).send({ 'message': 'The credentials you provided is incorrect' });
+      }
+
+      // Stops the login if the user has not verified it's account
+      if(rows[0].verified == false){
+        return res.redirect('need_confirmation')
       }
 
       req.session.name = rows[0].name;
