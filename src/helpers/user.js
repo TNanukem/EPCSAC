@@ -10,10 +10,10 @@ const User = {
   // Creates a new user
   async create(req, res) {
     if (!req.body.email || !req.body.password) {
-      return res.status(400).send({'message': 'Some values are missing'});
+      return res.render('error', {message: "The e-mail or the password is missing"});
     }
     if (!Helper.isValidEmail(req.body.email)) {
-      return res.status(400).send({ 'message': 'Please enter a valid email address' });
+      return res.render('error', {message: "The inserted email is invalid"});
     }
 
     const hashPassword = Helper.hashPassword(req.body.password);
@@ -94,10 +94,10 @@ const User = {
   // Proccess the login request from some user
   async login(req, res) {
     if (!req.body.email || !req.body.password) {
-      return res.status(400).send({'message': 'Some values are missing'});
+      return res.render('error', {message: "The e-mail or the password is missing"});
     }
     if (!Helper.isValidEmail(req.body.email)) {
-      return res.status(400).send({ 'message': 'Please enter a valid email address' });
+      return res.render('error', {message: "The inserted email is invalid"});
     }
 
     try {
@@ -105,10 +105,10 @@ const User = {
         'SELECT * FROM researchers WHERE email = $1', [req.body.email])
 
       if (!rows[0]) {
-        return res.status(400).send({'message': 'The credentials you provided is incorrect'});
+        return res.render('error', {message: "The credentials you provided are incorrect"});
       }
       if(!Helper.comparePassword(rows[0].password, req.body.password)) {
-        return res.status(400).send({ 'message': 'The credentials you provided is incorrect' });
+        return res.render('error', {message: "The credentials you provided are incorrect"});
       }
 
       // Stops the login if the user has not verified it's account
@@ -129,7 +129,7 @@ const User = {
       }
 
     } catch (error) {
-       return res.status(400).send(error);
+       return res.render('error', {message: error});
     }
 
   },
