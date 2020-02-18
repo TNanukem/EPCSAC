@@ -14,6 +14,7 @@ var multer = require('multer');
 var User = require('./helpers/user')
 var Experiment = require('./helpers/experiment');
 var Algorithm = require('./helpers/algorithm');
+var Simulation = require('./helpers/simulation');
 
 var app = express();
 var upload = multer();
@@ -141,13 +142,16 @@ app.post('/algorithm', function(req, res){
 });
 
 
+app.post('/simulation', Simulation.runSimulation);
+
 // Simulation page routing
-app.post('/simulation', function(req, res){
-  if(req.session.authenticated == true){
-    res.render('simulation');
-  }
-  else {
-    req.session.next_page = "simulation";
-    res.redirect("login");
-  }
-})
+// app.post('/simulation', function(req, res){
+//   if(req.session.authenticated == true){
+//     res.render('simulation');
+//     Simulation.runSimulation(req, res);
+//   }
+//   else {
+//     req.session.next_page = "simulation";
+//     res.redirect("login");
+//   }
+// })

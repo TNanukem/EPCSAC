@@ -271,7 +271,7 @@ const Experiment = {
       // Runs a shell script that generates the CloudSIM simulation file
 
       const exec = require('child_process').exec;
-      //var parametersList = "\"[5, 3, 'false', '251', '1', 'false', '2', '1', 'false', '2','1', 'false','2', '1', 'false', '2', '1', 'false', '2', '1', 'false', '2', '1','false', '2', '1', 'true','3300', '1', 'false', '2', '1', 'false', '2', '1','false', '2', '1', 'false', '2', '1700', 'false']\""
+    
       var generate_simulation_file = exec("./scripts/generate_simulation_file.sh " + "\"[" + auxList + "]\"",
            (error, stdout, stderr) => {
                console.log(stdout);

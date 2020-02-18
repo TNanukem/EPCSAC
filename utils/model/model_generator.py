@@ -2,14 +2,15 @@ import sys
 import ast
 
 parametersList = ast.literal_eval(sys.argv[1])
-print(parametersList)
 
 # parametersList = [5, 3, 'false', '2', '1', 'false', '2', '1', 'false', '2',
 # '1', 'false','2', '1', 'false', '2', '1', 'false', '2', '1', 'false', '2', '1',
 # 'false', '2', '1', 'false','2', '1', 'false', '2', '1', 'false', '2', '1',
 # 'false', '2', '1', 'false', '2', '1', 'false']
 
-file = open('model_aux.java', 'w+')
+directory = 'cloudsim-plus/cloudsim-plus-examples/src/main/java/org/cloudsimplus/examples/schedulers/Model.java'
+
+file = open(directory, 'w+')
 
 text = """
 
@@ -48,7 +49,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class modelo {{
+public class Model {{
     // Number of iterations
     private static final int ITERATIONS = {};
 
@@ -138,19 +139,20 @@ public class modelo {{
     private static final int CLOUDLET_LENGTH_MIN = {};
     private static final boolean CLOUDLET_LENGTH_FLAG = {};
 
+    private String ALGORITHM_NAME = "exemplo";
+
     private CloudSim simulation;
     private DatacenterBroker broker0;
     private List<Vm> vmList;
     private List<Cloudlet> cloudletList;
     private Datacenter datacenter0;
 
-    private String ALGORITHM_NAME = "exemplo";
 
     public static void main(String[] args) {{
-        new modelo();
+        new Model();
     }}
 
-    private modelo() {{
+    private Model() {{
         /*Enables just some level of log messages.
           Make sure to import org.cloudsimplus.util.Log;*/
         //Log.setLevel(ch.qos.logback.classic.Level.WARN);
