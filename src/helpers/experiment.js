@@ -262,25 +262,6 @@ const Experiment = {
         console.log('The table parameters has been updated')
       }})
 
-      var auxList = [];
-
-      for(i = 0; i < parametersList.length; i++){
-        auxList[i] = "'" + String(parametersList[i]) + "'";
-      }
-
-      // Runs a shell script that generates the CloudSIM simulation file
-
-      const exec = require('child_process').exec;
-    
-      var generate_simulation_file = exec("./scripts/generate_simulation_file.sh " + "\"[" + auxList + "]\"",
-           (error, stdout, stderr) => {
-               console.log(stdout);
-               console.log(stderr);
-               if (error !== null) {
-                   console.log(`exec error: ${error}`);
-               }
-       });
-
       // Redirects the user to the user page, passing his name as argument.
       res.redirect("user_page/?name="+req.session.name);
     },

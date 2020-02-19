@@ -82,6 +82,18 @@ const User = {
             console.log('User verified');
             await pool.query('UPDATE researchers SET verified = true WHERE email = $1', [req.query.email]);
 
+            // Creates a user folder inside the project
+            const exec = require('child_process').exec;
+
+            var generate_simulation_file = exec("./scripts/create_user_folder.sh " + String(req.session.user_id),
+                 (error, stdout, stderr) => {
+                     console.log(stdout);
+                     console.log(stderr);
+                     if (error !== null) {
+                         console.log(`exec error: ${error}`);
+                     }
+             });
+
             res.redirect('login');
           }
         }
