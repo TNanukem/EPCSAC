@@ -17,3 +17,10 @@ html
         div.row
           div.col-md-12
             h1 Run a simulation
+
+            form#simulation-form(method="post", action='/simulation_run')
+              p Choose your algorithm
+              select(name='algorithm_selector')
+                each algorithm in algorithms
+                  option=algorithm
+              p Choose your parameters
