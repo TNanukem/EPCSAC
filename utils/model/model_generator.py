@@ -31,7 +31,7 @@ import org.cloudbus.cloudsim.provisioners.ResourceProvisioner;
 import org.cloudbus.cloudsim.provisioners.ResourceProvisionerSimple;
 import org.cloudbus.cloudsim.resources.Pe;
 import org.cloudbus.cloudsim.resources.PeSimple;
-import org.cloudbus.cloudsim.schedulers.cloudlet.CloudletSchedulerSpaceShared;
+import org.cloudbus.cloudsim.schedulers.cloudlet.{};
 import org.cloudbus.cloudsim.schedulers.vm.VmScheduler;
 import org.cloudbus.cloudsim.schedulers.vm.VmSchedulerTimeShared;
 import org.cloudbus.cloudsim.utilizationmodels.UtilizationModel;
@@ -247,7 +247,7 @@ public class Model {{
             Vm vm =
                 new VmSimple(v, 1000, VM_PES)
                     .setRam(VM_RAM).setBw(VM_BW).setSize(VM_HD)
-                    .setCloudletScheduler(new CloudletSchedulerSpaceShared());
+                    .setCloudletScheduler(new {}());
 
             list.add(vm);
         }}

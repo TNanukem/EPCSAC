@@ -76,6 +76,7 @@ const User = {
 
       try{
         const {rows} = await pool.query('SELECT * FROM researchers WHERE email = $1', [req.query.email]);
+        var user_id = rows[0].id;
 
         if(rows[0]){
           if(req.query.id == rows[0].token){
@@ -85,7 +86,7 @@ const User = {
             // Creates a user folder inside the project
             const exec = require('child_process').exec;
 
-            var generate_simulation_file = exec("./scripts/create_user_folder.sh " + String(req.session.user_id),
+            var create_user_folders = exec("./scripts/create_user_folders.sh " + String(user_id),
                  (error, stdout, stderr) => {
                      console.log(stdout);
                      console.log(stderr);

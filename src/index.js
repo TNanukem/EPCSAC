@@ -138,7 +138,7 @@ app.post('/algorithm', function(req, res){
         return res.end("Something went wrong!");
     }
     Algorithm.insertAlgorithm(req, res);
-    return res.end("File uploaded sucessfully!.");
+    return res.redirect('user_page');
   });
 });
 
@@ -147,3 +147,5 @@ app.post('/algorithm', function(req, res){
 
 // Simulation page routing
 app.post('/simulation', Data.renderSimulation);
+
+app.post('/simulation_run', Simulation.runSimulation);

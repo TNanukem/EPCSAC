@@ -11,18 +11,24 @@ CREATE TABLE "researchers" (
 
 CREATE TABLE "algorithms" (
   "id" SERIAL PRIMARY KEY,
-  "name" varchar(100) UNIQUE NOT NULL,
+  "name" varchar(100) NOT NULL,
   "version" int NOT NULL,
   "published" boolean NOT NULL,
   "publication" varchar(300),
   "insert_date" timestamp NOT NULL,
-  "code" varchar(500) NOT NULL
+  "location" varchar(500)
 );
 
 CREATE TABLE "development" (
   "id" SERIAL PRIMARY KEY,
   "researcher_id" int NOT NULL,
   "algorithm_id" int NOT NULL
+);
+
+CREATE TABLE "configuration" (
+  "id" SERIAL PRIMARY KEY,
+  "researcher_id" int NOT NULL,
+  "parameters_id" int NOT NULL
 );
 
 CREATE TABLE "parameters" (
@@ -96,7 +102,11 @@ CREATE TABLE "tests" (
 
 ALTER TABLE "development" ADD FOREIGN KEY ("researcher_id") REFERENCES "researchers" ("id");
 
+ALTER TABLE "configuration" ADD FOREIGN KEY ("researcher_id") REFERENCES "researchers" ("id");
+
 ALTER TABLE "development" ADD FOREIGN KEY ("algorithm_id") REFERENCES "algorithms" ("id");
+
+ALTER TABLE "configuration" ADD FOREIGN KEY ("parameters_id") REFERENCES "parameters" ("id");
 
 ALTER TABLE "tests" ADD FOREIGN KEY ("researcher_id") REFERENCES "researchers" ("id");
 

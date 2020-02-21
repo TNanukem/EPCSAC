@@ -24,3 +24,8 @@ html
                 each algorithm in algorithms
                   option=algorithm
               p Choose your parameters
+              select(name='parameters_selector')
+                each parameter in parameters
+                  option=parameter
+                div.col-md-12
+                  input.btn.btn-success(type="submit", value="Finish", style="width: 15%")
