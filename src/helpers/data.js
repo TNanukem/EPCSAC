@@ -11,7 +11,7 @@ const Data = {
           algorithms = [];
 
           for(i = 0; i < rows.length; i++){
-            algorithms.push(String(rows[i].id)+'.'+rows[i].name + ' v' + String(rows[i].version));
+            algorithms.push(String(rows[i].id)+'.'+rows[i].name + ' v ' + String(rows[i].version));
           }
 
           var {rows} = await pool.query('SELECT parameters_id FROM configuration WHERE researcher_id = $1', [req.session.user_id]);

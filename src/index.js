@@ -39,11 +39,14 @@ app.use(session({
 // Multer file upload configuration
 var Storage = multer.diskStorage({
   destination: function(req, file, callback){
-    callback(null, './Files')
+    var dir = './users/' + String(req.session.user_id) + '/algorithms/';
+
+    callback(null, dir);
     //callback(null, "../data/"+req.session.user_id+"/algorithms");
   },
   filename: function(req, file, callback){
-    callback(null, file.originalname);
+    var name = req.body.algorithm_name + '_' + req.body.algorithm_version + '.java';
+    callback(null, name);
   }
 });
 
@@ -142,10 +145,13 @@ app.post('/algorithm', function(req, res){
   });
 });
 
-
-// app.post('/simulation', Simulation.runSimulation);
-
 // Simulation page routing
 app.post('/simulation', Data.renderSimulation);
 
 app.post('/simulation_run', Simulation.runSimulation);
+
+app.get('/downloadSimulation', Simulation.downloadSimulationResults);
+
+app.use(function(req, res){
+  res.status(404).render('404');
+})

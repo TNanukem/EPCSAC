@@ -21,7 +21,7 @@ const Algorithm = {
         'INSERT INTO algorithms(name, version, published, publication, insert_date) VALUES ($1, $2, $3, $4, $5) RETURNING *;',
         [req.body.algorithm_name, req.body.algorithm_version, false, 'Anything', datetime]);
 
-      var location = String(process.cwd()) + '/users/' + String(req.session.user_id) + "/algorithms/" + String(req.session.user_id) + "_" + String(rows[0].id) + "_v" + String(rows[0].version) + ".java";
+      var location = String(process.cwd()) + '/users/' + String(req.session.user_id) + "/algorithms/" + algorithm_name + "_" + algorithm_version + ".java";
 
       await pool.query('UPDATE algorithms SET location = $1 WHERE id = $2', [location, rows[0].id]);
 

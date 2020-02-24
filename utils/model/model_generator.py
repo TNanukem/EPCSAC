@@ -139,7 +139,7 @@ public class Model {{
     private static final int CLOUDLET_LENGTH_MIN = {};
     private static final boolean CLOUDLET_LENGTH_FLAG = {};
 
-    private String RESULT_NAME = "{}-{}-v{}-{}";
+    private String RESULT_NAME = "_{}-{}-v{}-{}";
 
     private CloudSim simulation;
     private DatacenterBroker broker0;
@@ -178,7 +178,7 @@ public class Model {{
             LocalDateTime now = LocalDateTime.now();
             String time = dtf.format(now);
 
-            String local = "{}" + RESULT_NAME + '-' + it + '-' + time + ".csv";
+            String local = "{}{}" + RESULT_NAME + '-' + it + '-' + time + ".csv";
             System.out.println(it);
             try {{
                 CsvTable csv = new CsvTable();

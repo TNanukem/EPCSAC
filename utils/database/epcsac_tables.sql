@@ -92,12 +92,13 @@ CREATE TABLE "parameters" (
   "cloudlets_length_flag" boolean NOT NULL
 );
 
-CREATE TABLE "tests" (
+CREATE TABLE "simulations" (
   "id" SERIAL PRIMARY KEY,
   "date" timestamp NOT NULL,
   "researcher_id" int UNIQUE NOT NULL,
   "algorithm_id" int UNIQUE NOT NULL,
-  "parameters_id" int UNIQUE NOT NULL
+  "parameters_id" int UNIQUE NOT NULL,
+  "token" varchar(20) UNIQUE NOT NULL
 );
 
 ALTER TABLE "development" ADD FOREIGN KEY ("researcher_id") REFERENCES "researchers" ("id");
@@ -108,8 +109,8 @@ ALTER TABLE "development" ADD FOREIGN KEY ("algorithm_id") REFERENCES "algorithm
 
 ALTER TABLE "configuration" ADD FOREIGN KEY ("parameters_id") REFERENCES "parameters" ("id");
 
-ALTER TABLE "tests" ADD FOREIGN KEY ("researcher_id") REFERENCES "researchers" ("id");
+ALTER TABLE "simulations" ADD FOREIGN KEY ("researcher_id") REFERENCES "researchers" ("id");
 
-ALTER TABLE "tests" ADD FOREIGN KEY ("algorithm_id") REFERENCES "algorithms" ("id");
+ALTER TABLE "simulations" ADD FOREIGN KEY ("algorithm_id") REFERENCES "algorithms" ("id");
 
-ALTER TABLE "tests" ADD FOREIGN KEY ("parameters_id") REFERENCES "parameters" ("id");
+ALTER TABLE "simulations" ADD FOREIGN KEY ("parameters_id") REFERENCES "parameters" ("id");
