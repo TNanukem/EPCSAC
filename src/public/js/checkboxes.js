@@ -15,3 +15,17 @@ function checkbox(id_check, id_div, id_text){
     div.style.display = "none"
   }
 }
+
+function checkbox_unique(id_checkbox, id_div){
+  var checkbox = document.getElementById(id_checkbox);
+  var div = document.getElementById(id_div);
+  var doi = document.getElementById('DOI');
+
+  if(checkbox.checked == true){
+    div.style.display = "block";
+    doi.required = true;
+  } else {
+    div.style.display = "none";
+    doi.required = false;
+  }
+}

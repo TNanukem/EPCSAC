@@ -36,15 +36,10 @@ h1{
   border: none;
   cursor: pointer;
   padding: 10px;
-  background-color: #428bca;
   color: white;
   border-radius: 5px;
   align: center;
   margin: 5px auto;
-}
-
-.index-button:hover {
-  background-color: #428bFF;
 }
 
 input {

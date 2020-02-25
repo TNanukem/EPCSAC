@@ -25,7 +25,6 @@ const Data = {
       }catch(error){
         console.log(error)
       }
-      console.log(algorithms);
       res.render('simulation', {algorithms: algorithms, parameters: parameters});
     }
     else {
