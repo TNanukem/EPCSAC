@@ -14,12 +14,24 @@ const Algorithm = {
 
     var algorithm_name = req.body.algorithm_name;
     var algorithm_version = req.body.algorithm_version;
+    var published_checkbox = req.body.published;
+    var published = false;
+    var doi = null;
+
+    if(published_checkbox != null){
+      doi = req.body.doi;
+      published = true;
+    }
+
+    console.log(published_checkbox);
+    console.log(doi);
+    console.log(published);
 
     try {
       // Updates the algorithms table
       const { rows } = await pool.query(
         'INSERT INTO algorithms(name, version, published, publication, insert_date) VALUES ($1, $2, $3, $4, $5) RETURNING *;',
-        [req.body.algorithm_name, req.body.algorithm_version, false, 'Anything', datetime]);
+        [req.body.algorithm_name, req.body.algorithm_version, published, doi, datetime]);
 
       var location = String(process.cwd()) + '/users/' + String(req.session.user_id) + "/algorithms/" + algorithm_name + "_" + algorithm_version + ".java";
 
