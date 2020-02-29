@@ -13,9 +13,17 @@ The EPCSAC comes as a solution to this problem. Using it, researchers can select
 
 Right now the project is still being developed by Tiago Toledo, the to-do list below lists all the features that still needs to be added to the project before it is completely available to be improved by others developers.
 
-* Response Time Analysis
+* Two algorithm comparison pipeline
 
 ## Available Features
+
+The project, as the beta release v0.1 (29/02/2020) has the following features:
+
+* User creation and authentication system
+* Simulation parameters creation
+* Algorithm upload
+* Simulation creation
+* Download simulation results
 
 ## Usage
 
