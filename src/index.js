@@ -152,6 +152,8 @@ app.post('/simulation_run', Simulation.runSimulation);
 
 app.get('/downloadSimulation', Simulation.downloadSimulationResults);
 
+app.get('/getparams', Data.generateParametersTable);
+
 app.use(function(req, res){
   res.status(404).render('404');
 })

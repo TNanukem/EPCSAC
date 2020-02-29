@@ -1,0 +1,109 @@
+link(rel='stylesheet', href='/css/bootstrap.min.css')
+link(rel='stylesheet', href='/css/tables.css')
+
+table
+  tr
+    th Parameter
+    th Range of Values
+
+  tr
+    td Iterations
+    td #{parameters.iterations}
+
+  tr
+    td Datacenters
+    if(parameters.datacenters_flag)
+      td #{parameters.datacenters_min} - #{parameters.datacenters_max}
+    else
+      td #{parameters.datacenters_exact}
+
+  tr
+    td Hosts
+    if(parameters.hosts_flag)
+      td #{parameters.hosts_min} - #{parameters.hosts_max}
+    else
+      td #{parameters.hosts_exact}
+
+  tr
+    td Hosts PEs
+    if(parameters.hosts_pes_flag)
+      td #{parameters.hosts_pes_min} - #{parameters.hosts_pes_max}
+    else
+      td #{parameters.hosts_pes_exact}
+
+  tr
+    td Hosts RAM
+    if(parameters.hosts_ram_flag)
+      td #{parameters.hosts_ram_min} - #{parameters.hosts_ram_max}
+    else
+      td #{parameters.hosts_ram_exact}
+
+    tr
+      td Hosts BW
+      if(parameters.hosts_bw_flag)
+        td #{parameters.hosts_bw_min} - #{parameters.hosts_bw_max}
+      else
+        td #{parameters.hosts_bw_exact}
+
+    tr
+      td Hosts HD
+      if(parameters.hosts_hd_flag)
+        td #{parameters.hosts_hd_min} - #{parameters.hosts_hd_max}
+      else
+        td #{parameters.hosts_hd_exact}
+
+    tr
+      td VMs
+      if(parameters.vms_flag)
+        td #{parameters.vms_min} - #{parameters.vms_max}
+      else
+        td #{parameters.vms_exact}
+
+    tr
+      td VMs PEs
+      if(parameters.vms_pes_flag)
+        td #{parameters.vms_pes_min} - #{parameters.vms_pes_max}
+      else
+        td #{parameters.vms_pes_exact}
+
+    tr
+      td VMs RAM
+      if(parameters.vms_ram_flag)
+        td #{parameters.vms_ram_min} - #{parameters.vms_ram_max}
+      else
+        td #{parameters.vms_ram_exact}
+
+    tr
+      td VMs HD
+      if(parameters.vms_hd_flag)
+        td #{parameters.vms_hd_min} - #{parameters.vms_hd_max}
+      else
+        td #{parameters.vms_hd_exact}
+
+    tr
+      td VMs BW
+      if(parameters.vms_bw_flag)
+        td #{parameters.vms_bw_min} - #{parameters.vms_bw_max}
+      else
+        td #{parameters.vms_bw_exact}
+
+    tr
+      td Tasks
+      if(parameters.cloudlets_flag)
+        td #{parameters.cloudlets_min} - #{parameters.cloudlets_max}
+      else
+        td #{parameters.cloudlets_exact}
+
+    tr
+      td Tasks PEs
+      if(parameters.cloudlets_pes_flag)
+        td #{parameters.cloudlets_pes_min} - #{parameters.cloudlets_pes_max}
+      else
+        td #{parameters.cloudlets_pes_exact}
+
+    tr
+      td Tasks Length
+      if(parameters.cloudlets_length_flag)
+        td #{parameters.cloudlets_length_min} - #{parameters.cloudlets_length_max}
+      else
+        td #{parameters.cloudlets_length_exact}
