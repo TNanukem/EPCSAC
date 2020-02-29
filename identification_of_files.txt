@@ -1,0 +1,9 @@
+Users folders are identified by their id number.
+---> 25 --> Refers to user 25
+
+Algorithms are in the format: id_user-id_algorithm-vVersion
+---> 1-25-v2 --> Refers to the algorithm 25, version 2 of user 1
+
+Simulation results are in the format: d_user-id_algorithm-vVersion-parameters_id-xid_algorithm2-vVersion2
+---> 3-21-v3-155-x15-v2-it-TIME --> Refers to a comparation between algorithm 21 version 3 against the
+algorithm 15 version 2 using the parameters 155, request by user 3 at TIME iteration it.

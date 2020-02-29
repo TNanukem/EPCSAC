@@ -1,0 +1,25 @@
+doctype html
+html
+
+   head
+
+      title "Login into EPCSAC"
+      link(rel='stylesheet', href='/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/css/style.css')
+
+   body.login-page
+      include ./navbar.pug
+
+      h1 Login into EPCSAC
+
+      div.login-div
+        form.login-form(method= "POST")
+
+          input(type="email", placeholder="Email", name="email", maxLength="320" required)
+
+          input(type="password", placeholder="Password", name="password", maxLength="100", required)
+          br
+          input.btn.btn-success(type="submit", value="Login", style="width: 15%; margin-top:-10px;")
+
+          script
+            include ../public/js/validator.min.js

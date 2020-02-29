@@ -1,0 +1,20 @@
+p {
+  margin: 0px;
+  margin-bottom: -30px;
+  padding: 0px;
+  text-align: center !important;
+}
+
+body div {
+  float: none;
+  text-align: center;
+}
+
+body input {
+  width: 25%;
+  text-align: center;
+}
+
+#btnSubmit{
+  width: 23%;
+}

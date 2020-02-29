@@ -1,0 +1,37 @@
+doctype html
+html
+
+   head
+      include ./meta_config.pug
+
+      title "Simulation"
+      script
+        include ../public/js/database.js
+      link(rel='stylesheet', href='/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/css/style.css')
+
+   body.index
+
+      include ./navbar.pug
+
+      div.container-fluid
+
+        div.row
+          div.col-md-12
+            h1 Run a simulation
+
+            form#simulation-form(method="post", action='/simulation_run')
+              p Choose your algorithm
+              select(name='algorithm_selector')
+                option=""
+                each algorithm in algorithms
+                  option=algorithm
+              p Choose your parameters
+              select(name='parameters_selector', onchange="showParameters(this.value)")
+                option=""
+                each parameter in parameters
+                  option=parameter
+              div#param
+                p The parameters selected will be shown here
+              div.col-md-12
+                input.btn.btn-success(type="submit", value="Finish", style="width: 15%")

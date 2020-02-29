@@ -1,0 +1,16 @@
+doctype html
+html
+
+  head
+    title An error happened
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/style.css')
+
+  body
+    include ./navbar.pug
+    div.container-fluid
+      div.row
+        div.col-md-12(style="text-align:center;")
+          h1 An error has happened
+          p #{message}
+          a(href='/') Return to the home page

@@ -1,0 +1,16 @@
+octype html
+html
+
+  head
+    title 404 - Page Not Found
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/style.css')
+
+  body
+    include ./navbar.pug
+    div.container-fluid
+      div.row
+        div.col-md-12(style="text-align:center;")
+          h1 404 - Page Not Found
+          p For some reason, the page you are trying to access does not exist.
+          a(href='/') Return to the home page

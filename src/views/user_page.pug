@@ -1,0 +1,22 @@
+doctype html
+html
+
+  head
+    title Welcome #{name}
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/style.css')
+
+  body
+    include ./navbar.pug
+    div.container-fluid
+      div.row
+        div.col-md-12(style="text-align:center;")
+          h1 Welcome #{name}
+          form(method="post")
+            input.btn.btn-success(type="submit", value="Configure an experiment", style="width: 19%")
+
+          form(method="get", action="/algorithm")
+            input.btn.btn-success(type="submit", value="Upload an algorithm", style="width: 19%")
+
+          form(method="post", action="/simulation")
+            input.btn.btn-success(type="submit", value="Make a simulation", style="width: 19%")

@@ -1,0 +1,17 @@
+table {
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  margin: 20px;
+
+}
+
+th {
+  border: 1px rgba(200,200,200,.5) solid;
+  padding: 10px;
+}
+
+td {
+  padding: 0 15px;
+  border: 1px rgba(200,200,200,.5) solid;
+}

@@ -1,0 +1,42 @@
+doctype html
+html
+
+   head
+      include ./meta_config.pug
+
+      title "Algorithm upload"
+      script
+        include ../public/js/checkboxes.js
+      link(rel='stylesheet', href='/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/css/style.css')
+      link(rel='stylesheet', href='/css/algorithm.css')
+
+   body.index
+
+      include ./navbar.pug
+
+      div.container-fluid
+
+        div.row
+          div.col-md-12
+            h1 Upload your algorithm
+
+            form#algorithm-uploader(method="post" enctype="multipart/form-data")
+              p Name
+              br
+              input#algorithm_name(type="text", name="algorithm_name", placeholder="Algorithm Name" required)
+              p Version
+              br
+              input#algorithm_version(type="text", name="algorithm_version", placeholder="Algorithm Version" required)
+
+              p Is your algorithm published?
+              input#checkbox_published(type="checkbox", name="published", onclick="checkbox_unique('checkbox_published', 'DOI_div')")
+              br
+
+              div#DOI_div(style="display:none")
+                p DOI of the article
+                input#DOI(type="text", name="doi", placeholder="DOI of the Article")
+
+              input(type="file" name="algorithmUploader", required)
+              br
+              input.btn.btn-success(type="submit" name="submit" id="btnSubmit" value="Upload")
