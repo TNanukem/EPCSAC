@@ -14,3 +14,16 @@ function validation(id_check, exact, max, min){
     max.required = false;
   }
 }
+
+function maxMinValidation(max, min){
+  // var max = document.getElementById(max);
+  // var min = document.getElementById(min);
+  // window.alert(min.value + "vs" + max.value);
+  // if(min.value >= max.value){
+  //   min.setCustomValidity("Minimun value has to be smaller than the maximum value");
+  //   window.alert(min.value + "vs" + max.value);
+  // } else {
+  //   min.setCustomValidity("");
+  //   window.alert('tudo certo');
+  // }
+}

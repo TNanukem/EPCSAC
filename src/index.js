@@ -148,6 +148,10 @@ app.post('/algorithm', function(req, res){
 // Simulation page routing
 app.post('/simulation', Data.renderSimulation);
 
+app.post('/simulation_compare', Data.renderSimulationCompare);
+
+app.post('/simulation_compare_run', Simulation.runSimulationCompare);
+
 app.post('/simulation_run', Simulation.runSimulation);
 
 app.get('/downloadSimulation', Simulation.downloadSimulationResults);
