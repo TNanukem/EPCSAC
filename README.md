@@ -31,5 +31,9 @@ The project, as the beta release v0.1 (29/02/2020) has the following features:
 
 ## Infrastructure
 
+### General Structure
+
+![EPCSAC Infrastructure](https://github.com/TNanukem/EPCSAC/blob/master/src/public/images/EPCSAC_General_Structure.png "EPCSAC Infrastructure")
+
 ## Contributing
 You're welcome to contribute to this project. However, we request that you first read the contributing guide in order to know how you can help this project to grow.
