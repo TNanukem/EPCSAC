@@ -149,17 +149,19 @@ const Simulation = {
                    console.log(`exec error: ${error}`);
                }
 
-       });
+       }).toString();
        console.log('Simulation success');
 
        directory = String(process.cwd())+'/users/' + String(req.session.user_id)  + '/simulations/';
        name = String(token) + "_" + String(req.session.user_id) + '_' + String(algorithm_id) + '_' + String(algorithm_version) + '_' + String(req.body.parameters_selector) + '.log';
 
-       //fs.writeFile(directory+name, [stdout, stderr, error]);
+       fs.writeFile(directory+name, [run_simulation]);
 
        module.exports.sendDownloadEmail(req, token, algorithm_class_name);
 
        module.exports.deleteFiles(new_file_name);
+
+       await pool.query('INSERT INTO simulations (researcher_id, algorithm_id, parameters_id, date, token) VALUES ($1, $2, $3, $4, $5);', [req.session.user_id, algorithm_id, req.body.parameters_selector, datetime, token]);
 
        res.redirect("user_page/?name="+req.session.name);
       } catch(error){
@@ -192,6 +194,11 @@ const Simulation = {
         console.log('Erro na primeira query');
         console.log(err);
       }
+    }
+
+    else{
+      original_parameters = req.body.parameters_selector;
+      parameters_selector = original_parameters;
     }
 
     try{
