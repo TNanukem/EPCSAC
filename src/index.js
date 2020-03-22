@@ -99,6 +99,10 @@ app.get('/need_confirmation', function(req, res){
 // Logout page routing
 app.get('/logout', User.logout);
 
+// Tutorial page routing
+app.get('/tutorial', function(req, res){
+  res.render('tutorial')
+})
 
 // Experiment configuration page routing
 app.get('/config', function(req, res) {

@@ -13,6 +13,8 @@ function checkbox(id_check, id_div, id_text){
     text.style.display = "block";
     div.style.float = "initial";
     div.style.display = "none"
+    text.style.marginLeft = "auto"
+    text.style.marginRight = "auto"
   }
 }
 

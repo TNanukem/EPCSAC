@@ -1,0 +1,59 @@
+doctype html
+html
+
+   head
+      include ./meta_config.pug
+      link(rel='stylesheet', href='/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/css/style.css')
+
+      title "Tutorial on EPCSAC"
+
+   body.index
+
+      include ./navbar.pug
+
+      div.container-fluid
+
+        div.row
+          div.col-md-12
+            h1 EPCSAC Tutorial
+            p.
+              The EPCSAC has the objective of helping you to compare your cloud
+              scheduling algorithm with other algorithms made by yourself or by other
+              researchers, and, doing so, improve the quality of your research. To
+              help you with that, this tutorial will show you how to use our platform
+              and the details that you should be aware of in order to have a smoother
+              experience with the platform.
+
+            h2 Quick reminders
+            p.
+              The first thing you should be aware of: the backend simulation framework
+              of the platform is the CloudSim Plus available at http://cloudsimplus.org/. So
+              in order to test your algorithms, it has to be developed in a way that
+              CloudSim Plus is capable of simulating it.
+            p.
+              As of this time, the EPCSAC is only capable of generating simulations for the
+              scheduling of Cloudlets (the CloudSim Plus abstraction of tasks) into VMs
+              (virtual machines) of the Datacenters.
+
+              If you is looking to simulate VMs scheduling on hosts or another kind of scheduling
+              paradigm, feel free to access the project Github and help us add that functionality!
+
+            h2 The functionalities and steps you should take
+            p.
+              After creating your account, you can create a set of parameters to be used in your
+              simulation, you can upload your own algorithm to the system, and you can run it with that
+              set of parameters.
+
+              You can then find previously published algorithms in our platform, and run a simulation
+              comparing your algorithm with their, using a set of parameters you created or the parameters
+              that were used in the publication. You will receive the results of the simulation for both
+              algorithms.
+
+            h4 Creating your parameters configuration
+
+            h4 Uploading an algorithm
+
+            h4 Running your algorithm with your set of parameters
+
+            h4 Comparing your algorithm with a published algorithm
