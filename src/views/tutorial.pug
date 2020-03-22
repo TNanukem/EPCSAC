@@ -5,6 +5,7 @@ html
       include ./meta_config.pug
       link(rel='stylesheet', href='/css/bootstrap.min.css')
       link(rel='stylesheet', href='/css/style.css')
+      link(rel='stylesheet', href='/css/tutorial.css')
 
       title "Tutorial on EPCSAC"
 
@@ -50,10 +51,51 @@ html
               that were used in the publication. You will receive the results of the simulation for both
               algorithms.
 
-            h4 Creating your parameters configuration
+            h4 1. Creating your parameters configuration
+            img.img-fluid.mx-auto.d-block(src="/images/configure.png")
+            p.
+              You can create a set of parameters to be used in your simulation. Each parameter can be randomized
+              based on two values after you click on the Randomize Parameter checkbox. This way, the parameter
+              value that will be used in the simulation is a random value between Max and Min.
 
-            h4 Uploading an algorithm
+              If you do not know what some parameter means, the '?' icon will display a brief description of
+              the meaning of the parameter and possibly the unit of the value to be inserted.
 
-            h4 Running your algorithm with your set of parameters
+            h4 2. Uploading an algorithm
+            img.img-fluid.mx-auto.d-block(src="/images/algorithm_upload.png")
+            p.
+              When uploading your algorithm you will be asked to put in the name of the algorithm and the
+              version. The version option is used so you can still access previous versions of your algorithm when
+              simulating.
 
-            h4 Comparing your algorithm with a published algorithm
+              IMPORTANT: It is essential that the name put in the form is the same name of the Java Class inside
+              the archive, including the capital letters, and without the version. Otherwise an error will happen when running your algorithm.
+
+            h4 3. Running your algorithm with your set of parameters
+            img.img-fluid.mx-auto.d-block(src="/images/simulation.png")
+            p.
+              After you uploaded an algorithm and defined a set of parameters, you can select both of them and then run a
+              simulation. All your uploaded algorithms will be shown on the first dropdown menu, including it's name and it's
+              version.
+
+              The second dropdown menu will show all your created parameters of simulation by it index. When selecting an index,
+              a table with a brief description of the parameters you have set will be shown.
+
+            h4 4. Comparing your algorithm with a published algorithm
+            img.img-fluid.mx-auto.d-block(src="/images/simulation_compare.png")
+            p.
+              In case you want to compare your algorithm with a published algorithm, you can select it, and then select a
+              published algorithm from our database. It is important to notice that the published algorithm will be identified
+              by it's DOI.
+
+              Finally, you have the option of using a set of parameters of your own to run the simulation on both algorithms or
+              use the parameters list that was used on the publication. It is important to notice that the same simulation will
+              run twice: one for your algorithm, and one for the published algorithm and the random parameters may possible change
+              between one simulation and another. This is why we strongly recommend using the Iterations option when running the
+              simulation so you can have a statistical revelant result when doing your analysis.
+
+            h4 5. Receiving and analyzing your results
+            p.
+              Your simulation can take very long to run given the parameters you used. So, you will receive an e-mail when the
+              simulation has finished, and this e-mail will redirect you to a link where you will download a .zip file with the
+              results of the simulation for the algorithm in a .csv file and a log of the simulation.
