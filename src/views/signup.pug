@@ -4,6 +4,8 @@ html
    head
 
       title "Signup into EPCSAC"
+      script
+        include ../public/js/pass_compare.js
       link(rel='stylesheet', href='/css/bootstrap.min.css')
       link(rel='stylesheet', href='/css/style.css')
       link(rel='stylesheet', href='/css/config.css')
@@ -28,12 +30,12 @@ html
 
             div.col-md-6
               p(style="font-size: 20px;") Password
-              input(type="password", placeholder="Password",id="InputPassword", name="password", style="text-align: center !important", maxLength="100", data-match="#ConfirmPassword", required)
+              input(type="password", placeholder="Password",id="InputPassword", name="password", style="text-align: center !important", maxLength="100", onchange="comparePasswords()", required)
               div.help-block.with-errors
 
             div.col-md-6
               p(style="font-size: 20px;") Password Confirmation
-              input(type="password", placeholder="Password Confirmation", name="password_confirm", maxLength="100", style="text-align: center !important", data-match="#InputPassword", data-match-error="The passwords must match" required, id="ConfirmPassword")
+              input(type="password", placeholder="Password Confirmation", name="password_confirm", maxLength="100", style="text-align: center !important", onchange="comparePasswords()", id="ConfirmPassword", required)
               div.help-block.with-errors
 
             div.col-md-6

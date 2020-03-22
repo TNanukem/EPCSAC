@@ -1,7 +1,20 @@
-div.navbar-div
-  nav.navbar.navbar-light.bg-white
-    a.navbar-brand(href='/') EPCSAC
-    button.navbar-toggler(type='button', data-toggle='collapse',
-      data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent',
-      aria-expanded='false', aria-label='Toggle navigation')
-        span.navbar-toggler-icon
+nav.navbar.navbar-expand-lg.navbar-light.bg-white
+  a.navbar-brand(href='/') EPCSAC
+  button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarSupportedContent', aria-controls='navbarSupportedContent', aria-expanded='false', aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+
+  .collapse.navbar-collapse(id='navbarSupportedContent')
+    ul.navbar-nav.mr-auto
+      li.nav-item
+        a.nav-link(href='/user_page?name=' + session.name) Profile
+      li.nav-item
+        a.nav-link(href='/tutorial') Tutorial
+    ul.navbar-nav.float-right
+      if session.authenticated
+        li.nav-item
+          a.nav-link(href='/logout') Logout
+      else
+        li.nav-item
+          a.nav-link(href='/login') Login
+        li.nav-item
+          a.nav-link(href='/signup') Signup

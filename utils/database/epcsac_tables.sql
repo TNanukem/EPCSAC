@@ -95,10 +95,17 @@ CREATE TABLE "parameters" (
 CREATE TABLE "simulations" (
   "id" SERIAL PRIMARY KEY,
   "date" timestamp NOT NULL,
-  "researcher_id" int UNIQUE NOT NULL,
-  "algorithm_id" int UNIQUE NOT NULL,
-  "parameters_id" int UNIQUE NOT NULL,
-  "token" varchar(20) UNIQUE NOT NULL
+  "researcher_id" int NOT NULL,
+  "algorithm_id" int NOT NULL,
+  "parameters_id" int NOT NULL,
+  "token" varchar(20) UNIQUE NOT NULL,
+  "compared_algorithm_id" int
+);
+
+CREATE TABLE "publications" (
+  "id" SERIAL PRIMARY KEY,
+  "simulation_id" int NOT NULL,
+  "doi" varchar(50) NOT NULL
 );
 
 ALTER TABLE "development" ADD FOREIGN KEY ("researcher_id") REFERENCES "researchers" ("id");
@@ -114,3 +121,7 @@ ALTER TABLE "simulations" ADD FOREIGN KEY ("researcher_id") REFERENCES "research
 ALTER TABLE "simulations" ADD FOREIGN KEY ("algorithm_id") REFERENCES "algorithms" ("id");
 
 ALTER TABLE "simulations" ADD FOREIGN KEY ("parameters_id") REFERENCES "parameters" ("id");
+
+ALTER TABLE "publications" ADD FOREIGN KEY ("simulation_id") REFERENCES "simulations" ("id");
+
+ALTER TABLE "simulations" ADD FOREIGN KEY ("compared_algorithm_id") REFERENCES "algorithms" ("id");

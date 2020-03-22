@@ -146,5 +146,10 @@ const User = {
     }
 
   },
+
+  async logout(req, res){
+    req.session.authenticated = false;
+    res.redirect("/");
+  },
 }
 module.exports = User;

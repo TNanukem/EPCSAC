@@ -57,6 +57,13 @@ var upload = multer({
 app.use(express.static('public'));
 app.listen(3000);
 
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  global.session = req.session;
+  next();
+});
+
+
 // -------------------------- END OF CONFIGURATION -----------------------------
 
 
@@ -89,6 +96,13 @@ app.get('/need_confirmation', function(req, res){
   res.render('need_confirmation');
 })
 
+// Logout page routing
+app.get('/logout', User.logout);
+
+// Tutorial page routing
+app.get('/tutorial', function(req, res){
+  res.render('tutorial')
+})
 
 // Experiment configuration page routing
 app.get('/config', function(req, res) {
@@ -147,6 +161,10 @@ app.post('/algorithm', function(req, res){
 
 // Simulation page routing
 app.post('/simulation', Data.renderSimulation);
+
+app.post('/simulation_compare', Data.renderSimulationCompare);
+
+app.post('/simulation_compare_run', Simulation.runSimulationCompare);
 
 app.post('/simulation_run', Simulation.runSimulation);
 

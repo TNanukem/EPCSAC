@@ -14,3 +14,14 @@ function showParameters(value){
 
   }
 }
+
+function parameterSelection(checkbox, div){
+  var check = document.getElementById(checkbox);
+  var div = document.getElementById(div)
+
+  if(check.checked == true){
+    div.style.display = "none";
+  } else {
+    div.style.display = "block";
+  }
+}
