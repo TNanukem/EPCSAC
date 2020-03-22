@@ -57,6 +57,13 @@ var upload = multer({
 app.use(express.static('public'));
 app.listen(3000);
 
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  global.session = req.session;
+  next();
+});
+
+
 // -------------------------- END OF CONFIGURATION -----------------------------
 
 
@@ -88,6 +95,9 @@ app.get('/verify', User.verify);
 app.get('/need_confirmation', function(req, res){
   res.render('need_confirmation');
 })
+
+// Logout page routing
+app.get('/logout', User.logout);
 
 
 // Experiment configuration page routing
