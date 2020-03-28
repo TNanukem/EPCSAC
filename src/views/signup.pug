@@ -18,7 +18,8 @@ html
         div.row
           div.col-md-12
             h1 Create your account
-          form(method="post")
+        form(method="post")
+          div.row
             div.col-md-6
               p(style="font-size: 20px;") Username
               input(type="text", placeholder="Username", name="username", maxLength="100", required)
@@ -28,6 +29,7 @@ html
               input(type="email", placeholder="Email", name="email", data-error="Insert a valid e-mail", style="text-align: center !important", maxLength="320", required)
               div.help-block.with-errors
 
+          div.row
             div.col-md-6
               p(style="font-size: 20px;") Password
               input(type="password", placeholder="Password",id="InputPassword", name="password", style="text-align: center !important", maxLength="100", onchange="comparePasswords()", required)
@@ -38,6 +40,7 @@ html
               input(type="password", placeholder="Password Confirmation", name="password_confirm", maxLength="100", style="text-align: center !important", onchange="comparePasswords()", id="ConfirmPassword", required)
               div.help-block.with-errors
 
+          div.row
             div.col-md-6
               p(style="font-size: 20px;") Name
               input(type="text", placeholder="Name", name="name", maxLength="100", required)
@@ -46,8 +49,9 @@ html
               p(style="font-size: 20px;") Institution
               input(type="text", placeholder="Institution", name="institution", maxLength="100", required)
 
+          div.row
             div.col-md-12
               input.btn.btn-success(type="submit", value="Finish", style="width: 15%")
 
-            script
-              include ../public/js/validator.min.js
+          script
+            include ../public/js/validator.min.js
