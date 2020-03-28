@@ -47,7 +47,7 @@ html
                       input#host_number_exact(type="text", name="host_exact", placeholder="Number of Hosts", required)
 
                     div#host_random_div(style="display:none")
-                      input#host_number_max(type="text", name="host_max", placeholder="Max Hosts")
+                      input#host_number_max(type="text", name="host_max", placeholder="Max Hosts", onchange="maxMinValidation('host_number_max', 'host_number_min')")
                       input#host_number_min(type="text", name="host_min", placeholder="Min Hosts", onchange="maxMinValidation('host_number_max', 'host_number_min')")
 
                   div.col-md-6
@@ -70,7 +70,7 @@ html
                       input#host_number_pes_exact(type="text", name="host_pes_exact", placeholder="Number of Hosts PEs", required)
 
                     div#host_pes_random_div(style="display:none")
-                      input#host_number_pes_max(type="text", name="host_pes_max", placeholder="Max Hosts PEs")
+                      input#host_number_pes_max(type="text", name="host_pes_max", placeholder="Max Hosts PEs", onchange="maxMinValidation('host_number_pes_max', 'host_number_pes_min')")
                       input#host_number_pes_min(type="text", name="host_pes_min", placeholder="Min Hosts PEs", onchange="maxMinValidation('host_number_pes_max', 'host_number_pes_min')")
 
 
@@ -94,7 +94,7 @@ html
                       input#host_ram_exact(type="text", name="host_ram_exact", placeholder="Hosts RAM", required)
 
                     div#host_ram(style="display:none")
-                      input#host_ram_max(type="text", name="host_ram_max", placeholder="Max Hosts RAM")
+                      input#host_ram_max(type="text", name="host_ram_max", placeholder="Max Hosts RAM", onchange="maxMinValidation('host_ram_max', 'host_ram_min')")
                       input#host_ram_min(type="text", name="host_ram_min", placeholder="Min Hosts RAM", onchange="maxMinValidation('host_ram_max', 'host_ram_min')")
 
                   div.col-md-6
@@ -116,7 +116,7 @@ html
                       input#host_bw_exact(type="text", name="host_bw_exact", placeholder="Hosts BW", required)
 
                     div#host_bw(style="display:none")
-                      input#host_bw_max(type="text", name="host_bw_max", placeholder="Max Hosts BW")
+                      input#host_bw_max(type="text", name="host_bw_max", placeholder="Max Hosts BW", onchange="maxMinValidation('host_bw_max', 'host_bw_min')")
                       input#host_bw_min(type="text", name="host_bw_min", placeholder="Min Hosts BW", onchange="maxMinValidation('host_bw_max', 'host_bw_min')")
                 div.row
                   div.col-md-12(style="text-align:center;itens-align:center")
@@ -138,7 +138,7 @@ html
                       input#host_hd_exact(type="text",name="host_hd_exact" , placeholder="Hosts HD", required)
 
                     div#host_hd(style="display:none")
-                      input#host_hd_max(type="text", name="host_hd_max", placeholder="Max Hosts HD")
+                      input#host_hd_max(type="text", name="host_hd_max", placeholder="Max Hosts HD", onchange="maxMinValidation('host_hd_max', 'host_hd_min')")
                       input#host_hd_min(type="text", name="host_hd_min", placeholder="Min Hosts HD", onchange="maxMinValidation('host_hd_max', 'host_hd_min')")
 
               //--------------------- VM CONFIGURATION PAGE ----------------------
@@ -163,7 +163,7 @@ html
                       input#vm_number_exact(type="text", name="vm_exact", placeholder="Number of VMs", required)
 
                     div#vm_random_div(style="display:none")
-                      input#vm_number_max(type="text", name="vm_max", placeholder="Max VMs")
+                      input#vm_number_max(type="text", name="vm_max", placeholder="Max VMs", onchange="maxMinValidation('vm_number_max', 'vm_number_min')")
                       input#vm_number_min(type="text", name="vm_min", placeholder="Min VMs", onchange="maxMinValidation('vm_number_max', 'vm_number_min')")
 
                   div.col-md-6
@@ -186,7 +186,7 @@ html
                       input#vm_number_pes_exact(type="text", name="vm_pes_exact", placeholder="Number of VMs PEs", required)
 
                     div#vm_pes_random_div(style="display:none")
-                      input#vm_number_pes_max(type="text", name="vm_pes_max", placeholder="Max VMs PEs")
+                      input#vm_number_pes_max(type="text", name="vm_pes_max", placeholder="Max VMs PEs", onchange="maxMinValidation('vm_number_pes_max', 'vm_number_pes_min')")
                       input#vm_number_pes_min(type="text", name="vm_pes_min", placeholder="Min VMs PEs", onchange="maxMinValidation('vm_number_pes_max', 'vm_number_pes_min')")
 
 
@@ -210,7 +210,7 @@ html
                       input#vm_ram_exact(type="text", name="vm_ram_exact", placeholder="VMs RAM", required)
 
                     div#vm_ram(style="display:none")
-                      input#vm_ram_max(type="text", name="vm_ram_max", placeholder="Max VMs RAM")
+                      input#vm_ram_max(type="text", name="vm_ram_max", placeholder="Max VMs RAM", onchange="maxMinValidation('vm_ram_max', 'vm_ram_min')")
                       input#vm_ram_min(type="text", name="vm_ram_min", placeholder="Min VMs RAM", onchange="maxMinValidation('vm_ram_max', 'vm_ram_min')")
 
                   div.col-md-6
@@ -232,7 +232,7 @@ html
                       input#vm_bw_exact(type="text", name="vm_bw_exact", placeholder="VMs BW", required)
 
                     div#vm_bw(style="display:none")
-                      input#vm_bw_max(type="text", name="vm_bw_max", placeholder="Max VMs BW")
+                      input#vm_bw_max(type="text", name="vm_bw_max", placeholder="Max VMs BW", onchange="maxMinValidation('vm_bw_max', 'vm_bw_min')")
                       input#vm_bw_min(type="text", name="vm_bw_min", placeholder="Min VMs BW", onchange="maxMinValidation('vm_bw_max', 'vm_bw_min')")
 
                 div.row
@@ -255,7 +255,7 @@ html
                       input#vm_hd_exact(type="text",name="vm_hd_exact" , placeholder="VMs HD", required)
 
                     div#vm_hd(style="display:none")
-                      input#vm_hd_max(type="text", name="vm_hd_max", placeholder="Max VMs HD")
+                      input#vm_hd_max(type="text", name="vm_hd_max", placeholder="Max VMs HD", onchange="maxMinValidation('vm_hd_max', 'vm_hd_min')")
                       input#vm_hd_min(type="text", name="vm_hd_min", placeholder="Min VMs HD", onchange="maxMinValidation('vm_hd_max', 'vm_hd_min')")
               //--------------------- CLOUDLET CONFIGURATION PAGE ----------------------
               div.pages
@@ -279,7 +279,7 @@ html
                       input#cloudlet_number_exact(type="text", name="cloudlet_exact", placeholder="Number of Tasks", required)
 
                     div#cloudlet_random_div(style="display:none")
-                      input#cloudlet_number_max(type="text", name="cloudlet_max", placeholder="Max Tasks")
+                      input#cloudlet_number_max(type="text", name="cloudlet_max", placeholder="Max Tasks", onchange="maxMinValidation('cloudlet_number_max', 'cloudlet_number_min')")
                       input#cloudlet_number_min(type="text", name="cloudlet_min", placeholder="Min Tasks", onchange="maxMinValidation('cloudlet_number_max', 'cloudlet_number_min')")
 
                   div.col-md-6
@@ -302,7 +302,7 @@ html
                       input#cloudlet_number_pes_exact(type="text", name="cloudlet_pes_exact", placeholder="Number of Tasks PEs", required)
 
                     div#cloudlet_pes_random_div(style="display:none")
-                      input#cloudlet_number_pes_max(type="text", name="cloudlet_pes_max", placeholder="Max Tasks PEs")
+                      input#cloudlet_number_pes_max(type="text", name="cloudlet_pes_max", placeholder="Max Tasks PEs", onchange="maxMinValidation('cloudlet_number_pes_max', 'cloudlet_number_pes_min')")
                       input#cloudlet_number_pes_min(type="text", name="cloudlet_pes_min", placeholder="Min Tasks PEs", onchange="maxMinValidation('cloudlet_number_pes_max', 'cloudlet_number_pes_min')")
 
                 div.row
@@ -325,7 +325,7 @@ html
                       input#cloudlet_length_exact(type="text",name="cloudlet_length_exact" , placeholder="Tasks Length", required)
 
                     div#cloudlet_length(style="display:none")
-                      input#cloudlet_length_max(type="text", name="cloudlet_length_max", placeholder="Max Tasks Length")
+                      input#cloudlet_length_max(type="text", name="cloudlet_length_max", placeholder="Max Tasks Length", onchange="maxMinValidation('cloudlet_length_max', 'cloudlet_length_min')")
                       input#cloudlet_length_min(type="text", name="cloudlet_length_min", placeholder="Min Tasks Length", onchange="maxMinValidation('cloudlet_length_max', 'cloudlet_length_min')")
 
                   div.col-md-6
@@ -347,7 +347,7 @@ html
                       input#datacenters_exact(type="text",name="datacenters_exact" , placeholder="Datacenters", required)
 
                     div#datacenters(style="display:none")
-                      input#datacenters_max(type="text", name="datacenters_max", placeholder="Max Datacenters")
+                      input#datacenters_max(type="text", name="datacenters_max", placeholder="Max Datacenters", onchange="maxMinValidation('datacenters_max', 'datacenters_min');")
                       input#datacenters_min(type="text", name="datacenters_min", placeholder="Min Datacenters", onchange="maxMinValidation('datacenters_max', 'datacenters_min');")
 
                 div.row
