@@ -9,21 +9,16 @@ When a new algorithm is developed and published, usually it is compared against 
 
 The EPCSAC comes as a solution to this problem. Using it, researchers can select different configurations to an fictional datacenter and then test how well their algorithm performs. Then, they can compare their performance against other published algorithms inside our database, this way, their research is improved and more data is gathered to help in the analysis of this new algorithm.
 
-## To-do
-
-Right now the project is still being developed by Tiago Toledo, the to-do list below lists all the features that still needs to be added to the project before it is completely available to be improved by others developers.
-
-* Two algorithm comparison pipeline
-
 ## Available Features
 
-The project, as the beta release v0.1 (29/02/2020) has the following features:
+The project, as the beta release v0.2.1 (28/03/2020) has the following features:
 
 * User creation and authentication system
 * Simulation parameters creation
 * Algorithm upload
 * Simulation creation
 * Download simulation results
+* Comparison between two algorithms
 
 ## Usage
 
