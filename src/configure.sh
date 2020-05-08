@@ -4,3 +4,4 @@ git clone https://github.com/manoelcampos/cloudsim-plus
 
 createdb -h localhost -p 5432 -U postgres EPCSAC
 psql -h localhost -p 5432 -U postgres -d EPCSAC -a -f "../utils/database/EPCSAC_DATABASE.sql"
+sudo apt install maven

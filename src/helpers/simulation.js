@@ -155,7 +155,7 @@ const Simulation = {
        directory = String(process.cwd())+'/users/' + String(req.session.user_id)  + '/simulations/';
        name = String(token) + "_" + String(req.session.user_id) + '_' + String(algorithm_id) + '_' + String(algorithm_version) + '_' + String(req.body.parameters_selector) + '.log';
 
-       fs.writeFile(directory+name, [run_simulation]);
+       fs.writeFile(directory+name, [run_simulation], () => {});
 
        module.exports.sendDownloadEmail(req, token, algorithm_class_name);
 
@@ -246,7 +246,7 @@ const Simulation = {
 
        directory = String(process.cwd())+'/users/' + String(req.session.user_id)  + '/simulations/';
        name = String(token) + "_" + String(req.session.user_id) + '_' + String(algorithm_id) + '_' + String(algorithm_version) + '_' + String(parameters_selector) + '.log';
-       fs.writeFile(directory+name, [run_simulation]);
+       fs.writeFile(directory+name, [run_simulation], () => {} );
 
        console.log('Deleting files')
        module.exports.deleteFiles(new_file_name);
@@ -297,7 +297,7 @@ const Simulation = {
 
         directory = String(process.cwd())+'/users/' + String(req.session.user_id)  + '/simulations/';
         name = String(token) + "_" + String(req.session.user_id) + '_' + String(algorithm_id) + '_' + String(algorithm_version) + '_' + String(parameters_selector) + '.log';
-        fs.writeFile(directory+name, [run_simulation]);
+        fs.writeFile(directory+name, [run_simulation], () => {});
 
         module.exports.deleteFiles(new_file_name);
         console.log('Sending Email')
