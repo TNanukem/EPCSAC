@@ -1,0 +1,31 @@
+doctype html
+html
+
+  head
+    title An error happened
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/style.css')
+    script(src='https://cdn.plot.ly/plotly-latest.min.js')
+
+  body(onload="plot()")
+    include ./navbar.pug
+    div.container-fluid
+      div.row
+        div.col-md-12(style="text-align:center;")
+          h1 Dashboard
+          p Be aware you need to be logged in your account to download the files
+          a(href=link) Download your results
+          h3(style='text-align: left;') Proportion of success
+          div(style="width:75%;height:450px;", id='prop-success')
+          h3(style='text-align: left;') Execution time of cloudlets
+          div(style="width:75%;height:450px;", id='cloudlet-time')
+          h3(style='text-align: left;') Distribution of response time
+          div(style="width:75%;height:450px;", id='response-time')
+        script.
+          var execTime = [#{exec_time}];
+          var cloudlet = [#{cloudlet}];
+          var responseTime = [#{response_time}];
+          var success = #{success};
+        script
+          include dash.js
+          

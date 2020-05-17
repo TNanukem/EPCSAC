@@ -1,4 +1,8 @@
 var { pool } = require('./config');
+const parse = require('csv-parser')
+const execSync = require('child_process').execSync;
+const fs = require('fs')
+path = require('path')
 
 const Data = {
 
@@ -81,9 +85,72 @@ const Data = {
       req.session.next_page = "simulation_compare";
       res.redirect("login");
     }
+  },
+
+  async generateDash(req, res){
+
+    var host = req.get('host');
+    var file_path = '/';
+
+    if ((req.protocol + "://" + req.get('host')) == ("http://" + host)) {
+      console.log("Domain is matched. Information is from Authentic email");
+
+      try {
+        const { rows } = await pool.query('SELECT token FROM simulations WHERE token = $1;', [req.query.token]);
+
+        if (rows[0]) {
+          token = rows[0].token;
+
+          var files = []
+
+          var address = String(process.cwd()) + '/users/' + String(req.query.user_id) + '/simulations/';
+          var command = "ls " + address + req.query.token + "*csv"
+          console.log(command)
+        }
+      }
+      catch{
+
+        }
+    }
+    var archive = await execSync(command,
+      (error, stdout, stderr) => {
+
+        if (error !== null) {
+          console.log(`exec error: ${error}`);
+        }
+      }).toString();
+
+    archive = archive.replace(/(\r\n|\n|\r)/gm, "");
+
+    const data = []
+    fs.createReadStream(archive)
+      .pipe(parse({ separator: ';' }))
+      .on('data', (r) => {
+        data.push(r);
+      })
+      .on('end', () => {
+
+        response_time = []
+        cloudlet = []
+        exec_time = []
+        success = 0
+        
+        for(i = 1; i < data.length; i++){
+
+          if (data[i]['Status '] == 'SUCCESS'){
+            success += 1;
+          }
+          
+          response_time.push(parseFloat(data[i]['StartTime']))
+          cloudlet.push(parseFloat(data[i]['Cloudlet']))
+          exec_time.push(parseFloat(data[i]['ExecTime']))
+        }
+        
+        link = "http://" + req.get('host') + "/downloadSimulation?token=" + String(token) + "&user_id=" + String(req.session.user_id);
+
+        res.render('dash', {response_time:response_time, cloudlet:cloudlet, exec_time:exec_time, success: success, link: link});
+      })
   }
-
 }
-
 
 module.exports = Data;

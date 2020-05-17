@@ -172,6 +172,8 @@ app.get('/downloadSimulation', Simulation.downloadSimulationResults);
 
 app.get('/getparams', Data.generateParametersTable);
 
+app.get('/dashboard', Data.generateDash);
+
 app.use(function(req, res){
   res.status(404).render('404');
 })

@@ -90,7 +90,7 @@ const Simulation = {
     });
 
     host = req.get('host');
-    link = "http://"+req.get('host')+"/downloadSimulation?token="+String(token)+"&user_id="+String(req.session.user_id);
+    link = "http://"+req.get('host')+"/dashboard?token="+String(token)+"&user_id="+String(req.session.user_id);
 
     var mailOptions = {
         to : req.session.email,
@@ -354,7 +354,7 @@ const Simulation = {
           await delay(500);
 
           fs.readdirSync(address).forEach(file => {
-            if(file.includes(String(req.query.token))){
+            if(file.includes(String(req.query.token)) && file.includes(".zip")){
               file_path = file;
             }
           });
