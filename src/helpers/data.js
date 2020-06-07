@@ -108,8 +108,8 @@ const Data = {
           console.log(command)
         }
       }
-      catch{
-
+      catch(error){
+	console.log(error);
         }
     }
     var archive = await execSync(command,
