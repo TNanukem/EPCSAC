@@ -71,7 +71,7 @@ const User = {
 
     host = "http://epcsac.lasdpc.icmc.usp.br/"
 
-    if((req.protocol+"://"epcsac.lasdpc.icmc.usp.br/")==("http://"+host)){
+    if((req.protocol+"://epcsac.lasdpc.icmc.usp.br/")==("http://"+host)){
       console.log("Domain is matched. Information is from Authentic email");
 
       try{
