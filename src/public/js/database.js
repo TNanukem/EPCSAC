@@ -25,3 +25,21 @@ function parameterSelection(checkbox, div){
     div.style.display = "block";
   }
 }
+
+function slider(){
+  var slider = document.getElementById("numAlg")
+  
+  var local = document.getElementById("space_for_more")
+  local.innerHTML = ''
+
+  if(slider.value > 2){
+    var original = document.getElementById("algorithms_for_comparison")
+
+    for (i = 2; i < slider.value; i++){
+      var clone = original.cloneNode(true);
+      clone.id = "algorithms_for_comparison" + i;
+      local.appendChild(clone);
+    }
+  }
+  
+}

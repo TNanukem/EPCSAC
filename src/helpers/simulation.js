@@ -30,10 +30,11 @@ const Simulation = {
             i++;
           }
 
-          auxList.push("'" + String(req.session.user_id) + "'");
+          /*auxList.push("'" + String(req.session.user_id) + "'");
           auxList.push("'" + String(algorithm_id) + "'");
           auxList.push("'" + String(algorithm_version) + "'");
-          auxList.push("'" + String(parameters_selector) + "'");
+          auxList.push("'" + String(parameters_selector) + "'");*/
+          auxList.push("'" + String(algorithm_class_name) + "'");
           auxList.push("'" + String(process.cwd())+'/users/' + String(req.session.user_id) + '/simulations/' + "'");
           auxList.push("'" + String(token) + "'");
           auxList.push("'" + String(algorithm_class_name) + "'");
@@ -177,29 +178,13 @@ const Simulation = {
     var datetime = date+' '+time;
 
     var token = Math.floor((Math.random() * 100) + Math.random()*151616);
-    var doi = String(req.body.published_selector);
+    var compare_name = String(req.body.published_selector).split(',');
+    console.log(compare_name)
+    
     var parameters_selector = req.body.parameters_selector;
 
-    if(req.body.checkbox_parameters != null){
-      // Retrieves the parameters from the publication
-
-      try{
-
-        var {rows} = await pool.query('SELECT parameters_id FROM simulations WHERE id = (SELECT simulation_id FROM publications WHERE doi = $1)', [doi])
-
-        parameters_selector = rows[0].parameters_id;
-        var original_parameters = parameters_selector;
-
-      } catch(err){
-        console.log('Erro na primeira query');
-        console.log(err);
-      }
-    }
-
-    else{
-      original_parameters = req.body.parameters_selector;
-      parameters_selector = original_parameters;
-    }
+    original_parameters = req.body.parameters_selector;
+    parameters_selector = original_parameters;
 
     try{
 
@@ -209,8 +194,11 @@ const Simulation = {
 
       var original_algorithm_id = algorithm_id;
 
+      res.redirect("user_page/?name=" + req.session.name);
+
       // Generate the simulation for the user algorithm
       console.log('############################# Generating user simulation #################################');
+      console.log(token);
 
       [auxList, algorithm_class_name, algorithm_location] = await module.exports.generateParametersList(req, algorithm_id,algorithm_version, parameters_selector, token);
 
@@ -248,68 +236,75 @@ const Simulation = {
        name = String(token) + "_" + String(req.session.user_id) + '_' + String(algorithm_id) + '_' + String(algorithm_version) + '_' + String(parameters_selector) + '.log';
        fs.writeFile(directory+name, [run_simulation], () => {} );
 
-       console.log('Deleting files')
        module.exports.deleteFiles(new_file_name);
      } catch(error){
        console.log('Erro na simulação de usuário');
        console.log(error);
      }
-       // Generates the simulation for the published algorithm
+      console.log(req.body.numAlg);
+      // Generates the simulation for the published algorithms
+      for(i = 0; i < req.body.numAlg - 1; i++){
+        console.log(token)
+        try{
+          // Retrieves the data from the algorithm
+          console.log(i)
+          var {rows} = await pool.query('SELECT * FROM algorithms WHERE name = $1', [String(compare_name[i])]);
+          console.log('############### STARTING PUBLISHED SIMULATION #################')
+          algorithm_id = rows[0].id;
+          algorithm_version = rows[0].version;
 
-     try{
-       // Retrieves the data from the algorithm
-       var {rows} = await pool.query('SELECT * FROM algorithms WHERE publication = $1', [doi]);
-       console.log('############### STARTING PUBLISHED SIMULATION #################')
-       algorithm_id = rows[0].id;
-       algorithm_version = rows[0].version;
+          console.log('Published parameters')
+          console.log(algorithm_location);
+          [auxList, algorithm_class_name, algorithm_location] = await module.exports.generateParametersList(req, algorithm_id,
+                                                                algorithm_version, parameters_selector, token)
 
-       console.log('Published parameters')
-       console.log(algorithm_location);
-       [auxList, algorithm_class_name, algorithm_location] = await module.exports.generateParametersList(req, algorithm_id,
-                                                             algorithm_version, parameters_selector, token)
+          } catch (error){
+            console.log('Error in parameters generation');
+            console.log(error);
+          }
 
-       } catch (error){
-         console.log('Error in parameters generation');
-         console.log(error);
-       }
+        try{
+          await module.exports.generateSimulationFile(auxList);
+          console.log('Simulation file for published')
 
-     try{
-       await module.exports.generateSimulationFile(auxList);
-       console.log('Simulation file for published')
+          new_file_name = await module.exports.copyAlgorithm(algorithm_version, algorithm_location);
+        } catch (error){
+          console.log('Error before the simulation');
+          console.log(error);
+        }
+        try {
+          console.log('Running simulation for published')
+          var run_simulation = await execSync("./scripts/run_simulation.sh",
+                (error, stdout, stderr) => {
 
-       new_file_name = await module.exports.copyAlgorithm(algorithm_version, algorithm_location);
-    } catch (error){
-      console.log('Error before the simulation');
-      console.log(error);
-    }
-    try {
-       console.log('Running simulation for published')
-       var run_simulation = await execSync("./scripts/run_simulation.sh",
-            (error, stdout, stderr) => {
+                    console.log(stdout);
+                    console.log(stderr);
 
-                console.log(stdout);
-                console.log(stderr);
+                    if (error !== null) {
+                        console.log(`exec error: ${error}`);
+                    }
+            }).toString();
 
-                if (error !== null) {
-                    console.log(`exec error: ${error}`);
-                }
-        }).toString();
+            directory = String(process.cwd())+'/users/' + String(req.session.user_id)  + '/simulations/';
+            name = String(token) + "_" + String(req.session.user_id) + '_' + String(algorithm_id) + '_' + String(algorithm_version) + '_' + String(parameters_selector) + '.log';
+            fs.writeFile(directory+name, [run_simulation], () => {});
 
-        directory = String(process.cwd())+'/users/' + String(req.session.user_id)  + '/simulations/';
-        name = String(token) + "_" + String(req.session.user_id) + '_' + String(algorithm_id) + '_' + String(algorithm_version) + '_' + String(parameters_selector) + '.log';
-        fs.writeFile(directory+name, [run_simulation], () => {});
+            module.exports.deleteFiles(new_file_name);
 
-        module.exports.deleteFiles(new_file_name);
-        console.log('Sending Email')
-        module.exports.sendDownloadEmail(req, token, algorithm_class_name);
+            await pool.query('INSERT INTO simulations (researcher_id, algorithm_id, parameters_id, date, token) VALUES ($1, $2, $3, $4, $5);', [req.session.user_id, original_algorithm_id, original_parameters, datetime, token]);
 
-        await pool.query('INSERT INTO simulations (researcher_id, algorithm_id, parameters_id, date, token) VALUES ($1, $2, $3, $4, $5);', [req.session.user_id, original_algorithm_id, original_parameters, datetime, token]);
-
-        res.redirect("user_page/?name="+req.session.name);
-    } catch (error){
-      console.log('erro na published');
-      console.log(error);
-    }
+        } catch (error){
+          console.log('erro na published');
+          console.log(error);
+        }
+      }
+      try{
+      console.log('Sending Email')
+      module.exports.sendDownloadEmail(req, token, algorithm_class_name);
+      } catch(error){
+        console.log('Error when sending the email');
+        console.log(error)
+      }
 
   },
 
@@ -351,7 +346,7 @@ const Simulation = {
 
           const delay = require('delay');
 
-          await delay(500);
+          await delay(1000);
 
           fs.readdirSync(address).forEach(file => {
             if(file.includes(String(req.query.token)) && file.includes(".zip")){

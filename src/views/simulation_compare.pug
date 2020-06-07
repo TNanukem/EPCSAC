@@ -26,15 +26,19 @@ html
                 option=""
                 each algorithm in algorithms
                   option=algorithm
-
-              p Choose the published algorithm you want to compare to
-              select(name='published_selector')
-                option=""
-                each algo in published
-                  option=algo
-
               br
-              div(style="padding: 15px;") I want to use the parameters of the publication
+              p Choose the number of algorithms to compare (Between 2 and 5)
+              input(type="range", min="2", max="5", value="1", class="slider", id="numAlg", name="numAlg", onchange="slider()")
+              
+              div#algorithms_for_comparison
+                p Choose the algorithm you want to compare to
+                select(name='published_selector')
+                  option=""
+                  each algo in published
+                    option=algo
+              div#space_for_more
+              br
+              //div(style="padding: 15px;") I want to use the parameters of the publication
                 input#checkbox_parameters(type="checkbox", style="position:sticky; padding-left:10px;", name="checkbox_parameters", onclick="parameterSelection('checkbox_parameters', 'parameters_user')")
 
               div#parameters_user
