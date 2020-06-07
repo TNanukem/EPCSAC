@@ -94,6 +94,7 @@ const Data = {
 
     if ((req.protocol + "://" + req.get('host')) == ("http://" + host)) {
       console.log("Domain is matched. Information is from Authentic email");
+    }
 
       try {
         const { rows } = await pool.query('SELECT token FROM simulations WHERE token = $1;', [req.query.token]);
