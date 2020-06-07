@@ -67,12 +67,12 @@ const Data = {
             parameters.push(rows[i].parameters_id);
           }
 
-          var {rows} = await pool.query('SELECT doi FROM publications');
+          var {rows} = await pool.query('SELECT name FROM algorithms');
 
           published = []
 
           for(i = 0; i < rows.length; i++){
-            published.push(rows[i].doi);
+            published.push(rows[i].name);
           }
 
 
@@ -110,7 +110,6 @@ const Data = {
       }
       catch(error){
 	console.log(error);
-        }
     }
     var archive = await execSync(command,
       (error, stdout, stderr) => {
@@ -119,37 +118,83 @@ const Data = {
           console.log(`exec error: ${error}`);
         }
       }).toString();
+    
+    console.log(archive);
+    archive = archive.split('\n');
+    console.log(archive.length);
+    console.log(archive);
 
-    archive = archive.replace(/(\r\n|\n|\r)/gm, "");
+    response_time_obj = [];
+    cloudlet_obj = [];
+    exec_time_obj = [];
+    success_obj = [];
+    failure_obj = [];
+    names_obj = [];
 
-    const data = []
-    fs.createReadStream(archive)
-      .pipe(parse({ separator: ';' }))
-      .on('data', (r) => {
-        data.push(r);
-      })
-      .on('end', () => {
+    for(i = 0; i < archive.length-1; i++){
+      
+      const data = []
 
-        response_time = []
-        cloudlet = []
-        exec_time = []
-        success = 0
-        
-        for(i = 1; i < data.length; i++){
+      archive_ = archive[i].replace(/(\r\n|\n|\r)/gm, "");
 
-          if (data[i]['Status '] == 'SUCCESS'){
-            success += 1;
+      name = archive_.split('/')
+      name = name[name.length - 1]
+
+      names_obj.push(name.split('_')[1].split('-')[0])
+      
+      fs.createReadStream(archive_)
+        .pipe(parse({ separator: ';' }))
+        .on('data', (r) => {
+          data.push(r);
+        })
+        .on('end', () => {
+
+          response_time = [];
+          cloudlet = [];
+          exec_time = [];
+          success = 0;
+          failure = 0;
+
+          for (i = 1; i < data.length; i++) {
+
+            if (data[i]['Status '] == 'SUCCESS') {
+              success += 1;
+            }
+            else {
+              failure += 1;
+            }
+
+            response_time.push(parseFloat(data[i]['StartTime']))
+            cloudlet.push(parseFloat(data[i]['Cloudlet']))
+            exec_time.push(parseFloat(data[i]['ExecTime']))
           }
-          
-          response_time.push(parseFloat(data[i]['StartTime']))
-          cloudlet.push(parseFloat(data[i]['Cloudlet']))
-          exec_time.push(parseFloat(data[i]['ExecTime']))
-        }
-        
-        link = "http://" + req.get('host') + "/downloadSimulation?token=" + String(token) + "&user_id=" + String(req.session.user_id);
 
-        res.render('dash', {response_time:response_time, cloudlet:cloudlet, exec_time:exec_time, success: success, link: link});
-      })
+          response_time_obj.push(response_time)
+
+          cloudlet_obj.push(cloudlet)
+
+          exec_time_obj.push(exec_time)
+
+          success_obj.push(success)
+          failure_obj.push(failure)
+          console.log(success_obj)
+
+          link = "http://" + req.get('host') + "/downloadSimulation?token=" + String(token) + "&user_id=" + String(req.session.user_id);
+        })
+    }
+
+    const delay = require('delay');
+    
+    await delay(1000);
+
+    console.log(names_obj)
+    console.log(response_time_obj.length) 
+
+    res.render('dash', {
+      response_time: JSON.stringify(response_time_obj), cloudlet: JSON.stringify(cloudlet_obj), exec_time: JSON.stringify(exec_time_obj),
+      success: success_obj, failure: failure_obj, names: names_obj, link: link
+    }); 
+
   }
 }
 

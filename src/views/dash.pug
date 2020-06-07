@@ -2,7 +2,7 @@ doctype html
 html
 
   head
-    title An error happened
+    title Results Dashboard
     link(rel='stylesheet', href='/css/bootstrap.min.css')
     link(rel='stylesheet', href='/css/style.css')
     script(src='https://cdn.plot.ly/plotly-latest.min.js')
@@ -17,15 +17,18 @@ html
           a(href=link) Download your results
           h3(style='text-align: left;') Proportion of success
           div(style="width:75%;height:450px;", id='prop-success')
-          h3(style='text-align: left;') Execution time of cloudlets
+          h3(style='text-align: left;') Average Execution time of cloudlets
           div(style="width:75%;height:450px;", id='cloudlet-time')
-          h3(style='text-align: left;') Distribution of response time
+          h3(style='text-align: left;') Average response time
           div(style="width:75%;height:450px;", id='response-time')
         script.
-          var execTime = [#{exec_time}];
-          var cloudlet = [#{cloudlet}];
-          var responseTime = [#{response_time}];
-          var success = #{success};
+          
+          const execTime = JSON.parse(!{JSON.stringify(exec_time)});
+          const cloudlet = JSON.parse(!{JSON.stringify(cloudlet)});
+          const responseTime = JSON.parse(!{JSON.stringify(response_time)});
+          const success = [#{success}];
+          const failure = [#{failure}];
+          const alg_names = !{JSON.stringify(names)};
         script
           include dash.js
           

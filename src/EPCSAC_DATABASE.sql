@@ -98,7 +98,7 @@ CREATE TABLE "simulations" (
   "researcher_id" int NOT NULL,
   "algorithm_id" int NOT NULL,
   "parameters_id" int NOT NULL,
-  "token" varchar(20) UNIQUE NOT NULL,
+  "token" varchar(20) NOT NULL,
   "compared_algorithm_id" int
 );
 
