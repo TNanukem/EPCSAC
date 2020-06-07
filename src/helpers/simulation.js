@@ -90,8 +90,8 @@ const Simulation = {
       }
     });
 
-    host = req.get('host');
-    link = "http://"+req.get('host')+"/dashboard?token="+String(token)+"&user_id="+String(req.session.user_id);
+    host = "http://epcsac.lasdpc.icmc.usp.br/"
+    link = "http://epcsac.lasdpc.icmc.usp.br//verify?id="+token+"&email="+req.body.email;
 
     var mailOptions = {
         to : req.session.email,
@@ -310,10 +310,11 @@ const Simulation = {
 
   async downloadSimulationResults(req, res){
     const exec = require('child_process').exec;
-    var host = req.get('host');
+    var host = "http://epcsac.lasdpc.icmc.usp.br/"
+    
     var file_path = '/';
 
-    if((req.protocol+"://"+req.get('host'))==("http://"+host)){
+    if((req.protocol+"://epcsac.lasdpc.icmc.usp.br")==("http://"+host)){
       console.log("Domain is matched. Information is from Authentic email");
 
       try{
