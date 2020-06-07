@@ -91,7 +91,7 @@ const Simulation = {
     });
 
     host = "http://epcsac.lasdpc.icmc.usp.br/"
-    link = "http://epcsac.lasdpc.icmc.usp.br//verify?id="+token+"&email="+req.body.email;
+    link = "http://epcsac.lasdpc.icmc.usp.br/downloadSimulation?token="+String(token)+"&user_id="+String(req.session.user_id);
 
     var mailOptions = {
         to : req.session.email,
