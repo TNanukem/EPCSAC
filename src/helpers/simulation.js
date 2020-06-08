@@ -7,6 +7,15 @@ const exec = require('child_process').exec;
 
 const Simulation = {
 
+  /* Sequence of events: 
+    - Parameters list is generated
+    - Generate Simulation File
+    - Simulation file and algorithm are copied to the right place
+    - Simulation runs
+    - Files are deleted
+    - E-mail is sent.
+  */
+
   async generateParametersList(req, algorithm_id, algorithm_version, parameters_selector, token){
     console.log('Starting parameters list generation')
     try{
@@ -119,11 +128,12 @@ const Simulation = {
 
   async runSimulation(req, res){
 
+    // Data retrieval from the forms and token generation
+
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var datetime = date+' '+time;
-
 
     var token = Math.floor((Math.random() * 100) + Math.random()*151616);
 
@@ -133,13 +143,15 @@ const Simulation = {
       var algorithm_version = String(req.body.algorithm_selector).split(' ');
       algorithm_version = algorithm_version[algorithm_version.length - 1];
 
+      res.redirect("user_page/?name="+req.session.name);
+
       [auxList, algorithm_class_name, algorithm_location] = await module.exports.generateParametersList(req, algorithm_id,
                                                             algorithm_version, req.body.parameters_selector, token)
 
       await module.exports.generateSimulationFile(auxList);
 
       new_file_name = await module.exports.copyAlgorithm(algorithm_version, algorithm_location);
-      console.log('Starting the run of the simluation')
+
       var run_simulation = await execSync("./scripts/run_simulation.sh",
            (error, stdout, stderr) => {
 
@@ -147,13 +159,11 @@ const Simulation = {
                console.log(stderr);
 
                if (error !== null) {
-                   console.log(`exec error: ${error}`);
+                   console.log("exec error: ${error}");
                }
-
        }).toString();
-       console.log('Simulation success');
 
-       directory = String(process.cwd())+'/users/' + String(req.session.user_id)  + '/simulations/';
+       directory = String(process.cwd())+ '/users/' + String(req.session.user_id)  + '/simulations/';
        name = String(token) + "_" + String(req.session.user_id) + '_' + String(algorithm_id) + '_' + String(algorithm_version) + '_' + String(req.body.parameters_selector) + '.log';
 
        fs.writeFile(directory+name, [run_simulation], () => {});
@@ -164,7 +174,6 @@ const Simulation = {
 
        await pool.query('INSERT INTO simulations (researcher_id, algorithm_id, parameters_id, date, token) VALUES ($1, $2, $3, $4, $5);', [req.session.user_id, algorithm_id, req.body.parameters_selector, datetime, token]);
 
-       res.redirect("user_page/?name="+req.session.name);
       } catch(error){
       console.log(error)
     }
@@ -197,8 +206,6 @@ const Simulation = {
       res.redirect("user_page/?name=" + req.session.name);
 
       // Generate the simulation for the user algorithm
-      console.log('############################# Generating user simulation #################################');
-      console.log(token);
 
       [auxList, algorithm_class_name, algorithm_location] = await module.exports.generateParametersList(req, algorithm_id,algorithm_version, parameters_selector, token);
 
@@ -208,11 +215,9 @@ const Simulation = {
       }
 
       try {
-      await module.exports.generateSimulationFile(auxList);
+        await module.exports.generateSimulationFile(auxList);
 
-      console.log('Generated user simulation file')
-
-      new_file_name = await module.exports.copyAlgorithm(algorithm_version, algorithm_location);
+        new_file_name = await module.exports.copyAlgorithm(algorithm_version, algorithm_location);
 
     } catch (error){
       console.log('Erro na geração do arquivo');
@@ -220,7 +225,7 @@ const Simulation = {
     }
 
     try{
-      console.log('Running user simulation')
+      
       var run_simulation = await execSync("./scripts/run_simulation.sh",
            (error, stdout, stderr) => {
 
@@ -228,7 +233,7 @@ const Simulation = {
                console.log(stderr);
 
                if (error !== null) {
-                   console.log(`exec error: ${error}`);
+                   console.log('exec error: ${error}');
                }
        }).toString();
 
@@ -242,6 +247,7 @@ const Simulation = {
        console.log(error);
      }
       console.log(req.body.numAlg);
+      
       // Generates the simulation for the published algorithms
       for(i = 0; i < req.body.numAlg - 1; i++){
         console.log(token)
