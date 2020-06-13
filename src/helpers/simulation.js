@@ -17,7 +17,7 @@ const Simulation = {
   */
 
   async generateParametersList(req, algorithm_id, algorithm_version, parameters_selector, token){
-    console.log('Starting parameters list generation')
+    console.log('1.Starting parameters list generation\n')
     try{
 
         var {rows} = await pool.query('SELECT id, name, version, location FROM algorithms WHERE id = $1 AND version = $2', [algorithm_id, algorithm_version])
@@ -48,7 +48,6 @@ const Simulation = {
           auxList.push("'" + String(token) + "'");
           auxList.push("'" + String(algorithm_class_name) + "'");
 
-          console.log(algorithm_location);
           return [auxList, algorithm_class_name, algorithm_location];
         }
 
@@ -59,7 +58,7 @@ const Simulation = {
   },
 
   async generateSimulationFile(auxList){
-    console.log('Starting the generation of simulation file');
+    console.log('2.Starting the generation of simulation file\n');
     var copy_algorithm = execSync("./scripts/generate_simulation_file.sh " + "\"[" + auxList + "]\"",
          (error, stdout, stderr) => {
              console.log(stdout);
@@ -71,7 +70,7 @@ const Simulation = {
   },
 
   async copyAlgorithm(algorithm_version, algorithm_location) {
-    console.log('Copying the algorithm');
+    console.log('3.Copying the algorithm\n');
     var file_name = algorithm_location.split('/')
     file_name = file_name[file_name.length - 1]
 
@@ -112,12 +111,12 @@ const Simulation = {
       if(error){
         console.log(error);
       }else{
-        console.log("Message sent: " + response.message);
+        console.log("5. Message sent\n")
       }});
   },
 
   async deleteFiles(new_file_name){
-    console.log('Deleting files');
+    console.log('6. Deleting files\n');
     var delete_files = execSync("./scripts/delete_simulation_file.sh " + String(process.cwd()) + " " + new_file_name + ".java",
          (error, stdout, stderr) => {
 
@@ -128,8 +127,12 @@ const Simulation = {
 
   async runSimulation(req, res){
 
-    // Data retrieval from the forms and token generation
+    console.log("\nUser", req.session.user_id, "requested a simple simulation of algorithm", String(req.body.algorithm_selector)[0], "with parameters", 
+    req.body.parameters_selector, "\n");
 
+    res.redirect("user_page/?name=" + req.session.name);
+
+    // Data retrieval from the forms and token generation
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -143,8 +146,6 @@ const Simulation = {
       var algorithm_version = String(req.body.algorithm_selector).split(' ');
       algorithm_version = algorithm_version[algorithm_version.length - 1];
 
-      res.redirect("user_page/?name="+req.session.name);
-
       [auxList, algorithm_class_name, algorithm_location] = await module.exports.generateParametersList(req, algorithm_id,
                                                             algorithm_version, req.body.parameters_selector, token)
 
@@ -152,27 +153,25 @@ const Simulation = {
 
       new_file_name = await module.exports.copyAlgorithm(algorithm_version, algorithm_location);
 
-      var run_simulation = await execSync("./scripts/run_simulation.sh",
-           (error, stdout, stderr) => {
+      console.log('4. Running simulation')
+      var run_simulation = await exec("./scripts/run_simulation.sh", (error, stdout, stderr) => {
 
-               console.log(stdout);
-               console.log(stderr);
+        if (error !== null) {
+            console.log(stderr);
+        }
 
-               if (error !== null) {
-                   console.log("exec error: ${error}");
-               }
+        directory = String(process.cwd()) + '/users/' + String(req.session.user_id) + '/simulations/';
+        name = String(token) + "_" + String(req.session.user_id) + '_' + String(algorithm_id) + '_' + String(algorithm_version) + '_' + String(req.body.parameters_selector) + '.log';
+
+        fs.writeFile(directory + name, [run_simulation], () => { });
+
+        module.exports.sendDownloadEmail(req, token, algorithm_class_name);
+
+        module.exports.deleteFiles(new_file_name);
+
+        pool.query('INSERT INTO simulations (researcher_id, algorithm_id, parameters_id, date, token) VALUES ($1, $2, $3, $4, $5);', [req.session.user_id, algorithm_id, req.body.parameters_selector, datetime, token]);
+
        }).toString();
-
-       directory = String(process.cwd())+ '/users/' + String(req.session.user_id)  + '/simulations/';
-       name = String(token) + "_" + String(req.session.user_id) + '_' + String(algorithm_id) + '_' + String(algorithm_version) + '_' + String(req.body.parameters_selector) + '.log';
-
-       fs.writeFile(directory+name, [run_simulation], () => {});
-
-       module.exports.sendDownloadEmail(req, token, algorithm_class_name);
-
-       module.exports.deleteFiles(new_file_name);
-
-       await pool.query('INSERT INTO simulations (researcher_id, algorithm_id, parameters_id, date, token) VALUES ($1, $2, $3, $4, $5);', [req.session.user_id, algorithm_id, req.body.parameters_selector, datetime, token]);
 
       } catch(error){
       console.log(error)
