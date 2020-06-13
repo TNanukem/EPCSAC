@@ -339,11 +339,10 @@ const Simulation = {
           var arguments = "";
 
           files.forEach(item => {
-            console.log(item);
-            arguments += address + String(item) + " ";
+            arguments += String(item) + " ";
           })
 
-          var zip_results = await exec("./scripts/zip_results.sh "+ " " + String(address) + String(req.query.token) + " " + arguments,
+          var zip_results = await exec("./scripts/zip_results.sh "+ " " + String(address) + " " + String(req.query.token) + " " + arguments,
                (error, stdout, stderr) => {
                    console.log(stdout);
                    console.log(stderr);
