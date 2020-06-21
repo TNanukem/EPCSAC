@@ -1,4 +1,10 @@
 echo 'Ziping the result files'
-NAME="$1"
-shift
+
+cd $1
+echo $1
+NAME="$2"
+echo $NAME
+
+shift 2
+echo $@
 zip $NAME.zip "$@"
