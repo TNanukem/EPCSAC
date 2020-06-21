@@ -8,7 +8,7 @@ parametersList = ast.literal_eval(sys.argv[1])
 # 'false', '2', '1', 'false','2', '1', 'false', '2', '1', 'false', '2', '1',
 # 'false', '2', '1', 'false', '2', '1', 'false']
 
-directory = 'cloudsim-plus/cloudsim-plus-examples/src/main/java/org/cloudsimplus/examples/schedulers/Model.java'
+directory = 'cloudsim-plus/cloudsim-plus-examples/src/main/java/org/cloudsimplus/examples/schedulers/Model_{}.java'.format(parametersList[0])
 
 file = open(directory, 'w+')
 
@@ -49,7 +49,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Model {{
+public class Model_{} {{
     // Number of iterations
     private static final int ITERATIONS = {};
 
@@ -149,10 +149,10 @@ public class Model {{
 
 
     public static void main(String[] args) {{
-        new Model();
+        new Model_{}();
     }}
 
-    private Model() {{
+    private Model_{}() {{
         /*Enables just some level of log messages.
           Make sure to import org.cloudsimplus.util.Log;*/
         //Log.setLevel(ch.qos.logback.classic.Level.WARN);
@@ -276,7 +276,7 @@ public class Model {{
 }}
 
 
-""".format(*parametersList)
+""".format(*parametersList[1:])
 
 file.write(text)
 file.close()

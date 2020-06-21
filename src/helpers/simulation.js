@@ -45,10 +45,6 @@ const Simulation = {
             i++;
           }
 
-          /*auxList.push("'" + String(req.session.user_id) + "'");
-          auxList.push("'" + String(algorithm_id) + "'");
-          auxList.push("'" + String(algorithm_version) + "'");
-          auxList.push("'" + String(parameters_selector) + "'");*/
           auxList.push("'" + String(algorithm_class_name) + "'");
           auxList.push("'" + String(algorithm_class_name) + "'");
           auxList.push("'" + String(algorithm_class_name) + "'");
@@ -353,15 +349,14 @@ const Simulation = {
 
                             function checkSemaphore(){
                               if(semaphore == true){
-                                console.log(new_file_name, "is blocked by semaphore")
                                 setTimeout(checkSemaphore, 1000);
                               }
                               else {
-                                console.log(new_file_name, "is released")
+                                console.log("Blocking. ", new_file_name, "is released\n")
 
                                 semaphore = true;
 
-                                console.log(new_file_name, "took the semaphore")
+                                console.log("Blocking. ", new_file_name, "took the semaphore\n")
 
                                 console.log('Running simulation for published', new_file_name);
                                 var run_simulation_ = exec("./scripts/run_simulation.sh " + String(algorithm_class_name),
@@ -374,7 +369,7 @@ const Simulation = {
                                     }
 
                                     semaphore = false;
-                                    console.log(new_file_name, "released the semaphore")
+                                    console.log("Blocking. ", new_file_name, "released the semaphore\n")
 
                                     directory = String(process.cwd()) + '/users/' + String(req.session.user_id) + '/simulations/';
                                     name = String(token) + "_" + String(req.session.user_id) + '_' + String(algorithm_id) + '_' + String(algorithm_version) + '_' + String(parameters_selector) + '.log';
