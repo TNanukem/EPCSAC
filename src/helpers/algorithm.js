@@ -1,6 +1,7 @@
 // This function handles the algorithm related functions
 
 var { pool } = require('./config');
+alert = require('alert');
 
 const Algorithm = {
 
@@ -17,6 +18,16 @@ const Algorithm = {
     var published_checkbox = req.body.published;
     var published = false;
     var doi = null;
+
+    var not_allowed_names = ["CloudletSchedulerTimeShared", "CloudletSchedulerSpaceShared", 
+      "CloudletSchedulerNull", "CloudletSchedulerCompletelyFair", "CloudletSchedulerAbstract", 
+    "CloudletScheduler"];
+
+    if (not_allowed_names.includes(algorithm_name)){
+      console.log('Not allowed name')
+      alert('This algorithm name is now allowed, please re-upload with a different name!');
+      return
+    }
 
     if(published_checkbox != null){
       doi = req.body.doi;
@@ -42,6 +53,7 @@ const Algorithm = {
         'INSERT INTO development(researcher_id, algorithm_id) VALUES ($1, $2) RETURNING *;',
         [req.session.user_id, rows[0].id]);
 
+        return true;
     } catch(error){
       console.log(error);
     }
