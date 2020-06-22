@@ -9,6 +9,7 @@
   "author": "Tiago Toledo Jr",
   "license": "ISC",
   "dependencies": {
+    "alert": "^5.0.0",
     "bcrypt": "^3.0.7",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
