@@ -358,7 +358,7 @@ const Simulation = {
 
                                 console.log("Blocking. ", new_file_name, "took the semaphore\n")
 
-                                console.log('Running simulation for published', new_file_name);
+                                console.log('Running simulation for published', new_file_name, "\n");
                                 var run_simulation_ = exec("./scripts/run_simulation.sh " + String(algorithm_class_name),
                                   (error, stdout, stderr) => {
 

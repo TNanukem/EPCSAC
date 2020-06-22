@@ -106,7 +106,6 @@ const Data = {
 
           var address = String(process.cwd()) + '/users/' + String(req.query.user_id) + '/simulations/';
           var command = "ls " + address + req.query.token + "*csv"
-          console.log(command)
         }
       }
       catch(error){
@@ -120,10 +119,7 @@ const Data = {
         }
       }).toString();
     
-    console.log(archive);
     archive = archive.split('\n');
-    console.log(archive.length);
-    console.log(archive);
 
     response_time_obj = [];
     cloudlet_obj = [];
@@ -178,7 +174,6 @@ const Data = {
 
           success_obj.push(success)
           failure_obj.push(failure)
-          console.log(success_obj)
 
           link = "http://" + req.get('host') + "/downloadSimulation?token=" + String(token) + "&user_id=" + String(req.session.user_id);
         })
@@ -187,9 +182,6 @@ const Data = {
     const delay = require('delay');
     
     await delay(1000);
-
-    console.log(names_obj)
-    console.log(response_time_obj.length) 
 
     res.render('dash', {
       response_time: JSON.stringify(response_time_obj), cloudlet: JSON.stringify(cloudlet_obj), exec_time: JSON.stringify(exec_time_obj),
