@@ -1,0 +1,1890 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset='utf-8'>
+  <title>epcsac 0.0.1 | Documentation</title>
+  <meta name='description' content='Extensible Platform for Cloud Scheduling Algorithm Comparison'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' rel='stylesheet'>
+  <link href='assets/style.css' rel='stylesheet'>
+  <link href='assets/github.css' rel='stylesheet'>
+  <link href='assets/split.css' rel='stylesheet'>
+</head>
+<body class='documentation m0'>
+    <div class='flex'>
+      <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
+        <div class='py1 px2'>
+          <h3 class='mb0 no-anchor'>epcsac</h3>
+          <div class='mb1'><code>0.0.1</code></div>
+          <input
+            placeholder='Filter'
+            id='filter-input'
+            class='col12 block input'
+            spellcheck='false'
+            autocapitalize='off'
+            autocorrect='off'
+            type='text' />
+          <div id='toc'>
+            <ul class='list-reset h5 py1-ul'>
+              
+                
+                <li><a
+                  href='#insertalgorithm'
+                  class="">
+                  insertAlgorithm
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#hashpassword'
+                  class="">
+                  hashPassword
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#comparepassword'
+                  class="">
+                  comparePassword
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#isvalidemail'
+                  class="">
+                  isValidEmail
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#generateparameterstable'
+                  class="">
+                  generateParametersTable
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#rendersimulation'
+                  class="">
+                  renderSimulation
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#rendersimulationcompare'
+                  class="">
+                  renderSimulationCompare
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#generatedash'
+                  class="">
+                  generateDash
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#create'
+                  class="">
+                  create
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#generateparameterslist'
+                  class="">
+                  generateParametersList
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#generatesimulationfile'
+                  class="">
+                  generateSimulationFile
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#copyalgorithm'
+                  class="">
+                  copyAlgorithm
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#senddownloademail'
+                  class="">
+                  sendDownloadEmail
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#senderroremail'
+                  class="">
+                  sendErrorEmail
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#deletefiles'
+                  class="">
+                  deleteFiles
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#runsimulation'
+                  class="">
+                  runSimulation
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#runsimulationcompare'
+                  class="">
+                  runSimulationCompare
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#downloadsimulationresults'
+                  class="">
+                  downloadSimulationResults
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#create'
+                  class="">
+                  create
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#verify'
+                  class="">
+                  verify
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#login'
+                  class="">
+                  login
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#logout'
+                  class="">
+                  logout
+                  
+                </a>
+                
+                </li>
+              
+            </ul>
+          </div>
+          <div class='mt1 h6 quiet'>
+            <a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
+          </div>
+        </div>
+      </div>
+      <div id='split-right' class='relative overflow-auto height-viewport-100'>
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='insertalgorithm'>
+      insertAlgorithm
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Inserts a new algorithm in the database from the upload form</p>
+
+    <div class='pre p1 fill-light mt0'>insertAlgorithm(req: <a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>, res: <a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>req</span> <code class='quiet'>(<a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>)</code>
+	    The request variable from the caller
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>res</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</code>
+	    The response variable from the caller
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='hashpassword'>
+      hashPassword
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Uses bcrypt to hash the password before sending it to the database</p>
+
+    <div class='pre p1 fill-light mt0'>hashPassword(password: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>password</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The password inserted by the user
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='comparepassword'>
+      comparePassword
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Compares an inserted password with a hashed version of it to verify if it is correct</p>
+
+    <div class='pre p1 fill-light mt0'>comparePassword(hashPassword: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, password: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>hashPassword</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The hashed version of the password on the database
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>password</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The inserted password on the login form
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='isvalidemail'>
+      isValidEmail
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Uses regex to verify if an email is valid</p>
+
+    <div class='pre p1 fill-light mt0'>isValidEmail(email: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>email</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The e-mail inserted in the form
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='generateparameterstable'>
+      generateParametersTable
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function retrieves parameters from the database and returns it to the view to be shown to the user.</p>
+
+    <div class='pre p1 fill-light mt0'>generateParametersTable(req: <a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>, res: <a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>req</span> <code class='quiet'>(<a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>)</code>
+	    The request variable from the caller
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>res</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</code>
+	    The response variable from the caller
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='rendersimulation'>
+      renderSimulation
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function retrieves all the algorithms and parameters from the researcher and render them as options on the simulation view.</p>
+
+    <div class='pre p1 fill-light mt0'>renderSimulation(req: <a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>, res: <a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>req</span> <code class='quiet'>(<a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>)</code>
+	    The request variable from the caller
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>res</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</code>
+	    The response variable from the caller
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='rendersimulationcompare'>
+      renderSimulationCompare
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function retrieves all the algorithms and parameters from the researcher and render them as options on the simulation compare view.</p>
+
+    <div class='pre p1 fill-light mt0'>renderSimulationCompare(req: <a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>, res: <a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>req</span> <code class='quiet'>(<a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>)</code>
+	    The request variable from the caller
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>res</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</code>
+	    The response variable from the caller
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='generatedash'>
+      generateDash
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function renders the dashboard once the user clicks on teh link sent by e-mail</p>
+
+    <div class='pre p1 fill-light mt0'>generateDash(req: <a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>, res: <a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>req</span> <code class='quiet'>(<a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>)</code>
+	    The request variable from the caller
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>res</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</code>
+	    The response variable from the caller
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='create'>
+      create
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function creates a new configuration of simulation for the user based on the forms of the Configure Experiment
+page and then saves it on the database.</p>
+
+    <div class='pre p1 fill-light mt0'>create(req: <a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>, res: <a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>req</span> <code class='quiet'>(<a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>)</code>
+	    The request variable from the caller
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>res</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</code>
+	    The response variable from the caller
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='generateparameterslist'>
+      generateParametersList
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function generates a list of parameters to be used on the script that
+generates the simulation file.</p>
+
+    <div class='pre p1 fill-light mt0'>generateParametersList(req: <a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>, algorithm_id: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, algorithm_version: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, parameters_selector: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, token: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>req</span> <code class='quiet'>(<a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>)</code>
+	    The request variable from the caller
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>algorithm_id</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    The id of the algorithm on the database.
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>algorithm_version</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    The version of the algorithm
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>parameters_selector</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    The id of the parameters to be used on the simulation
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>token</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    The simulation token
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='generatesimulationfile'>
+      generateSimulationFile
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function receives the list of parameters and runs the script that
+generates the simulation file.</p>
+
+    <div class='pre p1 fill-light mt0'>generateSimulationFile(auxList: list)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>auxList</span> <code class='quiet'>(list)</code>
+	    List of parameters to be inserted on the simulation file
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='copyalgorithm'>
+      copyAlgorithm
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function copies the algorithm file and the simulation file from the user folder
+into the cloudsim-plus correct folders.</p>
+
+    <div class='pre p1 fill-light mt0'>copyAlgorithm(algorithm_version: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, algorithm_location: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>algorithm_version</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    The version of the algorithm
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>algorithm_location</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The path to the algorithm inside the machine
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='senddownloademail'>
+      sendDownloadEmail
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function sends an e-mail to the user with the dashboard link after the simulation is done.</p>
+
+    <div class='pre p1 fill-light mt0'>sendDownloadEmail(req: <a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>, token: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, algorithm_class_name: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>, log: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>req</span> <code class='quiet'>(<a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>)</code>
+	    The request variable from the caller
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>token</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    The token of the simulation
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>algorithm_class_name</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The name of the algorithm
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>log</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='senderroremail'>
+      sendErrorEmail
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function sends an error e-mail when an algorithm does not compile.</p>
+
+    <div class='pre p1 fill-light mt0'>sendErrorEmail(req: <a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>, log: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>req</span> <code class='quiet'>(<a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>)</code>
+	    The request variable from the caller
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>log</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a>)</code>
+	    The stderr of the compilation error
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='deletefiles'>
+      deleteFiles
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function deletes the simulation and algorithm file from the cloudsim-plus folder.</p>
+
+    <div class='pre p1 fill-light mt0'>deleteFiles(new_file_name: any, algorithm_class_name: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>new_file_name</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>algorithm_class_name</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='runsimulation'>
+      runSimulation
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>This function deletes the simulation and algorithm file from the cloudsim-plus folder.</p>
+
+    <div class='pre p1 fill-light mt0'>runSimulation(req: <a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>, res: <a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>req</span> <code class='quiet'>(<a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>)</code>
+	    The request variable from the caller
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>res</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</code>
+	    The response variable from the caller
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='runsimulationcompare'>
+      runSimulationCompare
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Runs a simulation for 2 or more algorithms.</p>
+
+    <div class='pre p1 fill-light mt0'>runSimulationCompare(req: <a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>, res: <a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>req</span> <code class='quiet'>(<a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>)</code>
+	    The request variable from the caller
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>res</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</code>
+	    The response variable from the caller
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='downloadsimulationresults'>
+      downloadSimulationResults
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Retrieves the results files, zip them and return to the website to be downloaded</p>
+
+    <div class='pre p1 fill-light mt0'>downloadSimulationResults(req: <a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>, res: <a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>req</span> <code class='quiet'>(<a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>)</code>
+	    The request variable from the caller
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>res</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</code>
+	    The response variable from the caller
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='create'>
+      create
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Creates a new user in the database based on the form, and sends the confirmation e-mail.</p>
+
+    <div class='pre p1 fill-light mt0'>create(req: <a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>, res: <a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>req</span> <code class='quiet'>(<a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>)</code>
+	    The request variable from the caller
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>res</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</code>
+	    The response variable from the caller
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='verify'>
+      verify
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Verifies the email of the user and updates the database if the validation is valid.</p>
+
+    <div class='pre p1 fill-light mt0'>verify(req: <a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>, res: <a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>req</span> <code class='quiet'>(<a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>)</code>
+	    The request variable from the caller
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>res</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</code>
+	    The response variable from the caller
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='login'>
+      login
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Proccess the login request from some user and redirects him to the user page if everything is correct</p>
+
+    <div class='pre p1 fill-light mt0'>login(req: <a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>, res: <a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>req</span> <code class='quiet'>(<a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>)</code>
+	    The request variable from the caller
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>res</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</code>
+	    The response variable from the caller
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+          <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='logout'>
+      logout
+    </h3>
+    
+    
+  </div>
+  
+
+  <p>Logs out the user from the system</p>
+
+    <div class='pre p1 fill-light mt0'>logout(req: <a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>, res: <a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>req</span> <code class='quiet'>(<a href="https://developer.mozilla.org/Add-ons/SDK/High-Level_APIs/request">request</a>)</code>
+	    The request variable from the caller
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>res</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5">response</a>)</code>
+	    The response variable from the caller
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+      </div>
+    </div>
+  <script src='assets/anchor.js'></script>
+  <script src='assets/split.js'></script>
+  <script src='assets/site.js'></script>
+</body>
+</html>
