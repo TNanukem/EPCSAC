@@ -5,7 +5,11 @@ alert = require('alert');
 
 const Algorithm = {
 
-  // Inserts a new algorithm in the database
+  /**
+   * Inserts a new algorithm in the database from the upload form
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async insertAlgorithm(req, res){
 
     var today = new Date();

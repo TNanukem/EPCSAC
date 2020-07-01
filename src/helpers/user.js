@@ -7,7 +7,11 @@ require('dotenv').config()
 
 const User = {
 
-  // Creates a new user
+  /**
+   * Creates a new user in the database based on the form, and sends the confirmation e-mail.
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async create(req, res) {
     if (!req.body.email || !req.body.password) {
       return res.render('error', {message: "The e-mail or the password is missing"});
@@ -66,7 +70,11 @@ const User = {
 
   },
 
-  // Verifies the email of the user
+  /**
+   * Verifies the email of the user and updates the database if the validation is valid.
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async verify(req, res){
 
     host = req.get('host');
@@ -104,7 +112,11 @@ const User = {
     }
   },
 
-  // Proccess the login request from some user
+  /**
+   * Proccess the login request from some user and redirects him to the user page if everything is correct
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async login(req, res) {
     if (!req.body.email || !req.body.password) {
       return res.render('error', {message: "The e-mail or the password is missing"});
@@ -147,6 +159,11 @@ const User = {
 
   },
 
+  /**
+   * Logs out the user from the system
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async logout(req, res){
     req.session.authenticated = false;
     res.redirect("/");

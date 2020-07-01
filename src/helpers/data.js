@@ -6,6 +6,11 @@ path = require('path')
 
 const Data = {
 
+  /**
+   * This function retrieves parameters from the database and returns it to the view to be shown to the user.
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async generateParametersTable(req, res){
     var param_id = req.query.id;
 
@@ -17,6 +22,11 @@ const Data = {
     }
   },
 
+  /**
+   * This function retrieves all the algorithms and parameters from the researcher and render them as options on the simulation view.
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async renderSimulation(req, res){
 
     if(req.session.authenticated == true){
@@ -48,6 +58,11 @@ const Data = {
     }
   },
 
+  /**
+   * This function retrieves all the algorithms and parameters from the researcher and render them as options on the simulation compare view.
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async renderSimulationCompare(req, res){
     if(req.session.authenticated == true){
       try{
@@ -87,6 +102,11 @@ const Data = {
     }
   },
 
+  /**
+   * This function renders the dashboard once the user clicks on teh link sent by e-mail
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async generateDash(req, res){
 
     var host = req.get('host');

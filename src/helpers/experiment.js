@@ -1,8 +1,12 @@
 var { pool } = require('./config');
 
 const Experiment = {
-
-  // This function creates a new configuration of simulation for the user.
+  /**
+   * This function creates a new configuration of simulation for the user based on the forms of the Configure Experiment
+   * page and then saves it on the database.
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async create(req, res){
 
     // The first part of the function retrieves all the information from the
