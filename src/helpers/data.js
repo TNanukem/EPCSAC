@@ -31,6 +31,8 @@ const Data = {
 
     if(req.session.authenticated == true){
       try{
+
+          // Retrieves and inserts the algorithms list
           var {rows} = await pool.query('SELECT name, version, id FROM algorithms WHERE id in (SELECT algorithm_id FROM development WHERE researcher_id = $1)', [req.session.user_id]);
 
           algorithms = [];
@@ -39,6 +41,7 @@ const Data = {
             algorithms.push(String(rows[i].id)+'.'+rows[i].name + ' v ' + String(rows[i].version));
           }
 
+          // Retrieves and inserts the parameters lists
           var {rows} = await pool.query('SELECT parameters_id FROM configuration WHERE researcher_id = $1', [req.session.user_id]);
 
           parameters = [];
@@ -66,6 +69,8 @@ const Data = {
   async renderSimulationCompare(req, res){
     if(req.session.authenticated == true){
       try{
+          
+          // Retrieves and inserts the algorithms list
           var {rows} = await pool.query('SELECT name, version, id FROM algorithms WHERE id in (SELECT algorithm_id FROM development WHERE researcher_id = $1)', [req.session.user_id]);
 
           algorithms = [];
@@ -74,6 +79,7 @@ const Data = {
             algorithms.push(String(rows[i].id)+'.'+rows[i].name + ' v ' + String(rows[i].version));
           }
 
+          // Retrieves and inserts the parameters list
           var {rows} = await pool.query('SELECT parameters_id FROM configuration WHERE researcher_id = $1', [req.session.user_id]);
 
           parameters = [];
@@ -82,6 +88,7 @@ const Data = {
             parameters.push(rows[i].parameters_id);
           }
 
+          // Retrieves and inserts the algorithms names list
           var {rows} = await pool.query('SELECT name FROM algorithms');
 
           published = []
@@ -112,11 +119,13 @@ const Data = {
     var host = req.get('host');
     var file_path = '/';
 
+    // Verifies domain
     if ((req.protocol + "://" + req.get('host')) == ("http://" + host)) {
       console.log("Domain is matched. Information is from Authentic email");
     }
 
       try {
+        // Selects the simulation from its token
         const { rows } = await pool.query('SELECT token FROM simulations WHERE token = $1;', [req.query.token]);
 
         if (rows[0]) {
@@ -131,6 +140,8 @@ const Data = {
       catch(error){
 	console.log(error);
     }
+
+    // ls the folder to get the files
     var archive = await execSync(command,
       (error, stdout, stderr) => {
 
@@ -159,6 +170,7 @@ const Data = {
 
       names_obj.push(name.split('_')[1].split('-')[0])
       
+      // Read each of the files
       fs.createReadStream(archive_)
         .pipe(parse({ separator: ';' }))
         .on('data', (r) => {
@@ -172,6 +184,7 @@ const Data = {
           success = 0;
           failure = 0;
 
+          // Parse the csvs to get the relevant information
           for (i = 1; i < data.length; i++) {
 
             if (data[i]['Status '] == 'SUCCESS') {
@@ -203,6 +216,7 @@ const Data = {
     
     await delay(1000);
 
+    // Renders the dashboard
     res.render('dash', {
       response_time: JSON.stringify(response_time_obj), cloudlet: JSON.stringify(cloudlet_obj), exec_time: JSON.stringify(exec_time_obj),
       success: success_obj, failure: failure_obj, names: names_obj, link: link

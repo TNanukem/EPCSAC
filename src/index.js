@@ -10,6 +10,9 @@ const session = require('express-session')
 const cors = require('cors')
 var multer = require('multer');
 
+var app = express();
+var upload = multer();
+
 // Helpers to be used in the project
 var User = require('./helpers/user')
 var Experiment = require('./helpers/experiment');
@@ -17,9 +20,7 @@ var Algorithm = require('./helpers/algorithm');
 var Simulation = require('./helpers/simulation');
 var Data = require('./helpers/data');
 
-var app = express();
-var upload = multer();
-
+// Sets view configurations
 app.set('view engine', 'pug');
 app.set('views','./views');
 
@@ -40,9 +41,7 @@ app.use(session({
 var Storage = multer.diskStorage({
   destination: function(req, file, callback){
     var dir = './users/' + String(req.session.user_id) + '/algorithms/';
-
     callback(null, dir);
-    //callback(null, "../data/"+req.session.user_id+"/algorithms");
   },
   filename: function(req, file, callback){
     var name = req.body.algorithm_name + '_' + req.body.algorithm_version + '.java';
@@ -54,6 +53,7 @@ var upload = multer({
   storage: Storage}).array("algorithmUploader", 1); //Field name and max count
 
 
+// Port configuration
 app.use(express.static('public'));
 app.listen(8030);
 
@@ -172,8 +172,10 @@ app.get('/downloadSimulation', Simulation.downloadSimulationResults);
 
 app.get('/getparams', Data.generateParametersTable);
 
+// Dashboard page routing
 app.get('/dashboard', Data.generateDash);
 
+// 404 Routing
 app.use(function(req, res){
   res.status(404).render('404');
 })
