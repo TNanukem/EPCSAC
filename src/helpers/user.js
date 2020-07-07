@@ -79,6 +79,7 @@ const User = {
 
     host = req.get('host');
 
+    // Verifies the domain
     if((req.protocol+"://"+req.get('host'))==("http://"+host)){
       console.log("Domain is matched. Information is from Authentic email");
 
@@ -118,6 +119,8 @@ const User = {
    * @param {response} res The response variable from the caller
    */
   async login(req, res) {
+
+    // Verifies if there is a missing value or if the e-mail is invalid
     if (!req.body.email || !req.body.password) {
       return res.render('error', {message: "The e-mail or the password is missing"});
     }
@@ -126,6 +129,8 @@ const User = {
     }
 
     try {
+
+      // Credentials verification
       const { rows } = await pool.query(
         'SELECT * FROM researchers WHERE email = $1', [req.body.email])
 
@@ -146,6 +151,7 @@ const User = {
       req.session.email = rows[0].email;
       req.session.authenticated = true;
 
+      // Redirects the user to its user page
       if(req.session.next_page == "user_page" || req.session.next_page == undefined){
           return res.redirect("user_page/?name="+req.session.name);
       }

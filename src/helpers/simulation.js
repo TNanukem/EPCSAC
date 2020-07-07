@@ -5,6 +5,10 @@ require('dotenv').config()
 const execSync = require('child_process').execSync;
 const exec = require('child_process').exec;
 
+/* The simulation helper method handles all the simulation-related tasks. These functions are always called
+   right after the POST of the form from one of the simulation pages. 
+*/
+
 const Simulation = {
 
     /* Sequence of events: 
@@ -29,6 +33,7 @@ const Simulation = {
         console.log('1.Starting parameters list generation\n')
         try{
 
+              // Grabs the algorithm data
               var {rows} = await pool.query('SELECT id, name, version, location FROM algorithms WHERE id = $1 AND version = $2', [algorithm_id, algorithm_version])
 
               if(rows[0]){
@@ -39,7 +44,8 @@ const Simulation = {
                   auxList.push("'" + String(algorithm_class_name) + "'");
                   auxList.push("'" + String(algorithm_class_name) + "'");
               }
-
+              
+              // Grabs the parameters data
               var {rows} = await pool.query('SELECT iterations,datacenters_exact,hosts_exact,hosts_pes_exact,hosts_ram_exact,hosts_bw_exact,hosts_hd_exact,vms_exact,vms_pes_exact,vms_ram_exact,vms_bw_exact,vms_hd_exact,cloudlets_exact,cloudlets_pes_exact,cloudlets_length_exact, datacenters_max,datacenters_min,datacenters_flag,hosts_max,hosts_min,hosts_flag,hosts_pes_max,hosts_pes_min,hosts_pes_flag,hosts_ram_max,hosts_ram_min,hosts_ram_flag,hosts_bw_max,hosts_bw_min,hosts_bw_flag,hosts_hd_max,hosts_hd_min,hosts_hd_flag,vms_max,vms_min,vms_flag,vms_pes_max,vms_pes_min,vms_pes_flag,vms_ram_max,vms_ram_min,vms_ram_flag,vms_bw_max,vms_bw_min,vms_bw_flag,vms_hd_max,vms_hd_min,vms_hd_flag,cloudlets_max,cloudlets_min,cloudlets_flag,cloudlets_pes_max,cloudlets_pes_min,cloudlets_pes_flag,cloudlets_length_max, cloudlets_length_min,cloudlets_length_flag FROM parameters WHERE id = $1', [parameters_selector]);
 
               if(rows[0]){
@@ -74,6 +80,8 @@ const Simulation = {
     */
     async generateSimulationFile(auxList){
       console.log('2.Starting the generation of simulation file\n');
+
+      // Calls the script that generates the simulation file to be used on the simulation
       var copy_algorithm = execSync("./scripts/generate_simulation_file.sh " + "\"[" + auxList + "]\"",
           (error, stdout, stderr) => {
               console.log(stdout);
@@ -95,9 +103,11 @@ const Simulation = {
         var file_name = algorithm_location.split('/')
         file_name = file_name[file_name.length - 1]
 
+        // Removes the version of the algorithm from the name file
         var new_file_name = file_name.split("_" + String(algorithm_version));
         new_file_name = new_file_name[0];
 
+        // Calls the script that will copy the algorithm file to the right folder
         var copy_algorithm = execSync("./scripts/copy_algorithm.sh " + String(algorithm_location) + " " + String(process.cwd()) + " " + file_name + " " + new_file_name + ".java",
               (error, stdout, stderr) => {
                   console.log(stdout);
@@ -117,6 +127,7 @@ const Simulation = {
      */
     async sendDownloadEmail(req, token, algorithm_class_name, log){
 
+        // Email authentication configuration
         var smtpTransport = nodemailer.createTransport({
             service: "Gmail",
             auth: {
@@ -125,6 +136,7 @@ const Simulation = {
             }
         });
 
+        // Link to the dashboard
         host = req.get('host');
         link = "http://"+req.get('host')+"/dashboard?token="+String(token)+"&user_id="+String(req.session.user_id);
 
@@ -134,6 +146,7 @@ const Simulation = {
             html : "Hello,<br> Please Click on the link to see your simulation results <br><a href="+link+">Click here to see the results</a>"
         }
 
+        // Sends the e-mail
         smtpTransport.sendMail(mailOptions, function(error, response){
             if(error){
                 console.log(error);
@@ -149,6 +162,7 @@ const Simulation = {
      */
     async sendErrorEmail(req, log) {
 
+        // Email authentication configuration
         var smtpTransport = nodemailer.createTransport({
             service: "Gmail",
             auth: {
@@ -157,7 +171,7 @@ const Simulation = {
             }
         });
 
-
+        // Attaches the log error file
         var mailOptions = {
             to: req.session.email,
             subject: "Your simulation presented a compilation error",
@@ -168,6 +182,7 @@ const Simulation = {
             }]
         }
 
+        // Sends the e-mail
         smtpTransport.sendMail(mailOptions, function (error, response) {
             if (error) {
                 console.log(error);
@@ -184,6 +199,8 @@ const Simulation = {
      */
     async deleteFiles(new_file_name, algorithm_class_name){
         console.log('6. Deleting files\n');
+
+        // Calls the script that delete the simulation file and the algorithm from the cloudsim-plus folder
         var delete_files = execSync("./scripts/delete_simulation_file.sh " + String(process.cwd()) + " " + new_file_name + ".java" + " " + algorithm_class_name + ".java",
             (error, stdout, stderr) => {
 
@@ -202,6 +219,7 @@ const Simulation = {
       console.log("\nUser", req.session.user_id, "requested a simple simulation of algorithm", String(req.body.algorithm_selector)[0], "with parameters", 
       req.body.parameters_selector, "\n");
 
+      // Redirects the user to his user page
       res.redirect("user_page/?name=" + req.session.name);
 
       // Data retrieval from the forms and token generation
@@ -214,6 +232,7 @@ const Simulation = {
 
       try{
 
+        // Process the data and generates the parameter list
         var algorithm_id = String(req.body.algorithm_selector)[0];
         var algorithm_version = String(req.body.algorithm_selector).split(' ');
         algorithm_version = algorithm_version[algorithm_version.length - 1];
@@ -221,6 +240,7 @@ const Simulation = {
         [auxList, algorithm_class_name, algorithm_location] = await module.exports.generateParametersList(req, algorithm_id,
                                                               algorithm_version, req.body.parameters_selector, token)
 
+        // Handles the file manipulation  
         await module.exports.generateSimulationFile(auxList);
 
         new_file_name = await module.exports.copyAlgorithm(algorithm_version, algorithm_location);
@@ -242,6 +262,8 @@ const Simulation = {
 
           fs.writeFile(directory + name, [stdout], () => { });
 
+          // Finishes the simulation by sending the e-mail and deleting files
+
           module.exports.sendDownloadEmail(req, token, algorithm_class_name);
 
           module.exports.deleteFiles(new_file_name, algorithm_class_name);
@@ -262,6 +284,7 @@ const Simulation = {
      */
     async runSimulationCompare(req, res){
 
+      // Gets the required data
       var today = new Date();
       var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
       var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -277,6 +300,7 @@ const Simulation = {
       original_parameters = req.body.parameters_selector;
       parameters_selector = original_parameters;
 
+      // Redirects the user to the user page
       res.redirect("user_page/?name=" + req.session.name);
 
       try{
@@ -287,7 +311,7 @@ const Simulation = {
 
         var original_algorithm_id = algorithm_id;
 
-        // Generate the simulation for the user algorithm
+        // Generate the simulation for the first algorithm
 
         [auxList, algorithm_class_name, algorithm_location] = await module.exports.generateParametersList(req, algorithm_id,algorithm_version, parameters_selector, token);
 
@@ -332,7 +356,7 @@ const Simulation = {
                 module.exports.deleteFiles(new_file_name, algorithm_class_name);
 
                 
-                // Generates the simulation for the published algorithms
+                // Generates the simulation for the other algorithms
                 for (let i = 0; i < req.body.numAlg - 1; i++) {
                   let n_alg = req.body.numAlg;
                   let j = i;
@@ -374,6 +398,7 @@ const Simulation = {
                               auxList.push("'" + String(token) + "'");
                               auxList.push("'" + String(algorithm_class_name) + "'");
                               
+                              // Checks if the semaphore is taken
                               function checkSemaphore() {
                                 if (semaphore == true) {
                                   setTimeout(checkSemaphore, 1000);
@@ -382,11 +407,12 @@ const Simulation = {
 
                                   console.log("Blocking. ", algorithm_class_name, "is released\n")
 
+                                  // Grabs the semaphore to run its own simulation
                                   semaphore = true;
 
                                   console.log("Blocking. ", algorithm_class_name, "took the semaphore\n")
                               
-                              // Generate simulation file
+                              // Generate simulation file and cipies the files
                               console.log('2.Starting the generation of simulation file\n');
                               var copy_algorithm = execSync("./scripts/generate_simulation_file.sh " + "\"[" + auxList + "]\"",
                                 (error, stdout, stderr) => {
@@ -422,6 +448,7 @@ const Simulation = {
                                         console.log(new_file_name, "\nPresented an error\n");
                                         console.log(stderr);
 
+                                        // Sends the error e-mail in case of failure
                                         var smtpTransport = nodemailer.createTransport({
                                           service: "Gmail",
                                           auth: {
@@ -458,6 +485,7 @@ const Simulation = {
                                         console.log("\nNo Errors happened\n");
                                       }
 
+                                      // Release the semaphore for the next algorithm to run
                                       semaphore = false;
                                       console.log("Blocking. ", new_file_name, "released the semaphore\n")
 
@@ -482,7 +510,7 @@ const Simulation = {
                                           end = false;
                                         }
                                       }
-
+                                      // Sends the e-mail with the link only after all simulations have ended
                                       if (end == true) {
                                         var smtpTransport = nodemailer.createTransport({
                                           service: "Gmail",
@@ -513,7 +541,6 @@ const Simulation = {
                                   return;
                                 }
                               }
-
                               checkSemaphore();
                             }
                           });
@@ -536,10 +563,12 @@ const Simulation = {
       var host = req.get('host');
       var file_path = '/';
 
+      // Verifies the domain
       if((req.protocol+"://"+req.get('host'))==("http://"+host)){
         console.log("Domain is matched. Information is from Authentic email");
 
         try{
+          // Retrieves the simulation data
           const {rows} = await pool.query('SELECT token FROM simulations WHERE token = $1;', [req.query.token]);
 
           if(rows[0]){
@@ -547,6 +576,7 @@ const Simulation = {
 
             var files = []
 
+            // Retrieves the files that match the simulation token from the user folder
             var address = String(process.cwd()) + '/users/' + String(req.query.user_id) + '/simulations/';
             fs.readdirSync(address).forEach(file => {
               if(file.includes(String(req.query.token))){
@@ -560,16 +590,18 @@ const Simulation = {
               args += String(item) + " ";
             })
 
+            // Zips the results files to be downloaded
             var zip_results = await exec("./scripts/zip_results.sh "+ " " + String(address) + " " + String(req.query.token) + " " + args,
                 (error, stdout, stderr) => {
                     console.log(stdout);
                     console.log(stderr);
             });
 
+            // Waits one second for the zipping to happen
             const delay = require('delay');
-
             await delay(1000);
 
+            // Sends the file to the user
             fs.readdirSync(address).forEach(file => {
               if(file.includes(String(req.query.token)) && file.includes(".zip")){
                 file_path = file;

@@ -12,6 +12,7 @@ const Algorithm = {
    */
   async insertAlgorithm(req, res){
 
+    // Retrieves data from the day of the upload and from the forms of the user
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -23,6 +24,7 @@ const Algorithm = {
     var published = false;
     var doi = null;
 
+    /// Blocks internal classes from cloudsim-plus to avoid errors
     var not_allowed_names = ["CloudletSchedulerTimeShared", "CloudletSchedulerSpaceShared", 
       "CloudletSchedulerNull", "CloudletSchedulerCompletelyFair", "CloudletSchedulerAbstract", 
     "CloudletScheduler"];
