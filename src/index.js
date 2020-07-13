@@ -160,9 +160,9 @@ app.post('/algorithm', function(req, res){
 });
 
 // Simulation page routing
-app.post('/simulation', Data.renderSimulation);
+app.get('/simulation', Data.renderSimulation);
 
-app.post('/simulation_compare', Data.renderSimulationCompare);
+app.get('/simulation_compare', Data.renderSimulationCompare);
 
 app.post('/simulation_compare_run', Simulation.runSimulationCompare);
 

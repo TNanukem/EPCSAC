@@ -12,14 +12,40 @@ html
       div.row
         div.col-md-12(style="text-align:center;")
           h1 Welcome #{name}
-          form(method="post")
-            input.btn.btn-success(type="submit", value="Configure an experiment", style="width: 19%")
 
-          form(method="get", action="/algorithm")
-            input.btn.btn-success(type="submit", value="Upload an algorithm", style="width: 19%")
+          div.row(style='padding-top: 15px;')
+            div.col-md-6
+              a(href='/simulation')
+                div.experiment.user_page_buttons(style='float:left; display:flex;padding-left: 25px;')
+                  img.buttons(src='images/configure_experiment.png')
+                  p(style='padding-top: 20px;padding-right:5px;'). 
+                    Configure a set of parameters, from the aspects of each physical machine and the VMs to the 
+                    number and complexity of tasks to be solved. You will use these parameters to simulate your 
+                    algorithms.
 
-          form(method="post", action="/simulation")
-            input.btn.btn-success(type="submit", value="Simulate your algorithm", style="width: 19%")
+            div.col-md-6
+              a(href='/algorithm')
+                div.upload.user_page_buttons(style='float:left; display:flex')
+                  img.buttons(src='images/upload.png')
+                  p(style='padding-top: 20px;padding-right: 5px;'). 
+                    Upload an cloudsim-plus cloudlet scheduler algorithm, in java, to be able to test it using the parameters 
+                    of your choice and comparing it to other algorithms available here on the EPCSAC platform.
 
-          form(method="post", action="/simulation_compare")
-            input.btn.btn-success(type="submit", value="Compare your algorithm", style="width: 19%")
+          div.row(style='padding-top: 40px;padding-right:5px;')
+            div.col-md-6 
+              a(href='/simulation')
+                div.simulation.user_page_buttons(style='float:left; display:flex;padding-left: 25px;')
+                  img.buttons(src='images/simulate.png', style='padding-top: 10px;')
+                  p(style='padding-top: 15px;padding-left: 5px;padding-right:5px;'). 
+                    Using one of your algorithms and a set of parameters configured by you, simulate the algorithm 
+                    to see how it performs. You will be able to see a dashboard with some metrics and will also receive
+                    an csv file with the data for each cloudlet simulated.
+
+            div.col-md-6 
+              a(href='/simulation_compare')
+                div.compare.user_page_buttons(style='float:left; display:flex')
+                  img.buttons(src='images/compare.png')
+                  p(style='padding-top: 13px; padding-left: 5px;padding-right:5px;'). 
+                    Compare your algorithms between each other to see which of them has the best performance for your
+                    needs. You will have at your disposal a dashboard with the comparison and also a csv file for each one 
+                    so you can create your own metrics with the data.

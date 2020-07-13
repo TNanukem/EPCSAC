@@ -4,6 +4,8 @@ body {
 
 .navbar {
   margin: -30px;
+  border: 1px solid grey;
+  margin-bottom: 65px;;
 }
 
 .navbar a {
@@ -31,12 +33,13 @@ h1{
 
 .index-button {
   margin-top: 5px;
-  width: 15%;
+  width: 25%;
   text-align: center;
   border: none;
   cursor: pointer;
   padding: 10px;
   color: white;
+  background-color: #243665;
   border-radius: 5px;
   align: center;
   margin: 5px auto;
@@ -50,3 +53,22 @@ input {
 .login-div {
   text-align: center;
 }
+
+.logo-navbar{
+  height: auto;
+  width: 13%;;
+}
+
+img.buttons {
+  height: 25%;
+  width: 25%;
+}
+
+.user_page_buttons{
+  border: 1px #243665 solid;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+}
+
+a:link, a:visited, a:hover, a:active { color: black }
