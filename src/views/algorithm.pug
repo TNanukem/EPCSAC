@@ -19,6 +19,7 @@ html
 
         div.row
           div.col-md-12
+            img(src='images/upload.png', style='height: 100px; width: auto;')
             h1 Upload your algorithm
 
             form#algorithm-uploader(method="post" enctype="multipart/form-data")
@@ -39,4 +40,4 @@ html
 
               input(type="file" name="algorithmUploader", required)
               br
-              input.btn.btn-success(type="submit" name="submit" id="btnSubmit" value="Upload")
+              input.btn.btn-success(type="submit" name="submit" id="btnSubmit" value="Upload" style=' background-color: #243665; border: none')
