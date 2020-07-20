@@ -46,7 +46,7 @@ var Storage = multer.diskStorage({
   filename: function(req, file, callback){
     var name = req.body.algorithm_name + '_' + req.body.algorithm_version + '.java';
     callback(null, name);
-  }
+  },
 });
 
 var upload = multer({
