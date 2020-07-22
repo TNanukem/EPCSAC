@@ -274,7 +274,7 @@ const Experiment = {
           }})
 
         // Redirects the user to the user page, passing his name as argument.
-        res.redirect("user_page/?name="+req.session.name);
+        res.redirect("user_page?name="+req.session.name);
       } catch (error){
         console.log(error);
       }

@@ -167,6 +167,7 @@ app.post('/algorithm', function(req, res){
     }
     if (extension_error == true){
       alert('You have to upload a Java file with a .java extension');
+      extension_error = false;
       return res.redirect('user_page');
     }
     Algorithm.insertAlgorithm(req, res);
