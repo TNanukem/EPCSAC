@@ -11,14 +11,18 @@ html
 
       include ./navbar.pug
 
-      h1 Extensible Platform for Cloud Scheduling Algorithm Comparison (EPCSAC)
-      p.
-         The EPCSAC is an online platform developed to help researchers improve
-         their researches by comparing their scheduling algorithms with other
-         published algorithms. Create your account or login to start simulating
-         and comparing your results.
+      div.container-fluid
+         div.row
+            div.col-md-6
+               h1 Extensible Platform for Cloud Scheduling Algorithm Comparison (EPCSAC)
+               p.
+                  The EPCSAC is an online platform developed to help researchers improve
+                  their researches by comparing their scheduling algorithms with other
+                  published algorithms. Create your account or login to start simulating
+                  and comparing your results.
+               div
+                  a.btn.index-button(href='signup', style='color:white') Sign up
 
-      div.index-button-area
-        a.btn.btn-success.index-button(href='login') Login
-        br
-        a.btn.btn-success.index-button(href='signup') Sign up
+            div.col-md-6(style='padding-left: 150px;')
+               img(src="/images/logo.png", style="height: 200px; width: auto;")
+

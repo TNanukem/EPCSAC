@@ -9,6 +9,7 @@ html
         include ../public/js/database.js
       link(rel='stylesheet', href='/css/bootstrap.min.css')
       link(rel='stylesheet', href='/css/style.css')
+      link(rel='stylesheet', href='/css/algorithm.css')
 
    body.index
 
@@ -18,20 +19,27 @@ html
 
         div.row
           div.col-md-12
+            img(src='images/compare.png', style='height: 100px; width: auto;')
             h1 Compare your algorithm
 
             form#simulation-form(method="post", action='/simulation_compare_run')
               p Choose your algorithm
+              br
+              br
               select(name='algorithm_selector')
                 option=""
                 each algorithm in algorithms
                   option=algorithm
               br
               p Choose the number of algorithms to compare (Between 2 and 5)
+              br 
+              br
               input(type="range", min="2", max="5", value="1", class="slider", id="numAlg", name="numAlg", onchange="slider()")
               
               div#algorithms_for_comparison
                 p Choose the algorithm you want to compare to
+                br 
+                br
                 select(name='published_selector')
                   option=""
                   each algo in published
@@ -43,6 +51,8 @@ html
 
               div#parameters_user
                 p Choose your parameters
+                br 
+                br
                 select(name='parameters_selector', onchange="showParameters(this.value)")
                   option=""
                   each parameter in parameters
@@ -51,4 +61,4 @@ html
                   p The parameters selected will be shown here
 
               div.col-md-12
-                input.btn.btn-success(type="submit", value="Finish", style="width: 15%")
+                input.btn.btn-success(type="submit", value="Finish", style="width: 15%; background-color: #243665; border: none; text-align:center")

@@ -153,7 +153,7 @@ const User = {
 
       // Redirects the user to its user page
       if(req.session.next_page == "user_page" || req.session.next_page == undefined){
-          return res.redirect("user_page/?name="+req.session.name);
+          return res.redirect("user_page?name="+req.session.name);
       }
       else{
         return res.redirect(req.session.next_page);

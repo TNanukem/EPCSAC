@@ -22,6 +22,7 @@ html
 
         div.row
           div.col-md-12
+            img(src='images/configure_experiment.png', style='height: 100px; width: auto;')
             h1 Configure your experiment
         div.row
           div.col-md-12
@@ -369,9 +370,9 @@ html
               div.row
                 div.col-md-12(style="text-align:center;")
                   a.icon-button(onclick="plusPage(-1)", href="#")
-                    span.fas.fa-arrow-circle-left#previous-button
+                    span.fas.fa-arrow-circle-left#previous-button(style='color: #243665')
                   a.icon-button(onclick="plusPage(1)",  href="#")
-                    span.fas.fa-arrow-circle-right#next-button
+                    span.fas.fa-arrow-circle-right#next-button(style='color: #243665')
               div.row
                 div.col-md-12(style="text-align:center;")
-                  input.btn.btn-success#submit_button(type="submit", value="Generate Experiment",  style="width: 15%")
+                  input.btn.btn-success#submit_button(type="submit", value="Generate Experiment",  style="width: 15%; background-color: #243665; border: none")

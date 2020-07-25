@@ -40,10 +40,6 @@ const Algorithm = {
       published = true;
     }
 
-    console.log(published_checkbox);
-    console.log(doi);
-    console.log(published);
-
     try {
       // Updates the algorithms table
       const { rows } = await pool.query(

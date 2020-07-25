@@ -220,7 +220,7 @@ const Simulation = {
       req.body.parameters_selector, "\n");
 
       // Redirects the user to his user page
-      res.redirect("user_page/?name=" + req.session.name);
+      res.redirect("user_page?name=" + req.session.name);
 
       // Data retrieval from the forms and token generation
       var today = new Date();
@@ -301,7 +301,7 @@ const Simulation = {
       parameters_selector = original_parameters;
 
       // Redirects the user to the user page
-      res.redirect("user_page/?name=" + req.session.name);
+      res.redirect("user_page?name=" + req.session.name);
 
       try{
 
