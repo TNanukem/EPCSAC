@@ -10,16 +10,15 @@ html
    body.login-page
       include ./navbar.pug
 
-      h1 Login into EPCSAC
-
       div.login-div
+        img(src="/images/logo.png", style="height: 100px; width: auto;")
         form.login-form(method= "POST")
-
-          input(type="email", placeholder="Email", name="email", maxLength="320" required)
-
-          input(type="password", placeholder="Password", name="password", maxLength="100", required)
-          br
-          input.btn.btn-success(type="submit", value="Login", style="width: 15%; margin-top:-10px;")
+          div
+            input(type="email", placeholder="Email", name="email", maxLength="320", style='margin-bottom: -15px;' required)
+          div
+            input(type="password", placeholder="Password", name="password", maxLength="100", required)
+          div
+            input.btn.btn-success(type="submit", value="Login", style="width: 15%; margin-top:-10px; background-color: #243665; border: none")
 
           script
             include ../public/js/validator.min.js

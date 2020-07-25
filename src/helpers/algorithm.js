@@ -1,12 +1,18 @@
 // This function handles the algorithm related functions
 
 var { pool } = require('./config');
+alert = require('alert');
 
 const Algorithm = {
 
-  // Inserts a new algorithm in the database
+  /**
+   * Inserts a new algorithm in the database from the upload form
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async insertAlgorithm(req, res){
 
+    // Retrieves data from the day of the upload and from the forms of the user
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -18,14 +24,21 @@ const Algorithm = {
     var published = false;
     var doi = null;
 
+    /// Blocks internal classes from cloudsim-plus to avoid errors
+    var not_allowed_names = ["CloudletSchedulerTimeShared", "CloudletSchedulerSpaceShared", 
+      "CloudletSchedulerNull", "CloudletSchedulerCompletelyFair", "CloudletSchedulerAbstract", 
+    "CloudletScheduler"];
+
+    if (not_allowed_names.includes(algorithm_name)){
+      console.log('Not allowed name')
+      alert('This algorithm name is now allowed, please re-upload with a different name!');
+      return
+    }
+
     if(published_checkbox != null){
       doi = req.body.doi;
       published = true;
     }
-
-    console.log(published_checkbox);
-    console.log(doi);
-    console.log(published);
 
     try {
       // Updates the algorithms table
@@ -42,6 +55,7 @@ const Algorithm = {
         'INSERT INTO development(researcher_id, algorithm_id) VALUES ($1, $2) RETURNING *;',
         [req.session.user_id, rows[0].id]);
 
+        return true;
     } catch(error){
       console.log(error);
     }

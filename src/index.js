@@ -9,6 +9,10 @@ var { pool } = require('./helpers/config')
 const session = require('express-session')
 const cors = require('cors')
 var multer = require('multer');
+alert = require('alert');
+
+var app = express();
+var upload = multer();
 
 // Helpers to be used in the project
 var User = require('./helpers/user')
@@ -17,9 +21,9 @@ var Algorithm = require('./helpers/algorithm');
 var Simulation = require('./helpers/simulation');
 var Data = require('./helpers/data');
 
-var app = express();
-var upload = multer();
+var extension_error = false;
 
+// Sets view configurations
 app.set('view engine', 'pug');
 app.set('views','./views');
 
@@ -40,20 +44,27 @@ app.use(session({
 var Storage = multer.diskStorage({
   destination: function(req, file, callback){
     var dir = './users/' + String(req.session.user_id) + '/algorithms/';
+    var extension_name = file.originalname;
+    extension_name = extension_name.split('.');
+
+    if (extension_name[extension_name.length - 1] != 'java'){
+      console.log('Error on extension');
+      extension_error = true;
+    }
 
     callback(null, dir);
-    //callback(null, "../data/"+req.session.user_id+"/algorithms");
   },
   filename: function(req, file, callback){
     var name = req.body.algorithm_name + '_' + req.body.algorithm_version + '.java';
     callback(null, name);
-  }
+  },
 });
 
 var upload = multer({
   storage: Storage}).array("algorithmUploader", 1); //Field name and max count
 
 
+// Port configuration
 app.use(express.static('public'));
 app.listen(8030);
 
@@ -154,15 +165,20 @@ app.post('/algorithm', function(req, res){
     if (err) {
         return res.end("Something went wrong!");
     }
+    if (extension_error == true){
+      alert('You have to upload a Java file with a .java extension');
+      extension_error = false;
+      return res.redirect('user_page');
+    }
     Algorithm.insertAlgorithm(req, res);
     return res.redirect('user_page');
   });
 });
 
 // Simulation page routing
-app.post('/simulation', Data.renderSimulation);
+app.get('/simulation', Data.renderSimulation);
 
-app.post('/simulation_compare', Data.renderSimulationCompare);
+app.get('/simulation_compare', Data.renderSimulationCompare);
 
 app.post('/simulation_compare_run', Simulation.runSimulationCompare);
 
@@ -172,8 +188,10 @@ app.get('/downloadSimulation', Simulation.downloadSimulationResults);
 
 app.get('/getparams', Data.generateParametersTable);
 
+// Dashboard page routing
 app.get('/dashboard', Data.generateDash);
 
+// 404 Routing
 app.use(function(req, res){
   res.status(404).render('404');
 })

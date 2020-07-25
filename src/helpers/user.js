@@ -7,7 +7,11 @@ require('dotenv').config()
 
 const User = {
 
-  // Creates a new user
+  /**
+   * Creates a new user in the database based on the form, and sends the confirmation e-mail.
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async create(req, res) {
     if (!req.body.email || !req.body.password) {
       return res.render('error', {message: "The e-mail or the password is missing"});
@@ -66,12 +70,18 @@ const User = {
 
   },
 
-  // Verifies the email of the user
+  /**
+   * Verifies the email of the user and updates the database if the validation is valid.
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async verify(req, res){
 
     host = "http://epcsac.lasdpc.icmc.usp.br/"
 
-    if((req.protocol+"://epcsac.lasdpc.icmc.usp.br/")==("http://"+host)){
+    // Verifies the domain
+    if((req.protocol+"://"+req.get('host'))==("http://"+host)){
+
       console.log("Domain is matched. Information is from Authentic email");
 
       try{
@@ -104,8 +114,14 @@ const User = {
     }
   },
 
-  // Proccess the login request from some user
+  /**
+   * Proccess the login request from some user and redirects him to the user page if everything is correct
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async login(req, res) {
+
+    // Verifies if there is a missing value or if the e-mail is invalid
     if (!req.body.email || !req.body.password) {
       return res.render('error', {message: "The e-mail or the password is missing"});
     }
@@ -114,6 +130,8 @@ const User = {
     }
 
     try {
+
+      // Credentials verification
       const { rows } = await pool.query(
         'SELECT * FROM researchers WHERE email = $1', [req.body.email])
 
@@ -134,8 +152,9 @@ const User = {
       req.session.email = rows[0].email;
       req.session.authenticated = true;
 
+      // Redirects the user to its user page
       if(req.session.next_page == "user_page" || req.session.next_page == undefined){
-          return res.redirect("user_page/?name="+req.session.name);
+          return res.redirect("user_page?name="+req.session.name);
       }
       else{
         return res.redirect(req.session.next_page);
@@ -147,6 +166,11 @@ const User = {
 
   },
 
+  /**
+   * Logs out the user from the system
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async logout(req, res){
     req.session.authenticated = false;
     res.redirect("/");

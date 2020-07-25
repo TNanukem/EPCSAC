@@ -9,6 +9,8 @@ html
         include ../public/js/database.js
       link(rel='stylesheet', href='/css/bootstrap.min.css')
       link(rel='stylesheet', href='/css/style.css')
+      link(rel='stylesheet', href='/css/algorithm.css')
+
 
    body.index
 
@@ -18,20 +20,27 @@ html
 
         div.row
           div.col-md-12
-            h1 Run a simulation
+            div
+              img(src='images/simulate.png', style='height: 100px; width: auto;')
+              h1 Run a simulation
 
             form#simulation-form(method="post", action='/simulation_run')
               p Choose your algorithm
+              br
+              br
               select(name='algorithm_selector')
                 option=""
                 each algorithm in algorithms
                   option=algorithm
+              br
               p Choose your parameters
+              br
+              br
               select(name='parameters_selector', onchange="showParameters(this.value)")
                 option=""
                 each parameter in parameters
                   option=parameter
-              div#param
+              div#param(style='float:none;')
                 p The parameters selected will be shown here
               div.col-md-12
-                input.btn.btn-success(type="submit", value="Finish", style="width: 15%")
+                input.btn.btn-success(type="submit", value="Finish", style="width: 15%; background-color: #243665; border: none")

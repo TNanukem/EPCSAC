@@ -6,6 +6,11 @@ path = require('path')
 
 const Data = {
 
+  /**
+   * This function retrieves parameters from the database and returns it to the view to be shown to the user.
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async generateParametersTable(req, res){
     var param_id = req.query.id;
 
@@ -17,10 +22,17 @@ const Data = {
     }
   },
 
+  /**
+   * This function retrieves all the algorithms and parameters from the researcher and render them as options on the simulation view.
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async renderSimulation(req, res){
 
     if(req.session.authenticated == true){
       try{
+
+          // Retrieves and inserts the algorithms list
           var {rows} = await pool.query('SELECT name, version, id FROM algorithms WHERE id in (SELECT algorithm_id FROM development WHERE researcher_id = $1)', [req.session.user_id]);
 
           algorithms = [];
@@ -29,6 +41,7 @@ const Data = {
             algorithms.push(String(rows[i].id)+'.'+rows[i].name + ' v ' + String(rows[i].version));
           }
 
+          // Retrieves and inserts the parameters lists
           var {rows} = await pool.query('SELECT parameters_id FROM configuration WHERE researcher_id = $1', [req.session.user_id]);
 
           parameters = [];
@@ -48,9 +61,16 @@ const Data = {
     }
   },
 
+  /**
+   * This function retrieves all the algorithms and parameters from the researcher and render them as options on the simulation compare view.
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async renderSimulationCompare(req, res){
     if(req.session.authenticated == true){
       try{
+          
+          // Retrieves and inserts the algorithms list
           var {rows} = await pool.query('SELECT name, version, id FROM algorithms WHERE id in (SELECT algorithm_id FROM development WHERE researcher_id = $1)', [req.session.user_id]);
 
           algorithms = [];
@@ -59,6 +79,7 @@ const Data = {
             algorithms.push(String(rows[i].id)+'.'+rows[i].name + ' v ' + String(rows[i].version));
           }
 
+          // Retrieves and inserts the parameters list
           var {rows} = await pool.query('SELECT parameters_id FROM configuration WHERE researcher_id = $1', [req.session.user_id]);
 
           parameters = [];
@@ -67,6 +88,7 @@ const Data = {
             parameters.push(rows[i].parameters_id);
           }
 
+          // Retrieves and inserts the algorithms names list
           var {rows} = await pool.query('SELECT name FROM algorithms');
 
           published = []
@@ -87,16 +109,23 @@ const Data = {
     }
   },
 
+  /**
+   * This function renders the dashboard once the user clicks on teh link sent by e-mail
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
   async generateDash(req, res){
 
     var host = "http://epcsac.lasdpc.icmc.usp.br/"
     var file_path = '/';
+
 
     if ((req.protocol + "://epcsac.lasdpc.icmc.usp.br/") == ("http://" + host)) {
       console.log("Domain is matched. Information is from Authentic email");
     }
 
       try {
+        // Selects the simulation from its token
         const { rows } = await pool.query('SELECT token FROM simulations WHERE token = $1;', [req.query.token]);
 
         if (rows[0]) {
@@ -106,12 +135,13 @@ const Data = {
 
           var address = String(process.cwd()) + '/users/' + String(req.query.user_id) + '/simulations/';
           var command = "ls " + address + req.query.token + "*csv"
-          console.log(command)
         }
       }
       catch(error){
 	console.log(error);
     }
+
+    // ls the folder to get the files
     var archive = await execSync(command,
       (error, stdout, stderr) => {
 
@@ -120,10 +150,7 @@ const Data = {
         }
       }).toString();
     
-    console.log(archive);
     archive = archive.split('\n');
-    console.log(archive.length);
-    console.log(archive);
 
     response_time_obj = [];
     cloudlet_obj = [];
@@ -143,6 +170,7 @@ const Data = {
 
       names_obj.push(name.split('_')[1].split('-')[0])
       
+      // Read each of the files
       fs.createReadStream(archive_)
         .pipe(parse({ separator: ';' }))
         .on('data', (r) => {
@@ -156,6 +184,7 @@ const Data = {
           success = 0;
           failure = 0;
 
+          // Parse the csvs to get the relevant information
           for (i = 1; i < data.length; i++) {
 
             if (data[i]['Status '] == 'SUCCESS') {
@@ -178,7 +207,6 @@ const Data = {
 
           success_obj.push(success)
           failure_obj.push(failure)
-          console.log(success_obj)
 
           link = "http://epcsac.lasdpc.icmc.usp.br/downloadSimulation?token=" + String(token) + "&user_id=" + String(req.session.user_id);
         })
@@ -188,9 +216,7 @@ const Data = {
     
     await delay(1000);
 
-    console.log(names_obj)
-    console.log(response_time_obj.length) 
-
+    // Renders the dashboard
     res.render('dash', {
       response_time: JSON.stringify(response_time_obj), cloudlet: JSON.stringify(cloudlet_obj), exec_time: JSON.stringify(exec_time_obj),
       success: success_obj, failure: failure_obj, names: names_obj, link: link
