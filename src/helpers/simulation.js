@@ -71,7 +71,6 @@ const Simulation = {
             console.log(error);
         }
     },
-
     
     /**
      * This function receives the list of parameters and runs the script that
@@ -596,6 +595,7 @@ const Simulation = {
                     console.log(stdout);
                     console.log(stderr);
             });
+
 
             // Waits one second for the zipping to happen
             const delay = require('delay');

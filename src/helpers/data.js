@@ -116,11 +116,11 @@ const Data = {
    */
   async generateDash(req, res){
 
-    var host = req.get('host');
+    var host = "http://epcsac.lasdpc.icmc.usp.br/"
     var file_path = '/';
 
-    // Verifies domain
-    if ((req.protocol + "://" + req.get('host')) == ("http://" + host)) {
+
+    if ((req.protocol + "://epcsac.lasdpc.icmc.usp.br/") == ("http://" + host)) {
       console.log("Domain is matched. Information is from Authentic email");
     }
 
@@ -208,7 +208,7 @@ const Data = {
           success_obj.push(success)
           failure_obj.push(failure)
 
-          link = "http://" + req.get('host') + "/downloadSimulation?token=" + String(token) + "&user_id=" + String(req.session.user_id);
+          link = "http://epcsac.lasdpc.icmc.usp.br/downloadSimulation?token=" + String(token) + "&user_id=" + String(req.session.user_id);
         })
     }
 

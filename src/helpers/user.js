@@ -46,8 +46,8 @@ const User = {
           }
         });
 
-        host = req.get('host');
-        link = "http://"+req.get('host')+"/verify?id="+token+"&email="+req.body.email;
+        host = "http://epcsac.lasdpc.icmc.usp.br/"
+        link = "http://epcsac.lasdpc.icmc.usp.br//verify?id="+token+"&email="+req.body.email;
 
         var mailOptions = {
             to : req.body.email,
@@ -77,10 +77,11 @@ const User = {
    */
   async verify(req, res){
 
-    host = req.get('host');
+    host = "http://epcsac.lasdpc.icmc.usp.br/"
 
     // Verifies the domain
     if((req.protocol+"://"+req.get('host'))==("http://"+host)){
+
       console.log("Domain is matched. Information is from Authentic email");
 
       try{
