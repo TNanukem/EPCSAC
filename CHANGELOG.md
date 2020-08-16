@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed useless files
 - Added a .env example
 
+- On demand zip and unzip, so the dashboard can unzip the files when needed
+
+
 ### Added
 
 ### Changed

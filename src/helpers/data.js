@@ -134,13 +134,35 @@ const Data = {
           var files = []
 
           var address = String(process.cwd()) + '/users/' + String(req.query.user_id) + '/simulations/';
-          var command = "ls " + address + req.query.token + "*csv"
+          var command = "ls " + address + req.query.token + ".zip"
         }
       }
       catch(error){
 	console.log(error);
     }
 
+    // verify if there is a zip file
+    try{
+      console.log('Verifying zip file');
+      var archive = await execSync(command,
+        (error, stdout, stderr) => {
+
+          if (error !== null) {
+            console.log(`exec error: ${error}`);
+          }
+        }).toString();
+
+        // Unzip the file
+        var zip_results = await execSync("./scripts/unzip_results.sh " + " " + String(address) + " " + String(req.query.token),
+          (error, stdout, stderr) => {
+          });
+
+    } catch(error){
+      console.log(error)
+      console.log('No Zip file')
+    }
+
+    var command = "ls " + address + req.query.token + "*csv"
     // ls the folder to get the files
     var archive = await execSync(command,
       (error, stdout, stderr) => {
