@@ -1,0 +1,10 @@
+# Update the info below and save the file with the name .env
+
+DB_USER=postgres
+DB_HOST=localhost
+DB_PASSWORD=password_db
+DB_DATABASE=EPCSAC
+DB_PORT=5432
+
+GMAIL_USER=email@gmail.com
+GMAIL_PASSWORD=email_password
