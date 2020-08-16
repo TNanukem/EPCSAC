@@ -7,4 +7,4 @@ echo $NAME
 
 shift 2
 echo $@
-zip $NAME.zip "$@"
+zip -rm $NAME.zip "$@"
