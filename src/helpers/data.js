@@ -187,10 +187,8 @@ const Data = {
 
       archive_ = archive[i].replace(/(\r\n|\n|\r)/gm, "");
 
-      name = archive_.split('/')
+      let name = archive_.split('/')
       name = name[name.length - 1]
-
-      names_obj.push(name.split('_')[1].split('-')[0])
       
       // Read each of the files
       fs.createReadStream(archive_)
@@ -200,6 +198,8 @@ const Data = {
         })
         .on('end', () => {
 
+          names_obj.push(name.split('_')[1].split('-')[0])
+          
           response_time = [];
           cloudlet = [];
           exec_time = [];
@@ -237,7 +237,6 @@ const Data = {
     const delay = require('delay');
     
     await delay(1000);
-
     // Renders the dashboard
     res.render('dash', {
       response_time: JSON.stringify(response_time_obj), cloudlet: JSON.stringify(cloudlet_obj), exec_time: JSON.stringify(exec_time_obj),
