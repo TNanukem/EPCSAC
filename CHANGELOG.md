@@ -7,9 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 - Removed useless files
 - Added a .env example
-
 - On demand zip and unzip, so the dashboard can unzip the files when needed
-
+- Dashboard allows for representation of individual iterations or averages
 
 ### Added
 
