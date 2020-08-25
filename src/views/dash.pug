@@ -15,6 +15,11 @@ html
           h1 Dashboard
           p Be aware you need to be logged in your account to download the files
           a(href=link) Download your results
+          br
+          div(style='margin=15px; text-align:left')
+            p Aggregate Results
+              input#aggregation(type="checkbox", style="position:sticky", onchange="plot()")
+          
           h3(style='text-align: left;') Proportion of success
           div(style="width:75%;height:450px;", id='prop-success')
           h3(style='text-align: left;') Average Execution time of cloudlets
@@ -23,12 +28,12 @@ html
           div(style="width:75%;height:450px;", id='response-time')
         script.
           
-          const execTime = JSON.parse(!{JSON.stringify(exec_time)});
-          const cloudlet = JSON.parse(!{JSON.stringify(cloudlet)});
-          const responseTime = JSON.parse(!{JSON.stringify(response_time)});
-          const success = [#{success}];
-          const failure = [#{failure}];
-          const alg_names = !{JSON.stringify(names)};
+          var execTime = JSON.parse(!{JSON.stringify(exec_time)});
+          var cloudlet = JSON.parse(!{JSON.stringify(cloudlet)});
+          var responseTime = JSON.parse(!{JSON.stringify(response_time)});
+          var success = [#{success}];
+          var failure = [#{failure}];
+          var alg_names = !{JSON.stringify(names)};
         script
           include dash.js
           

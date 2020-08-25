@@ -180,7 +180,7 @@ const Data = {
     success_obj = [];
     failure_obj = [];
     names_obj = [];
-
+    
     for(i = 0; i < archive.length-1; i++){
       
       const data = []
@@ -197,9 +197,7 @@ const Data = {
           data.push(r);
         })
         .on('end', () => {
-
-          names_obj.push(name.split('_')[1].split('-')[0])
-          
+          names_obj.push(name.split('_')[1].split('-')[0] + name.split('_')[1].split('-')[1])
           response_time = [];
           cloudlet = [];
           exec_time = [];
@@ -220,6 +218,9 @@ const Data = {
             cloudlet.push(parseFloat(data[i]['Cloudlet']))
             exec_time.push(parseFloat(data[i]['ExecTime']))
           }
+
+          success = (success / data.length) * 100;
+          failure = (failure / data.length) * 100;
 
           response_time_obj.push(response_time)
 
