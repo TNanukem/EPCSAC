@@ -8,8 +8,10 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-white
   .collapse.navbar-collapse(id='navbarSupportedContent')
     ul.navbar-nav.mr-auto
       li.nav-item
-        a.nav-link(href='/user_page?name=' + session.name) Profile
-      li.nav-item
+        a.nav-link(href='/user_page?name=' + session.name) Experiments
+            li.nav-item
+        a.nav-link(href='/user?id=' + session.user_id) Profile
+            li.nav-item
         a.nav-link(href='/tutorial') Tutorial
     ul.navbar-nav.float-right
       if session.authenticated

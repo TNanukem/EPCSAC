@@ -144,6 +144,10 @@ app.post('/user_page', function(req, res){
   res.redirect('../config');
 });
 
+// User profile routing
+app.get('/user', function (req, res) {
+  Data.renderUserProfile(req, res)
+});
 
 // Algorithm upload pages routing
 app.post('/algorithm_page', function(req, res){

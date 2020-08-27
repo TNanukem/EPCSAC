@@ -244,6 +244,55 @@ const Data = {
       success: success_obj, failure: failure_obj, names: names_obj, link: link
     }); 
 
+  },
+
+  /**
+   * 
+   * This function renders the user profile
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   * @param {int} user_id The id of the user which the profile must be rendered
+   */
+  async renderUserProfile(req, res){
+    
+    // Retrieves the data from the user from the database
+
+    if (req.query.id == null | req.query.id == 'undefined') {
+      
+      if (req.session.user_id == null){
+        req.session.next_page = "user";
+        res.redirect("login");
+        return;
+      }
+
+      else{
+        var id = req.session.user_id;
+      }
+    }
+
+    else {
+      var id = req.query.id;
+    }
+
+    try{
+      var { rows } = await pool.query('SELECT * FROM researchers WHERE id = $1', [id]);
+
+      if(rows[0].profile_picture == null){
+        var picture = 'images/generic_user.png';
+      } else{
+        var picture = rows[0].profile_picture;
+      }
+
+      var { algorithms } = await pool.query('SELECT name, version, id FROM algorithms WHERE id in (SELECT algorithm_id FROM development WHERE researcher_id = $1)', [id]);
+      console.log(algorithms[0]);
+      console.log(rows);
+
+      res.render('user', {name: rows[0].name, profile_picture: picture, bio: rows[0].bio});
+    }
+    catch (error){
+      console.log(error);
+    }
+    
   }
 }
 
