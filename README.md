@@ -12,6 +12,8 @@ This reduces the potential for a real comparison between these algorithms in a w
 
 To solve this problem and make the research process easier for the researchers, we propose the EPCSAC (Extensible Platform for Cloud Scheduling Algorithm Comparison), a web service based on the SaaS model that provides the simulation infrastructure required for researchers to test their algorithms.
 
+The EPCSAC uses the [CloudSim Plus](https://github.com/manoelcampos/cloudsim-plus/) on its back-end in order to run the requested simulations. This way, users have access to all the features promoted by the simulator, which has been chosen, after a long research process, because of its extensibility, maintainability and performance. 
+
 The development of the project is done primarly by [Tiago Toledo Jr](https://github.com/TNanukem), a student and researcher at University of São Paulo.
 
 # Main Features
