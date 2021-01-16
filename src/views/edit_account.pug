@@ -1,0 +1,38 @@
+doctype html
+html
+
+   head
+      include ./meta_config.pug
+
+      title "Profile Edit"
+      script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+      script
+        include ../public/js/bootstrap.min.js
+      script
+        include ../public/js/pass_compare.js
+      link(rel='stylesheet', href='/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/css/style.css')
+      link(rel='stylesheet', href='/css/algorithm.css')
+
+   body.index
+
+      include ./navbar.pug
+
+      div.container-fluid
+
+        div.row
+          div.col-md-12
+            h1 Edit your account
+
+            form#edit_form(method="POST")
+              br
+              h5 Email
+              input#email(name="email", placeholder="New Email")
+              p Password
+              input#InputPassword(name="new_password", placeholder="New Password", type="password", onchange="comparePasswords()")
+              p Confirm your passoword
+              input#ConfirmPassword(name="new_password_confirm", placeholder="Confirm New Password", type='password', onchange="comparePasswords()")
+              p Confirm your current password
+              input#password(name="password", placeholder="Currnet Password", type='password')
+              div.col-md-12
+              input.btn.btn-success(type="submit", value="Finish", style="width: 15%; background-color: #243665; border: none; text-align:center")

@@ -277,23 +277,102 @@ const Data = {
     try{
       var { rows } = await pool.query('SELECT * FROM researchers WHERE id = $1', [id]);
 
-      if(rows[0].profile_picture == null){
-        var picture = 'images/generic_user.png';
-      } else{
-        var picture = rows[0].profile_picture;
-      }
+      var picture = 'images/users/' + id + '/photo';
 
-      var { algorithms } = await pool.query('SELECT name, version, id FROM algorithms WHERE id in (SELECT algorithm_id FROM development WHERE researcher_id = $1)', [id]);
-      console.log(algorithms[0]);
-      console.log(rows);
+      user_info = rows
 
-      res.render('user', {name: rows[0].name, profile_picture: picture, bio: rows[0].bio});
+      var { rows } = await pool.query('SELECT name, version, id FROM algorithms WHERE id in (SELECT algorithm_id FROM development WHERE researcher_id = $1)', [id]);
+      algorithms = rows
+
+      res.render('user', {name: user_info[0].name, profile_picture: picture, bio: user_info[0].bio, inst: user_info[0].institution, algos: algorithms});
     }
     catch (error){
       console.log(error);
     }
     
+  },
+
+
+  /**
+   *
+   * This function renders the algorithm page
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   * @param {int} algo_id The id of the algorithm which the page must be rendered
+   */
+  async renderAlgorithmPage(req, res) {
+
+    // Retrieves the data from the algorithm from the database
+
+    if (req.query.id == null | req.query.id == 'undefined') {
+      res.status(404).render('404');
+    }
+
+    else {
+      var id = req.query.id;
+    }
+
+    try {
+      var { rows } = await pool.query('SELECT * FROM algorithms WHERE id = $1', [id]);
+      algo_info = rows
+
+      var { rows } = await pool.query('SELECT * FROM development INNER JOIN researchers ON researcher_id = researchers.id AND algorithm_id = $1 ', [id]);
+
+      developers = rows
+
+      // Verifying if the logged user is an owner of the algorithm
+      var owners = []
+      for(i = 0; i < developers.length; i++){
+        owners.push(developers[i].researcher_id)
+      }
+      var is_owner = owners.includes(req.session.user_id)
+
+      if(algo_info.published == false){
+        doi = false
+      } else{
+        doi = algo_info[0].publication
+      }
+
+      res.render('algorithm_info', { name: algo_info[0].name, version: algo_info[0].version, description: algo_info[0].description, dev: developers, owner: is_owner, id: id , doi: doi});
+    }
+    catch (error) {
+      console.log(error);
+    }
+
+  },
+
+  /**
+   *
+   * This function renders the algorithm page
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   * @param {string} q The query of the search
+   */
+  async renderSearch(req, res){
+    if (req.query.q == null | req.query.q == 'undefined'| req.query.q == ''){
+      return res.render('error', { message: "No query search" });
+    }
+
+    try{
+      // Searches all users with name related to the query
+      var { rows } = await pool.query("SELECT * FROM researchers WHERE name ILIKE $1", ['%' + req.query.q + '%']);
+      users = rows
+
+      // Searches all algorithms with name related to the query
+      var { rows } = await pool.query("SELECT * FROM algorithms WHERE name ILIKE $1", ['%' + req.query.q + '%']);
+      algorithms = rows
+
+      if(users.length == 0 & algorithms.length == 0){
+        return res.render('error', { message: "No results from search" });
+      }
+
+      res.render('search_results', {users: users, algorithms: algorithms})
+    }
+    catch (error) {
+      console.log(error)
+    }
   }
+
 }
 
 module.exports = Data;

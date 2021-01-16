@@ -63,7 +63,6 @@ var Storage = multer.diskStorage({
 var upload = multer({
   storage: Storage}).array("algorithmUploader", 1); //Field name and max count
 
-
 // Port configuration
 app.use(express.static('public'));
 app.listen(8030);
@@ -145,9 +144,60 @@ app.post('/user_page', function(req, res){
 });
 
 // User profile routing
-app.get('/user', function (req, res) {
+app.get('/user', function (req, res){
   Data.renderUserProfile(req, res)
 });
+
+// User profile configuration routing
+app.get('/edit_profile', function(req, res){
+  if (req.session.authenticated == true) {
+    res.render("edit_profile");
+  }
+  else {
+    req.session.next_page = "edit_profile";
+    res.redirect("login");
+  }
+});
+
+app.post('/edit_profile', function(req, res){
+  // Creates an auxiliar storage to store the photo
+  var Storage_Photo = multer.diskStorage({
+    destination: function (req, file, callback) {
+      var dir = './public/images/users/' + String(req.session.user_id) + '/';
+      var extension_name = file.originalname;
+      extension_name = extension_name.split('.');
+      callback(null, dir);
+    },
+    filename: function (req, file, callback) {
+      var name = 'photo';
+      callback(null, name);
+    },
+  });
+
+  var upload_photo = multer({
+    storage: Storage_Photo
+  }).array("photo", 1); //Field name and max count
+
+  upload_photo(req, res, function(err){
+    if (err){
+      console.log(err)
+      return res.end('Something went wrong!')
+    }
+    User.update_information(req, res);
+  })
+});
+
+app.get('/edit_account', function(req, res){
+  if (req.session.authenticated == true) {
+    res.render("edit_account");
+  }
+  else {
+    req.session.next_page = "edit_account";
+    res.redirect("login");
+  }
+});
+
+app.post('/edit_account', User.update_account);
 
 // Algorithm upload pages routing
 app.post('/algorithm_page', function(req, res){
@@ -158,11 +208,11 @@ app.post('/algorithm_page', function(req, res){
     req.session.next_page = "algorithm_page";
     res.redirect("login");
   }
-})
+});
 
 app.get('/algorithm', function(req, res){
   res.render('algorithm');
-})
+});
 
 app.post('/algorithm', function(req, res){
   upload(req, res, function(err){
@@ -179,6 +229,19 @@ app.post('/algorithm', function(req, res){
   });
 });
 
+// Algorithm information page routing
+app.get('/algorithm_info', function (req, res) {
+  Data.renderAlgorithmPage(req, res)
+});
+
+app.get('/alter_algorithm_description', function(req, res) {
+  Algorithm.renderUpdateAlgorithmDescription(req, res)
+});
+
+app.post('/alter_algorithm_description', function(req, res){
+  Algorithm.updateAlgorithmDescription(req, res)
+})
+
 // Simulation page routing
 app.get('/simulation', Data.renderSimulation);
 
@@ -194,6 +257,9 @@ app.get('/getparams', Data.generateParametersTable);
 
 // Dashboard page routing
 app.get('/dashboard', Data.generateDash);
+
+// Search page routing
+app.get('/search', Data.renderSearch);
 
 // 404 Routing
 app.use(function(req, res){

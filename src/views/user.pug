@@ -2,6 +2,9 @@ doctype html
 html
 
   head
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+    script
+      include ../public/js/bootstrap.min.js
     link(rel='stylesheet', href='/css/bootstrap.min.css')
     link(rel='stylesheet', href='/css/style.css')
 
@@ -11,13 +14,18 @@ html
       div.row
         div.col-md-12(style="text-align:center;")
           h1 #{name}
-          div(style='float:left; padding:50px;')
+          hr(style="border-color:#243665")
+          div.col-md-6(style='float:left; padding:50px;')
             img(src=profile_picture, style="width:300px; height:300px;")
+            br
+            br
+            h5 Institution: #{inst}
           div
-            p(style='padding:20px;margin-left:25px; text-align:justify') Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae leo mi. Phasellus sit amet orci risus. Suspendisse congue feugiat lacus, id ultrices augue condimentum nec. Suspendisse potenti. Fusce id laoreet dolor, nec luctus nisi. Fusce porta leo sit amet luctus laoreet. Pellentesque vulputate eu leo at sodales. Nullam viverra libero ut orci mollis rhoncus. 
-              Phasellus pretium orci non tempus volutpat. Nam sollicitudin ornare dolor, a blandit urna. Sed posuere turpis lacus, eu lobortis nunc pulvinar porttitor. Sed rutrum orci augue, vitae dignissim tellus vulputate ac. Nulla congue, enim at condimentum vehicula, felis purus mollis dolor, eu pharetra mauris mauris sit amet erat. Mauris felis ante, semper eu turpis at, pulvinar dignissim nisi. Suspendisse ullamcorper dolor turpis, ut placerat neque posuere commodo. Praesent tellus purus, sagittis suscipit viverra in, auctor ut lectus. Mauris ultricies a velit sed pretium. Proin commodo velit ac nunc maximus commodo. Donec at augue non lacus volutpat pretium in ut nibh. Donec in condimentum purus. Phasellus consequat enim a tortor pharetra, eu tincidunt orci scelerisque.
-              Maecenas aliquet id augue sit amet bibendum. Cras aliquam, enim ac tincidunt tincidunt, lacus purus fermentum lorem, id sollicitudin libero enim a augue. Vivamus pellentesque eget augue ac egestas. Nulla non fringilla nisi, eu finibus augue. Sed in augue fermentum, fermentum mi interdum, sodales arcu. Praesent malesuada sapien ac pellentesque tincidunt. Nam semper tristique elit sed vestibulum. Nunc porta fermentum enim sed maximus. Proin varius sodales ipsum, gravida elementum enim suscipit vel. Nam mi est, placerat at tellus nec, eleifend tincidunt ex. Integer at magna ut tellus rhoncus lobortis vel et arcu. Curabitur hendrerit nulla eget sapien porta, non ullamcorper nisi interdum. Donec at risus tempor, placerat lacus eget, ultricies est. Quisque egestas ultricies porta. Quisque nec sollicitudin magna.
-              Quisque convallis dignissim lacus, id laoreet mi aliquet at. Donec bibendum nunc vel commodo posuere. Proin vulputate, ligula sed pretium vestibulum, leo lorem porttitor turpis, vitae commodo dui ipsum at orci. Quisque ac erat eu odio efficitur porttitor quis eget ligula. Praesent euismod libero lectus, in molestie ex sagittis a. Suspendisse eget dolor sed dolor aliquam porttitor et in mi. Fusce in dictum metus, eu hendrerit dui. Nullam luctus, dolor et dapibus dictum, eros tellus feugiat elit, eget auctor ligula augue at leo. Duis tempor laoreet aliquam.
-              Proin magna libero, porttitor in vestibulum sed, ullamcorper at sapien. Aliquam a vestibulum erat. Proin at sem ac nunc luctus semper in vel arcu. Suspendisse pharetra placerat tempor. Donec faucibus facilisis enim, sed maximus libero volutpat nec. Praesent fermentum purus quam, at tempus nulla semper et. Mauris orci arcu, commodo nec magna a, rhoncus rutrum risus. Nunc suscipit, nisi ut sollicitudin scelerisque, justo neque blandit leo, sed mattis velit lectus quis nulla. Ut congue finibus ex, in elementum sem luctus ut. Fusce pharetra sapien et vulputate porta. Cras nisl quam, finibus sit amet laoreet ut, eleifend vitae risus. Nullam non ligula dui. Duis lacus massa, posuere vitae pulvinar eu, iaculis vel nibh. 
-          div 
+            p(style='padding:20px;margin-left:25px; text-align:justify') #{bio}
+          div.col-md-6
             h2(style='text-align:left') Public Algorithms
+            ul(style='text-align:left')
+             each val in algos
+              li.list-group-item
+                a(href="algorithm_info?id=" + val.id)= val.name + ' v' + val.version
+              br
