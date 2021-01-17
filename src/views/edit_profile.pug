@@ -1,0 +1,36 @@
+doctype html
+html
+
+   head
+      include ./meta_config.pug
+
+      title "Profile Edit"
+      script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+      script
+        include ../public/js/bootstrap.min.js
+      link(rel='stylesheet', href='/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/css/style.css')
+      link(rel='stylesheet', href='/css/algorithm.css')
+
+   body.index
+
+      include ./navbar.pug
+
+      div.container-fluid
+
+        div.row
+          div.col-md-12
+            h1 Edit your profile
+
+            form#edit_form(method="POST", enctype="multipart/form-data")
+              br
+              h5 Biography
+              textarea#bio(maxlength="3500", name="bio", placeholder="Biography or Description")
+              p Institution
+              input#institution(name="institution", placeholder="Institution")
+              p Upload a photo
+              input#photo(type='file', name="photo")
+              p Confirm your passoword
+              input#password(name="password", placeholder="password", type='password' required)
+              div.col-md-12
+              input.btn.btn-success(type="submit", value="Finish", style="width: 15%; background-color: #243665; border: none; text-align:center")

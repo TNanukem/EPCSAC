@@ -1,0 +1,33 @@
+doctype html
+html
+
+  head
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+    script
+      include ../public/js/bootstrap.min.js
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/style.css')
+
+  body
+    include ./navbar.pug
+    div.container-fluid
+      div.row
+        div.col-md-12(style="text-align:left;")
+          h3(style='text-align: center !important') Search Results
+          h5 Users
+          ul.list-group
+            each val in users
+              li.list-group-item
+                strong
+                  a(href="user?id=" + val.id)= val.name
+                div.text-muted
+                  p #{val.bio}
+          br
+          h5(style='text-align: left !important') Algorithms
+          ul.list-group(style='text-align: left !improtant')
+            each val in algorithms
+              li.list-group-item
+                strong
+                  a(href="algorithm_info?id=" + val.id)= val.name + ' v' + val.version
+                div.text-muted
+                  p #{val.description}

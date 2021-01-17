@@ -1,4 +1,4 @@
-CREATE TABLE "researchers" (
+CREATE TABLE IF NOT EXISTS "researchers" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar(100) NOT NULL,
   "institution" varchar(100) NOT NULL,
@@ -6,32 +6,35 @@ CREATE TABLE "researchers" (
   "password" varchar(1000) NOT NULL,
   "email" varchar(320) UNIQUE NOT NULL,
   "verified" boolean NOT NULL DEFAULT false,
-  "token" varchar(120) NOT NULL
+  "token" varchar(120) NOT NULL,
+  "photo_loc" varchar(500),
+  "bio" varchar(500)
 );
 
-CREATE TABLE "algorithms" (
+CREATE TABLE IF NOT EXISTS  "algorithms" (
   "id" SERIAL PRIMARY KEY,
   "name" varchar(100) NOT NULL,
   "version" int NOT NULL,
   "published" boolean NOT NULL,
   "publication" varchar(300),
   "insert_date" timestamp NOT NULL,
-  "location" varchar(500)
+  "location" varchar(500),
+  "description" varchar(2000)
 );
 
-CREATE TABLE "development" (
+CREATE TABLE IF NOT EXISTS "development" (
   "id" SERIAL PRIMARY KEY,
   "researcher_id" int NOT NULL,
   "algorithm_id" int NOT NULL
 );
 
-CREATE TABLE "configuration" (
+CREATE TABLE IF NOT EXISTS "configuration" (
   "id" SERIAL PRIMARY KEY,
   "researcher_id" int NOT NULL,
   "parameters_id" int NOT NULL
 );
 
-CREATE TABLE "parameters" (
+CREATE TABLE IF NOT EXISTS "parameters" (
   "id" SERIAL PRIMARY KEY,
   "iterations" int,
   "datacenters_max" int,
@@ -92,7 +95,7 @@ CREATE TABLE "parameters" (
   "cloudlets_length_flag" boolean NOT NULL
 );
 
-CREATE TABLE "simulations" (
+CREATE TABLE IF NOT EXISTS "simulations" (
   "id" SERIAL PRIMARY KEY,
   "date" timestamp NOT NULL,
   "researcher_id" int NOT NULL,
@@ -102,7 +105,7 @@ CREATE TABLE "simulations" (
   "compared_algorithm_id" int
 );
 
-CREATE TABLE "publications" (
+CREATE TABLE IF NOT EXISTS "publications" (
   "id" SERIAL PRIMARY KEY,
   "simulation_id" int NOT NULL,
   "doi" varchar(50) NOT NULL

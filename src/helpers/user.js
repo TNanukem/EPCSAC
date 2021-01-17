@@ -46,13 +46,13 @@ const User = {
           }
         });
 
-        host = "http://epcsac.lasdpc.icmc.usp.br/"
-        link = "http://epcsac.lasdpc.icmc.usp.br//verify?id="+token+"&email="+req.body.email;
+        host = process.env.HOST;
+        link = host+"/verify?id="+token+"&email="+req.body.email;
 
         var mailOptions = {
             to : req.body.email,
             subject : "Please confirm your Email account",
-            html : "Hello,<br> Please Click on the link to verify your email.<br><a href="+link+">Click here to verify</a>"
+            html : "Hello,<br> Please access " +link+ "to verify your email.<br>"
         }
 
         smtpTransport.sendMail(mailOptions, function(error, response){
@@ -77,8 +77,7 @@ const User = {
    */
   async verify(req, res){
 
-    host = "http://epcsac.lasdpc.icmc.usp.br/"
-
+    process.env.HOST;
     // Verifies the domain
     if((req.protocol+"://"+req.get('host'))==("http://"+host)){
 
@@ -119,7 +118,7 @@ const User = {
    * @param {request} req The request variable from the caller
    * @param {response} res The response variable from the caller
    */
-  async login(req, res) {
+  async login(req, res){
 
     // Verifies if there is a missing value or if the e-mail is invalid
     if (!req.body.email || !req.body.password) {
@@ -175,5 +174,80 @@ const User = {
     req.session.authenticated = false;
     res.redirect("/");
   },
+
+  /**
+   * Updates the user profile information given form
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
+  async update_information(req, res){
+    console.log(req.body)
+    var { rows } = await pool.query('SELECT * FROM researchers WHERE id = $1', [req.session.user_id]);
+
+    if (!Helper.comparePassword(rows[0].password, req.body.password)) {
+      return res.render('error', { message: "The password you provided is incorrect" });
+    }
+
+    if (req.body.bio == '') {
+      bio = rows[0].bio;
+    } else{
+      bio = req.body.bio
+    }
+
+    if (req.body.institution == '') {
+      institution = rows[0].institution;
+    } else{
+      institution = req.body.institution
+    }
+
+    var location = String(process.cwd()) + '/public/images/users/' + String(req.session.user_id) + "photo";
+    pool.query('UPDATE researchers SET institution = $1, bio = $2, photo_loc = $3 WHERE id = $4', [institution, bio, location, req.session.user_id], (err, res) => {
+      console.log(err)
+    })
+
+    res.redirect('user_page');
+
+  },
+
+    /**
+   * Updates the user account information given form
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   */
+  async update_account(req, res) {
+
+    var { rows } = await pool.query('SELECT * FROM researchers WHERE id = $1', [req.session.user_id]);
+
+    if (!Helper.comparePassword(rows[0].password, req.body.password)) {
+      return res.render('error', { message: "The password you provided is incorrect" });
+    }
+
+    if (req.body.new_password == '') {
+      password = rows[0].password;
+    } else {
+      password = req.body.new_password
+      console.log(password)
+      password = Helper.hashPassword(password);
+    }
+
+    if (req.body.email == '') {
+      email = rows[0].email;
+    } else {
+      email = req.body.email
+    }
+
+    console.log(email)
+    console.log(password)
+    try{
+      pool.query('UPDATE researchers SET password = $1, email = $2 WHERE id = $3', [password, email, req.session.user_id], (err, res) => {
+        console.log(err)
+      });
+    }
+    catch (err){
+      console.log(err)
+    }
+
+    res.redirect('user_page');
+  }
 }
 module.exports = User;

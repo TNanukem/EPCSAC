@@ -1,4 +1,5 @@
 # Update the info below and save the file with the name .env
+HOST=localhost:8030
 
 DB_USER=postgres
 DB_HOST=localhost

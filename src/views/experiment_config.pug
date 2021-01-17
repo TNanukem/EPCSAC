@@ -5,7 +5,9 @@ html
       include ./meta_config.pug
 
       title "Experiment Configuration"
+      script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
       script
+        include ../public/js/bootstrap.min.js
         include ../public/js/checkboxes.js
         include ../public/js/page_selection.js
         include ../public/js/config_validator.js

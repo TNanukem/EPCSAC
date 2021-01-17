@@ -116,11 +116,11 @@ const Data = {
    */
   async generateDash(req, res){
 
-    var host = "http://epcsac.lasdpc.icmc.usp.br/"
+    var host = process.env.HOST;
     var file_path = '/';
 
 
-    if ((req.protocol + "://epcsac.lasdpc.icmc.usp.br/") == ("http://" + host)) {
+    if ((req.protocol + "://" + host) == ("http://" + host)) {
       console.log("Domain is matched. Information is from Authentic email");
     }
 
@@ -180,7 +180,7 @@ const Data = {
     success_obj = [];
     failure_obj = [];
     names_obj = [];
-
+    
     for(i = 0; i < archive.length-1; i++){
       
       const data = []
@@ -197,9 +197,7 @@ const Data = {
           data.push(r);
         })
         .on('end', () => {
-
-          names_obj.push(name.split('_')[1].split('-')[0])
-          
+          names_obj.push(name.split('_')[1].split('-')[0] + name.split('_')[1].split('-')[1])
           response_time = [];
           cloudlet = [];
           exec_time = [];
@@ -221,6 +219,9 @@ const Data = {
             exec_time.push(parseFloat(data[i]['ExecTime']))
           }
 
+          success = (success / data.length) * 100;
+          failure = (failure / data.length) * 100;
+
           response_time_obj.push(response_time)
 
           cloudlet_obj.push(cloudlet)
@@ -230,7 +231,7 @@ const Data = {
           success_obj.push(success)
           failure_obj.push(failure)
 
-          link = "http://epcsac.lasdpc.icmc.usp.br/downloadSimulation?token=" + String(token) + "&user_id=" + String(req.session.user_id);
+          link = "http://" + host +"/downloadSimulation?token=" + String(token) + "&user_id=" + String(req.session.user_id);
         })
     }
 
@@ -243,7 +244,135 @@ const Data = {
       success: success_obj, failure: failure_obj, names: names_obj, link: link
     }); 
 
+  },
+
+  /**
+   * 
+   * This function renders the user profile
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   * @param {int} user_id The id of the user which the profile must be rendered
+   */
+  async renderUserProfile(req, res){
+    
+    // Retrieves the data from the user from the database
+
+    if (req.query.id == null | req.query.id == 'undefined') {
+      
+      if (req.session.user_id == null){
+        req.session.next_page = "user";
+        res.redirect("login");
+        return;
+      }
+
+      else{
+        var id = req.session.user_id;
+      }
+    }
+
+    else {
+      var id = req.query.id;
+    }
+
+    try{
+      var { rows } = await pool.query('SELECT * FROM researchers WHERE id = $1', [id]);
+
+      var picture = 'images/users/' + id + '/photo';
+
+      user_info = rows
+
+      var { rows } = await pool.query('SELECT name, version, id FROM algorithms WHERE id in (SELECT algorithm_id FROM development WHERE researcher_id = $1)', [id]);
+      algorithms = rows
+
+      res.render('user', {name: user_info[0].name, profile_picture: picture, bio: user_info[0].bio, inst: user_info[0].institution, algos: algorithms});
+    }
+    catch (error){
+      console.log(error);
+    }
+    
+  },
+
+
+  /**
+   *
+   * This function renders the algorithm page
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   * @param {int} algo_id The id of the algorithm which the page must be rendered
+   */
+  async renderAlgorithmPage(req, res) {
+
+    // Retrieves the data from the algorithm from the database
+
+    if (req.query.id == null | req.query.id == 'undefined') {
+      res.status(404).render('404');
+    }
+
+    else {
+      var id = req.query.id;
+    }
+
+    try {
+      var { rows } = await pool.query('SELECT * FROM algorithms WHERE id = $1', [id]);
+      algo_info = rows
+
+      var { rows } = await pool.query('SELECT * FROM development INNER JOIN researchers ON researcher_id = researchers.id AND algorithm_id = $1 ', [id]);
+
+      developers = rows
+
+      // Verifying if the logged user is an owner of the algorithm
+      var owners = []
+      for(i = 0; i < developers.length; i++){
+        owners.push(developers[i].researcher_id)
+      }
+      var is_owner = owners.includes(req.session.user_id)
+
+      if(algo_info.published == false){
+        doi = false
+      } else{
+        doi = algo_info[0].publication
+      }
+
+      res.render('algorithm_info', { name: algo_info[0].name, version: algo_info[0].version, description: algo_info[0].description, dev: developers, owner: is_owner, id: id , doi: doi});
+    }
+    catch (error) {
+      console.log(error);
+    }
+
+  },
+
+  /**
+   *
+   * This function renders the algorithm page
+   * @param {request} req The request variable from the caller
+   * @param {response} res The response variable from the caller
+   * @param {string} q The query of the search
+   */
+  async renderSearch(req, res){
+    if (req.query.q == null | req.query.q == 'undefined'| req.query.q == ''){
+      return res.render('error', { message: "No query search" });
+    }
+
+    try{
+      // Searches all users with name related to the query
+      var { rows } = await pool.query("SELECT * FROM researchers WHERE name ILIKE $1", ['%' + req.query.q + '%']);
+      users = rows
+
+      // Searches all algorithms with name related to the query
+      var { rows } = await pool.query("SELECT * FROM algorithms WHERE name ILIKE $1", ['%' + req.query.q + '%']);
+      algorithms = rows
+
+      if(users.length == 0 & algorithms.length == 0){
+        return res.render('error', { message: "No results from search" });
+      }
+
+      res.render('search_results', {users: users, algorithms: algorithms})
+    }
+    catch (error) {
+      console.log(error)
+    }
   }
+
 }
 
 module.exports = Data;

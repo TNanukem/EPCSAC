@@ -8,15 +8,26 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-white
   .collapse.navbar-collapse(id='navbarSupportedContent')
     ul.navbar-nav.mr-auto
       li.nav-item
-        a.nav-link(href='/user_page?name=' + session.name) Profile
-      li.nav-item
         a.nav-link(href='/tutorial') Tutorial
-    ul.navbar-nav.float-right
       if session.authenticated
         li.nav-item
-          a.nav-link(href='/logout') Logout
+          a.nav-link(href='/user_page?name=' + session.name) Experiments
+        li.nav-item
+          a.nav-link(href='/user?id=' + session.user_id) Profile
+        li.nav-item.dropdown
+          a.nav-link(href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") Config
+          div.dropdown-menu.dropdown-menu-right(aria-labelledby="navbarDropdown")
+            a.dropdown-item(href='/edit_profile') Profile
+            a.dropdown-item(href='/edit_account') Account
+          li.nav-item
+            a.nav-link(href='/logout') Logout
       else
         li.nav-item
           a.nav-link(href='/login') Login
         li.nav-item
           a.nav-link(href='/signup') Signup
+      li.nav-item
+        form(class="form-inline my-2 my-lg-0",  style="flex-flow:unset !important", action="/search")
+          input(class="form-control mr-sm-2",type="search",placeholder="Search",aria-label="Search", name='q')
+          button(class="btn btn-outline-success my-2 my-sm-0",type="submit") Search
+        

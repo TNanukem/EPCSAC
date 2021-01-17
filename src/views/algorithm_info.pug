@@ -1,0 +1,34 @@
+doctype html
+html
+
+  head
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+    script
+      include ../public/js/bootstrap.min.js
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/style.css')
+
+  body
+    include ./navbar.pug
+    div.container-fluid
+      div.row
+        div.col-md-12(style="text-align:center;")
+          h3 #{name}
+          h6 Version: #{version}
+          if doi
+              p Doi of the article: #{doi}
+          hr(style="border-color:#243665")
+          div
+            h5(style='text-align:left') Description
+            p(style='padding:20px;margin-left:25px; text-align:justify') #{description}
+          div 
+            h5(style='text-align:left') Developers
+            ul(style='text-align:left')
+             each val in dev
+              li.list-group-item
+                a(href="user?id=" + val.researcher_id)= val.name
+              br
+            if owner
+              div(style='text-align:right !important')
+                a(href="alter_algorithm_description?id=" + id, class="btn btn-primary", style="background-color:#243665; color:white; border-color:transparent") Alter algorithm description
+                  span(class="glyphicon glyphicon-cog")
