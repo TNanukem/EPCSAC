@@ -1,0 +1,34 @@
+doctype html
+html
+
+   head
+      include ./meta_config.pug
+
+      title "Algorithm Edit"
+      script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+      script
+        include ../public/js/bootstrap.min.js
+      link(rel='stylesheet', href='/css/bootstrap.min.css')
+      link(rel='stylesheet', href='/css/style.css')
+      link(rel='stylesheet', href='/css/algorithm.css')
+
+   body.index
+
+      include ./navbar.pug
+
+      div.container-fluid
+
+        div.row
+          div.col-md-12
+            h1 Edit your algorithm description
+            h3 #{name}
+            h4 #{version}
+
+            form#edit_form(method="POST")
+              br
+              h5 Description
+              textarea#description(maxlength="1999", name="description", placeholder="Description")
+              p Confirm your password
+              input#password(name="password", placeholder="password", type='password' required)
+              div.col-md-12
+              input.btn.btn-success(type="submit", value="Finish", style="width: 15%; background-color: #243665; border: none; text-align:center")

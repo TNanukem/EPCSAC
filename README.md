@@ -1,53 +1,36 @@
-# EPCSAC
-This is the offical repository to the Extensible Platform for Cloud Scheduling Algorithm Comparison.
+![EPCSAC Loog](https://github.com/TNanukem/EPCSAC/blob/master/src/public/images/logo.png "EPCSAC Logo")
 
-## Overview
+# Overview
 
-The EPCSAC is an online open-source platform developed to help researchers compare scheduling algorithms to allocate tasks into virtual machines inside cloud infrastructures.
+The EPCSAC (Extensible Platform for Cloud Scheduling Algorithm Comparison) is an online open-source platform developed to help researchers compare scheduling algorithms to allocate tasks into virtual machines inside cloud infrastructures.
 
-When a new algorithm is developed and published, usually it is compared against some famous literature standard algorithms (like the First-Come-First-Served). However, usually is too difficult to compare this new algorithm with other published works and even when this is made, the researchers cannot reproduce the results obtained in the peer-paper.
+The comparison between two different proposed scheduling algorithms is difficult, not to say impossible. This happens for several reasons like the unavailability of the source code for the algorithm proposed by a peer, the lack of data on the inputs asserted into this algorithm and the configurations of the simulation software itself. Also, in several cases, these researchers focus on only one aspect of the algorithm, like time efficiency or energy consumption and each new research requires the researcher to implement by itself the infrastructure of the simulation, reducing the time available to the focus of the research: studying the scheduling algorithm
 
-The EPCSAC comes as a solution to this problem. Using it, researchers can select different configurations to an fictional datacenter and then test how well their algorithm performs. Then, they can compare their performance against other published algorithms inside our database, this way, their research is improved and more data is gathered to help in the analysis of this new algorithm.
+This leads to several papers where new scheduling algorithms proposed are compared only to algorithms developed by the same researcher or some classic algorithms from the literature, like the FCFS (First Come, First Serve) algorithm.
 
-## User Usage
+This reduces the potential for a real comparison between these algorithms in a way that one cannot truly know if some algorithm performs better than the other, and if so, how and why does that happen.
 
-The researcher (main user) will face the initial screen of the platform, where he can create a new account of login into an existing account. When creating a new account, the researcher needs to confirm his e-mail by cliking a link that was sent to him.
+To solve this problem and make the research process easier for the researchers, we propose the EPCSAC (Extensible Platform for Cloud Scheduling Algorithm Comparison), a web service based on the SaaS model that provides the simulation infrastructure required for researchers to test their algorithms.
 
-### Configuration of simulation parameters
+The EPCSAC uses the [CloudSim Plus](https://github.com/manoelcampos/cloudsim-plus/) on its back-end in order to run the requested simulations. This way, users have access to all the features promoted by the simulator, which has been chosen, after a long research process, because of its extensibility, maintainability and performance. 
 
-The first step to run a simulation is define the parameters of the simulation. Each parameter can be set to a fixed value or randomized between two bounds, accordingly to the desires of the researcher.
+The development of the project is done primarly by [Tiago Toledo Jr](https://github.com/TNanukem), a student and researcher at University of São Paulo.
 
-![EPCSAC Configure Page](https://github.com/TNanukem/EPCSAC/blob/master/src/public/images/configure.png "EPCSAC Configure Page")
+# Main Features
 
-### Algorithm Upload
+As of today, researchers are capable of using the EPCSAC to:
 
-The researcher can upload an unlimited amount of algorithms, an define new versions for each one, allowing him to use the platform as versiong platform, though it is not the main purpose of the platform.
+- Create a set of simulation parameters to be used on the simulations.
+- Upload scheduling algorithms to the platform.
+- Simulate their algorithms using a set of parameters.
+- Comparing the results of their algorithms with other algorithms on the platform.
+- Seeing the comparative results on an online dashboard.
+- Search for users and algorithms inside the platform
 
-![EPCSAC Algorithm Upload Page](https://github.com/TNanukem/EPCSAC/blob/master/src/public/images/algorithm_upload.png "EPCSAC Algorithm Upload Page")
+# Contributing
 
-Also, the user can inform if the algorithm was published and then add the DOI of the article.
+You're welcome to contribute to this project. However, we request that you first read the [Contributing Guide](https://github.com/TNanukem/EPCSAC/blob/master/CONTRIBUTING.md) in order to know how you can help this project to grow.
 
-### Algorithm Simulation
+<!--# Documentation and FAQ-->
 
-The researcher can simulate an algorithm they uploaded with a set of parameters they created. 
-
-![EPCSAC Algorithm Simulation Page](https://github.com/TNanukem/EPCSAC/blob/master/src/public/images/simulation.png "EPCSAC Algorithm Simulation Page")
-
-### Comparison Simulation
-
-The user can also compare an algorithm he uploaded with a published algorithm, using the parameters of the publication or a set of parameters that he created. This allows the results of both algorithms to be compared.
-
-![EPCSAC Algorithm Compare Page](https://github.com/TNanukem/EPCSAC/blob/master/src/public/images/simulation_compare.png "EPCSAC Algorithm Compare Page")
-
-### Results Examples
-
-The simulation can take a while to run. So, when the simulation is done, the user will receive an e-mail with a link to download an log file with the compilation of the program and a csv with the results of the simulation that was done.
-
-## Infrastructure
-
-### General Structure
-
-![EPCSAC Infrastructure](https://github.com/TNanukem/EPCSAC/blob/master/src/public/images/EPCSAC_General_Structure.png "EPCSAC Infrastructure")
-
-## Contributing
-You're welcome to contribute to this project. However, we request that you first read the contributing guide in order to know how you can help this project to grow.
+<!--# Publications-->

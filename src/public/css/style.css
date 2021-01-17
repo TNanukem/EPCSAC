@@ -59,9 +59,18 @@ input {
   width: 13%;;
 }
 
+.navbar-brand{
+  width: 70%;
+}
+
 img.buttons {
   height: 25%;
   width: 25%;
+}
+
+li.nav-item {
+  display: flex;
+  align-items: center;
 }
 
 .user_page_buttons{

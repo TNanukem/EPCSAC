@@ -5,6 +5,9 @@ html
       include ./meta_config.pug
 
       title "Algorithm upload"
+      script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+      script
+        include ../public/js/bootstrap.min.js
       script
         include ../public/js/checkboxes.js
       link(rel='stylesheet', href='/css/bootstrap.min.css')
@@ -37,7 +40,11 @@ html
               div#DOI_div(style="display:none")
                 p DOI of the article
                 input#DOI(type="text", name="doi", placeholder="DOI of the Article")
+              br
+              h6 Description of your algorithm
+              textarea#description(maxlength="2000", name="description", placeholder="Description of the Algorithm")
 
+              br
               input(type="file" name="algorithmUploader", required)
               br
               input.btn.btn-success(type="submit" name="submit" id="btnSubmit" value="Upload" style=' background-color: #243665; border: none')

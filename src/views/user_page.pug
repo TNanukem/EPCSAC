@@ -3,6 +3,9 @@ html
 
   head
     title Welcome #{name}
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js')
+    script
+      include ../public/js/bootstrap.min.js
     link(rel='stylesheet', href='/css/bootstrap.min.css')
     link(rel='stylesheet', href='/css/style.css')
 
@@ -28,7 +31,7 @@ html
                 div.upload.user_page_buttons(style='float:left; display:flex')
                   img.buttons(src='images/upload.png')
                   p(style='padding-top: 20px;padding-right: 5px;'). 
-                    Upload an cloudsim-plus cloudlet scheduler algorithm, in java, to be able to test it using the parameters 
+                    Upload a cloudsim-plus cloudlet scheduler algorithm, in java, to be able to test it using the parameters 
                     of your choice and comparing it to other algorithms available here on the EPCSAC platform.
 
           div.row(style='padding-top: 40px;padding-right:5px;')
