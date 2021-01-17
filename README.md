@@ -25,17 +25,7 @@ As of today, researchers are capable of using the EPCSAC to:
 - Simulate their algorithms using a set of parameters.
 - Comparing the results of their algorithms with other algorithms on the platform.
 - Seeing the comparative results on an online dashboard.
-
-# Under development
-
-The immediate next steps of development are:
-
-- Improved reproducibility and metrics of results.
-- Users and algorithms pages. 
-- Unit tests creation.
-- Refactor of the code.
-
-After all these steps are concluded, version 1.0 will be released.
+- Search for users and algorithms inside the platform
 
 # Contributing
 
