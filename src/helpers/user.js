@@ -77,7 +77,7 @@ const User = {
    */
   async verify(req, res){
 
-    process.env.HOST;
+    host = process.env.HOST;
     // Verifies the domain
     if((req.protocol+"://"+req.get('host'))==("http://"+host)){
 
