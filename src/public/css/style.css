@@ -68,6 +68,11 @@ img.buttons {
   width: 25%;
 }
 
+li.nav-item {
+  display: flex;
+  align-items: center;
+}
+
 .user_page_buttons{
   border: 1px #243665 solid;
   border-radius: 10px;
