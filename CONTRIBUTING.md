@@ -35,7 +35,7 @@ The project follows the convention for branch names:
 ## Other ways of contributing
 Other ways to contribute to the project without working on the documentation or the source-code are:
 - Use our platform on your publications and then citing us on that.
-- Giving the repo a start.
+- Giving the repo a star.
 - Talking about the project to your colleagues.
 - Sharing it on social media.
 
