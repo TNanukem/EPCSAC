@@ -1,0 +1,3 @@
+[submodule "src/cloudsim-plus"]
+	path = src/cloudsim-plus
+	url = https://github.com/manoelcampos/cloudsim-plus
