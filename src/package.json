@@ -26,7 +26,7 @@
     "node-postgres": "^0.1.2",
     "nodemailer": "^6.6.1",
     "nodemon": "^2.0.20",
-    "passport": "^0.4.1",
+    "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "pg": "^7.17.1",
     "pug": "^3.0.1"
